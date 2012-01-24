@@ -75,7 +75,7 @@ namespace Game
 		assert(imageManager && "Init: NULL pointer");
 
 		// Init player sprite.
-		const sf::Texture *image = imageManager->getResource("resources/images/truck/SpaceShip3.png");
+		const sf::Texture *image = imageManager->getResource("resources/ships/PlayerShip.png");
 		assert(image && "Init: NULL pointer");
 		SpriteManager * const spriteManager = mGameManager->GetSpriteManager();
 		assert(spriteManager && "Init: NULL pointer");
@@ -86,7 +86,7 @@ namespace Game
 		mPlayerPosition.y = 0.0f;
 				
 		// Init player bullets.
-		image = imageManager->getResource("resources/bullets/bullet3.png");
+		image = imageManager->getResource("resources/bullets/bullet.png");
 		assert(image && "Init: NULL pointer");
 		mPlayerBulletSprite = spriteManager->getResource("PlayerBulletSprite");
 		assert(mPlayerBulletSprite && "Init: NULL pointer");
@@ -94,7 +94,7 @@ namespace Game
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 
 		// Init enemy sprite.
-		image = imageManager->getResource("resources/ships/boss1.PNG");
+		image = imageManager->getResource("resources/ships/boss.PNG");
 		assert(image && "Init: NULL pointer");
 		mEnemySprite = spriteManager->getResource("EnemyShipSprite");
 		assert(mEnemySprite && "Init: NULL pointer");
@@ -189,7 +189,7 @@ namespace Game
 				
 				ImageManager * const imageManager = mGameManager->GetImageManager();
 				assert(imageManager && "ManageEvents: NULL pointer");
-				imageManager->releaseResource("resources/images/truck/SpaceShip3.png");
+				imageManager->releaseResource("resources/images/PlayerShip.png");
 
 				SpriteManager * const spriteManager = mGameManager->GetSpriteManager();
 				assert(spriteManager && "ManageEvents: NULL pointer");
@@ -206,10 +206,10 @@ namespace Game
 	{
 		ImageManager * const imageManager = mGameManager->GetImageManager();
 		assert(imageManager && "Clear: NULL pointer");	
-		imageManager->releaseResource("resources/ships/boss1.png");
+		imageManager->releaseResource("resources/ships/boss.png");
 		imageManager->releaseResource("resources/background/level1.jpg");
 
-		imageManager->releaseResource("resources/images/truck/SpaceShip3.png");
+		imageManager->releaseResource("resources/images/PlayerShip.png");
 
 		SpriteManager * const spriteManager = mGameManager->GetSpriteManager();
 		assert(spriteManager && "Clear: NULL pointer");
