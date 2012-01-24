@@ -75,7 +75,7 @@ namespace Game
 		ImageManager * const imageManager = mGameManager->GetImageManager();
 		assert(imageManager && "LoadResources: NULL pointer");
 		
-		sf::Texture * const backgroundImage = imageManager->getResource("resources/images/background/main_screen.png");
+		sf::Texture * const backgroundImage = imageManager->getResource("resources/background/main_screen.png");
 		assert(backgroundImage && "LoadResources: NULL pointer");
 
 		sf::RenderWindow * const renderWindow = mGameManager->GetRenderWindow();

@@ -77,7 +77,7 @@ namespace Game
 		ImageManager * const imageManager = mGameManager->GetImageManager();
 		assert(imageManager && "LoadResources: NULL pointer");
 
-		sf::Texture * const backgroundImage = imageManager->getResource("resources/images/background/loading.png");
+		sf::Texture * const backgroundImage = imageManager->getResource("resources/background/loading.png");
 		assert(backgroundImage && "LoadResources: NULL pointer");
 
 		SpriteManager * const spriteManager = mGameManager->GetSpriteManager();
@@ -96,7 +96,7 @@ namespace Game
 		
 		ImageManager * const imageManager = mGameManager->GetImageManager();
 		assert(imageManager && "DestroyResources: NULL pointer");
-		imageManager->releaseResource("resources/images/background/loading.png");
+		imageManager->releaseResource("resources/background/loading.png");
 	
 		SpriteManager * const spriteManager = mGameManager->GetSpriteManager();
 		assert(spriteManager && "DestroyResources: NULL pointer");
