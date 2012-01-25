@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="entities">
+      <UniqueIdentifier>{cee79192-5b47-4d30-9aae-4486187d448d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game_states">
+      <UniqueIdentifier>{cfbe6c9a-502c-47ee-9520-7d2dca3efe1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="managers">
+      <UniqueIdentifier>{e955760d-87c9-4acd-bc53-e4da4cdf9115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utilities">
+      <UniqueIdentifier>{ba2879ae-6205-49f9-b5ea-c89b6d624ee9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="entities\KamikazeEnemy.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="game_states\ControlsState.cpp">
+      <Filter>game_states</Filter>
+    </ClCompile>
+    <ClCompile Include="game_states\CreditsState.cpp">
+      <Filter>game_states</Filter>
+    </ClCompile>
+    <ClCompile Include="game_states\GameExplanationState.cpp">
+      <Filter>game_states</Filter>
+    </ClCompile>
+    <ClCompile Include="game_states\InformationState.cpp">
+      <Filter>game_states</Filter>
+    </ClCompile>
+    <ClCompile Include="game_states\Level01State.cpp">
+      <Filter>game_states</Filter>
+    </ClCompile>
+    <ClCompile Include="game_states\LoadingState.cpp">
+      <Filter>game_states</Filter>
+    </ClCompile>
+    <ClCompile Include="game_states\MainMenuState.cpp">
+      <Filter>game_states</Filter>
+    </ClCompile>
+    <ClCompile Include="managers\GameManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\Updaters.cpp">
+      <Filter>utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="entities\KamikazeEnemy.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="game_states\ControlsState.h">
+      <Filter>game_states</Filter>
+    </ClInclude>
+    <ClInclude Include="game_states\CreditsState.h">
+      <Filter>game_states</Filter>
+    </ClInclude>
+    <ClInclude Include="game_states\GameExplanationState.h">
+      <Filter>game_states</Filter>
+    </ClInclude>
+    <ClInclude Include="game_states\InformationState.h">
+      <Filter>game_states</Filter>
+    </ClInclude>
+    <ClInclude Include="game_states\Level01State.h">
+      <Filter>game_states</Filter>
+    </ClInclude>
+    <ClInclude Include="game_states\LoadingState.h">
+      <Filter>game_states</Filter>
+    </ClInclude>
+    <ClInclude Include="game_states\MainMenuState.h">
+      <Filter>game_states</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\GameManager.h">
+      <Filter>managers</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\Updaters.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

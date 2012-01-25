@@ -9,7 +9,7 @@
 //////////////////////////////////////////////////////////////////////////
 
 #include <cassert>
-#include "../utilities/Types.h"
+#include <GameFramework/utilities/Types.h>
 
 #include "KamikazeEnemy.h"
 

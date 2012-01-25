@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="state_machine">
+      <UniqueIdentifier>{ff4e6de8-a3e7-4f02-9f1a-0ade97ccbfb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="managers">
+      <UniqueIdentifier>{9c859224-fb3c-4305-b8c7-f60427b0d6b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utilities">
+      <UniqueIdentifier>{ea7890d9-d09a-4aa8-8a6b-ebfedbc1265d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="managers\ImageManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="managers\SpriteManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="state_machine\State.cpp">
+      <Filter>state_machine</Filter>
+    </ClCompile>
+    <ClCompile Include="state_machine\StateMachine.cpp">
+      <Filter>state_machine</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\CollisionDetection.cpp">
+      <Filter>utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\FPSCalculator.cpp">
+      <Filter>utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\MemoryPool.cpp">
+      <Filter>utilities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="managers\ImageManager.h">
+      <Filter>managers</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\ResourceManager.h">
+      <Filter>managers</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\SpriteManager.h">
+      <Filter>managers</Filter>
+    </ClInclude>
+    <ClInclude Include="state_machine\State.h">
+      <Filter>state_machine</Filter>
+    </ClInclude>
+    <ClInclude Include="state_machine\StateMachine.h">
+      <Filter>state_machine</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\CollisionDetection.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\FPSCalculator.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\MemoryPool.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\Types.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -11,7 +11,7 @@
 #ifndef KAMIKAZE_ENEMY_H
 #define KAMIKAZE_ENEMY_H
 
-#include "../utilities/Types.h"
+#include <GameFramework/utilities/Types.h>
 
 #include <SFML/System/Vector2.hpp>
 

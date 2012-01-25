@@ -31,13 +31,18 @@ namespace Game
 		, mMemoryPool(sMemoryBlocks, sMemoryBlockSize)
 		, mImageManager(&mMemoryPool)
 		, mSpriteManager(&mMemoryPool)
-		, mStateMachine(this)
+		, mMainMenuState(this)
+		, mControlsState(this)
+		, mCreditsState(this)
+		, mGameExplanationState(this)
+		, mLoadingState(this)
+		, mLevel01State(this)
 #ifdef _DEBUG
 		, mFpsText(0)
 #endif
 		, mFont(new (mMemoryPool.Alloc(sizeof(sf::Font))) sf::Font)
 	{
-		mStateMachine.ChangeState(mStateMachine.GetMainMenuState());
+		mStateMachine.ChangeState(&mMainMenuState);
 		
 		bool correctLoading = mFont->LoadFromFile("resources/fonts/calibri.ttf");
 		assert(correctLoading && "GameManager: Incorrect font loading");
@@ -45,8 +50,6 @@ namespace Game
 #ifdef _DEBUG
 		InitText();
 #endif 
-
-		mRenderWindow.EnableVerticalSync(true);
 		mRenderWindow.SetFramerateLimit(60);
 	}
 	

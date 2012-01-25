@@ -14,15 +14,15 @@
 #include <SFML/Window/Event.hpp>
 
 #include "Level01State.h"
-#include "StateMachine.h"
+#include <GameFramework/state_machine/StateMachine.h>
 
 #include "../managers/GameManager.h"
-#include "../managers/ImageManager.h"
-#include "../managers/SpriteManager.h"
+#include <GameFramework/managers/ImageManager.h>
+#include <GameFramework/managers/SpriteManager.h>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include "../utilities/CollisionDetection.h"
+#include <GameFramework/utilities/CollisionDetection.h>
 #include "../utilities/Updaters.h"
 
 namespace
@@ -197,7 +197,7 @@ namespace Game
 				
 				StateMachine * const stateMachine = mGameManager->GetStateMachine();
 				assert(stateMachine && "ManageEvents: NULL pointer");
-				stateMachine->ChangeState(stateMachine->GetMainMenuState());
+				stateMachine->ChangeState(mGameManager->GetMainMenuState());
 			}	
 		}
 	}

@@ -13,9 +13,9 @@
 
 #include "../entities/KamikazeEnemy.h"
 
-#include "../utilities/Types.h"
+#include <GameFramework/utilities/Types.h>
 
-#include "State.h"
+#include <GameFramework/state_machine/State.h>
 
 namespace sf
 {

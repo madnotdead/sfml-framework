@@ -14,18 +14,25 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include "../game_states/StateMachine.h"
+#include <GameFramework/state_machine/StateMachine.h>
 
 #ifdef _DEBUG
-#include "../utilities/FPSCalculator.h"
+#include <GameFramework/utilities/FPSCalculator.h>
 #endif
 
-#include "../utilities/MemoryPool.h"
+#include <GameFramework/utilities/MemoryPool.h>
 
-#include "../utilities/Types.h"
+#include <GameFramework/utilities/Types.h>
 
-#include "ImageManager.h"
-#include "SpriteManager.h"
+#include <GameFramework/managers/ImageManager.h>
+#include <GameFramework/managers/SpriteManager.h>
+
+#include "../game_states/ControlsState.h"
+#include "../game_states/CreditsState.h"
+#include "../game_states/GameExplanationState.h"
+#include "../game_states/Level01State.h"
+#include "../game_states/LoadingState.h"
+#include "../game_states/MainMenuState.h"
 
 namespace sf
 {
@@ -51,6 +58,13 @@ namespace Game
 		inline StateMachine* GetStateMachine();
 		inline Utils::MemoryPool* GetMemoryPool();
 
+		inline State* GetMainMenuState();
+		inline State* GetControlsState();
+		inline State* GetCreditsState();
+		inline State* GetGameExplanationState();
+		inline State* GetLoadingState();
+		inline State* GetLevel01State();
+
 	private:
 #ifdef _DEBUG
 		void InitText();
@@ -69,6 +83,13 @@ namespace Game
 		SpriteManager mSpriteManager;
 
 		StateMachine mStateMachine;
+
+		MainMenuState mMainMenuState;
+		ControlsState mControlsState;
+		CreditsState mCreditsState;
+		GameExplanationState mGameExplanationState;
+		LoadingState mLoadingState;
+		Level01State mLevel01State;
 		
 #ifdef _DEBUG
 		Utils::FPSCalculator mFpsManager;
@@ -100,6 +121,37 @@ namespace Game
 	Utils::MemoryPool * GameManager::GetMemoryPool()
 	{
 		return &mMemoryPool;
+	}
+
+	State* GameManager::GetMainMenuState() 
+	{
+		return &mMainMenuState;
+	}
+
+	State* GameManager::GetControlsState() 
+	{
+		return &mControlsState;
+	}
+
+
+	State* GameManager::GetCreditsState() 
+	{
+		return &mCreditsState;
+	}
+
+	State* GameManager::GetGameExplanationState() 
+	{
+		return &mGameExplanationState;
+	}
+
+	State*GameManager::GetLoadingState()
+	{
+		return &mLoadingState;
+	}
+
+	State* GameManager::GetLevel01State()
+	{
+		return &mLevel01State;
 	}
 }
 
