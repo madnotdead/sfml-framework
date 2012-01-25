@@ -47,6 +47,7 @@ namespace Game
 #endif 
 
 		mRenderWindow.EnableVerticalSync(true);
+		mRenderWindow.SetFramerateLimit(60);
 	}
 	
 	GameManager::~GameManager()
