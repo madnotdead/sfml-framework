@@ -12,7 +12,7 @@
 
 #include "State.h"
 
-namespace Game
+namespace Game 
 {
 	State::State(GameManager * const gameManager)
 		: mGameManager(gameManager)

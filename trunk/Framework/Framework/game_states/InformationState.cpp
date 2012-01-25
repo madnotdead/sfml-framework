@@ -11,7 +11,7 @@
 //////////////////////////////////////////////////////////////////////////
 
 #include <cassert>
-#include "../utilities/Types.h"
+#include <GameFramework/utilities/Types.h>
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -22,11 +22,11 @@
 
 #include "InformationState.h"
 #include "MainMenuState.h"
-#include "StateMachine.h"
+#include <GameFramework/state_machine/StateMachine.h>
 
 #include "../managers/GameManager.h"
-#include "../managers/ImageManager.h"
-#include "../managers/SpriteManager.h"
+#include <GameFramework/managers/ImageManager.h>
+#include <GameFramework/managers/SpriteManager.h>
 
 namespace Game
 {
@@ -60,7 +60,7 @@ namespace Game
 		assert(stateMachine && "ManageEvents: NULL pointer");
 		
 		if(ev.Type == sf::Event::KeyPressed && ev.Key.Code == sf::Keyboard::Escape)
-			stateMachine->ChangeState(stateMachine->GetMainMenuState());
+			stateMachine->ChangeState(mGameManager->GetMainMenuState());
 	}
 
 	void InformationState::Clear()

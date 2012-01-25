@@ -1,9 +1,15 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Framework", "Framework\Framework.vcproj", "{BF4A0426-CAE2-46DC-9112-1B6E47190F66}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Framework", "Framework\Framework.vcxproj", "{BF4A0426-CAE2-46DC-9112-1B6E47190F66}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameFramework", "GameFramework\GameFramework.vcxproj", "{8528D0C4-81DD-40BC-984C-EFE872B30BCB}"
 EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		Debug|x64 = Debug|x64
@@ -19,6 +25,13 @@ Global
 		{BF4A0426-CAE2-46DC-9112-1B6E47190F66}.Release|Win32.Build.0 = Release|Win32
 		{BF4A0426-CAE2-46DC-9112-1B6E47190F66}.Release|x64.ActiveCfg = Release|x64
 		{BF4A0426-CAE2-46DC-9112-1B6E47190F66}.Release|x64.Build.0 = Release|x64
+		{8528D0C4-81DD-40BC-984C-EFE872B30BCB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8528D0C4-81DD-40BC-984C-EFE872B30BCB}.Debug|Win32.Build.0 = Debug|Win32
+		{8528D0C4-81DD-40BC-984C-EFE872B30BCB}.Debug|x64.ActiveCfg = Debug|x64
+		{8528D0C4-81DD-40BC-984C-EFE872B30BCB}.Debug|x64.Build.0 = Debug|x64
+		{8528D0C4-81DD-40BC-984C-EFE872B30BCB}.Release|Win32.ActiveCfg = Release|Win32
+		{8528D0C4-81DD-40BC-984C-EFE872B30BCB}.Release|Win32.Build.0 = Release|Win32
+		{8528D0C4-81DD-40BC-984C-EFE872B30BCB}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

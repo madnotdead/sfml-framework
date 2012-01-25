@@ -20,7 +20,7 @@
 #include "GameExplanationState.h"
 #include "LoadingState.h"
 #include "MainMenuState.h"
-#include "StateMachine.h"
+#include <GameFramework/state_machine/StateMachine.h>
 
 #include "../managers/GameManager.h"
 
@@ -128,19 +128,19 @@ namespace Game
 				switch(mCurrentOption)
 				{
 				case(MenuOption_NewGame):
-					stateMachine->ChangeState(stateMachine->GetLoadingState());
+					stateMachine->ChangeState(mGameManager->GetLoadingState());
 					break;
 
 				case(MenuOption_Controls):
-					stateMachine->ChangeState(stateMachine->GetControlsState());
+					stateMachine->ChangeState(mGameManager->GetControlsState());
 					break;
 
 				case(MenuOption_GameExplanation):
-					stateMachine->ChangeState(stateMachine->GetGameExplanationState());
+					stateMachine->ChangeState(mGameManager->GetGameExplanationState());
 					break;
 
 				case(MenuOption_Credits):
-					stateMachine->ChangeState(stateMachine->GetCreditsState());
+					stateMachine->ChangeState(mGameManager->GetCreditsState());
 					break;
 
 				case(MenuOption_Exit):

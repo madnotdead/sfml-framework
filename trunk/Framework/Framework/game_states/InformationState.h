@@ -17,7 +17,7 @@
 
 #include <SFML/Graphics/Color.hpp>
 
-#include "State.h"
+#include <GameFramework/state_machine/State.h>
 
 namespace sf
 {

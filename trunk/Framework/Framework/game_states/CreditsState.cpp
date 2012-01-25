@@ -46,8 +46,7 @@ namespace Game
 							  "Bertoa Mariano - mbertoa@gmail.com \n"
 							  "Almada Gaspar - gaspar980@gmail.com \n"
 							  "Programmers: \n"
-							  "Perez Paladini Agustin - aguperezpala@gmail.com \n"
-							  "Muller Catriel - catrielmuller@gmail.com \n"
+							  "Ramiro Del Corro - ramiro.del.corro@gmail.com \n"
 							  "Bertoa Nicolas - nicobertoa@gmail.com";
 		DisplayText(credits, xPos, yPos + initialPos, sf::Color::White);
 	}

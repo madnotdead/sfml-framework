@@ -11,7 +11,7 @@
 #ifndef GAME_LOADING_STATE_H
 #define GAME_LOADING_STATE_H
 
-#include "State.h"
+#include <GameFramework/state_machine/State.h>
 
 namespace sf
 {

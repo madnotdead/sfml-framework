@@ -17,22 +17,11 @@
 #include "State.h"
 #include "StateMachine.h"
 
-#include "../managers/GameManager.h"
-
 namespace Game
 {
-	StateMachine::StateMachine(GameManager * const gameManager) 
-		: mRenderWindow(gameManager->GetRenderWindow())
-		, mCurrentState(0)
-		, mMainMenuState(gameManager)
-		, mControlsState(gameManager)
-		, mCreditsState(gameManager)
-		, mGameExplanationState(gameManager)
-		, mLoadingState(gameManager)
-		, mLevel01State(gameManager)
+	StateMachine::StateMachine() 
+		: mCurrentState(0)
 	{
-		assert(mRenderWindow && "StateMachine:NULL pointer");
-		assert(gameManager && "StateMachine: NULL pointer");
 	}
 
 	// Change the current state.

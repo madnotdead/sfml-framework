@@ -16,11 +16,11 @@
 
 #include "Level01State.h"
 #include "LoadingState.h"
-#include "StateMachine.h"
+#include <GameFramework/state_machine/StateMachine.h>
 
 #include "../managers/GameManager.h"
-#include "../managers/ImageManager.h"
-#include "../managers/SpriteManager.h"
+#include <GameFramework/managers/ImageManager.h>
+#include <GameFramework/managers/SpriteManager.h>
 
 namespace Game
 {
@@ -55,7 +55,7 @@ namespace Game
 		}
 
 		else
-			stateMachine->ChangeState(stateMachine->GetLevel01State());
+			stateMachine->ChangeState(mGameManager->GetLevel01State());
 	}
 
 	void LoadingState::ManageEvents(const sf::Event& ev) 
