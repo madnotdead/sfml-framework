@@ -26,7 +26,7 @@ namespace Game
 	class LoadingState : public State
 	{
 	public:
-		LoadingState(GameManager * const gameManager);
+		LoadingState(GameManager& gameManager);
 		
 	public:
 		void Init();

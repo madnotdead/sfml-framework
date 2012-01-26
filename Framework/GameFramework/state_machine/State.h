@@ -24,7 +24,7 @@ namespace Game
 	class State
 	{
 	public:
-		State(GameManager * const gameManager);
+		State(GameManager& gameManager);
 		virtual ~State();
 
 	public:
@@ -34,7 +34,7 @@ namespace Game
 		virtual void Clear() = 0;
 
 	protected:
-		GameManager * const mGameManager;
+		GameManager& mGameManager;
 
 	private:
 		State(const State& state);

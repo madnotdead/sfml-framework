@@ -21,22 +21,18 @@
 
 namespace Game
 {
-	ControlsState::ControlsState(GameManager * const gameManager)
+	ControlsState::ControlsState(GameManager& gameManager)
 		: InformationState(gameManager)
 	{
-		assert(gameManager && "ControlsState: NULL pointer");
 	}
 	
 	void ControlsState::DrawContent()
 	{
 		assert(mText && "DrawContent: NULL pointer");
 
-		assert(mGameManager && "DrawContent: NULL pointer");
-		sf::RenderWindow * const renderWindow = mGameManager->GetRenderWindow();
-		assert(renderWindow && "DrawContent: NULL pointer");
-
-		const float xPos = static_cast<float>(renderWindow->GetWidth()) * 0.5f;
-		const float yPos = static_cast<float>(renderWindow->GetHeight()) * 0.4f;
+		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
+		const float xPos = static_cast<float>(renderWindow.GetWidth()) * 0.5f;
+		const float yPos = static_cast<float>(renderWindow.GetHeight()) * 0.4f;
 		const float initialPos = 40.0f;
 		const float displacement = 40.0f;
 

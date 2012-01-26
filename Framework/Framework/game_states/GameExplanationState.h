@@ -20,7 +20,7 @@ namespace Game
 	class GameExplanationState : public InformationState
 	{
 	public:
-		GameExplanationState(GameManager * const gameManager);
+		GameExplanationState(GameManager& gameManager);
 
 	protected:
 		void DrawContent();

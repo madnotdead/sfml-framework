@@ -20,7 +20,7 @@ namespace Game
 	class CreditsState : public InformationState
 	{
 	public:
-		CreditsState(GameManager * const gameManager);
+		CreditsState(GameManager& gameManager);
 
 	protected:
 		void DrawContent();

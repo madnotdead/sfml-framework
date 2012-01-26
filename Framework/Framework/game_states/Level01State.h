@@ -33,7 +33,7 @@ namespace Game
 		static const uint8_t sPlayerBullets = 5;
 
 	public:
-		Level01State(GameManager * const gameManager);
+		Level01State(GameManager& gameManager);
 
 	public:
 		void Init();

@@ -7,18 +7,16 @@
 
 namespace Game
 {
-	SpriteManager::SpriteManager(::Utils::MemoryPool * const memoryPool)
+	SpriteManager::SpriteManager(Utils::MemoryPool& memoryPool)
 		: ResourceManager(memoryPool)
 	{
-		assert(mMemoryPool && "SpriteManager: NULL pointer");
 	}
 
 	sf::Sprite* SpriteManager::load(const std::string& strId) 
 	{
 		strId; // Not used
 
-		assert(mMemoryPool && "load: NULL pointer");
-		sf::Sprite *sprite = reinterpret_cast<sf::Sprite *>(mMemoryPool->Alloc(sizeof(sf::Sprite)));
+		sf::Sprite *sprite = reinterpret_cast<sf::Sprite *>(mMemoryPool.Alloc(sizeof(sf::Sprite)));
 		
 		return new (sprite) sf::Sprite;
 	}

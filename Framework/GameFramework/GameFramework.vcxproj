@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="managers\ImageManager.cpp" />
+    <ClCompile Include="managers\SoundManager.cpp" />
     <ClCompile Include="managers\SpriteManager.cpp" />
     <ClCompile Include="state_machine\State.cpp" />
     <ClCompile Include="state_machine\StateMachine.cpp" />
@@ -30,6 +31,7 @@
   <ItemGroup>
     <ClInclude Include="managers\ImageManager.h" />
     <ClInclude Include="managers\ResourceManager.h" />
+    <ClInclude Include="managers\SoundManager.h" />
     <ClInclude Include="managers\SpriteManager.h" />
     <ClInclude Include="state_machine\State.h" />
     <ClInclude Include="state_machine\StateMachine.h" />

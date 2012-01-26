@@ -33,6 +33,9 @@
     <ClCompile Include="utilities\MemoryPool.cpp">
       <Filter>utilities</Filter>
     </ClCompile>
+    <ClCompile Include="managers\SoundManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="managers\ImageManager.h">
@@ -61,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="utilities\Types.h">
       <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\SoundManager.h">
+      <Filter>managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -24,38 +24,32 @@
 
 namespace Game
 {
-	LoadingState::LoadingState(GameManager * const gameManager) 
+	LoadingState::LoadingState(GameManager& gameManager) 
 		: State(gameManager)
 		, mBackgroundSprite(0) 
-		, mDelayForNextState(0.0f)
+		, mDelayForNextState(2.5f)
 	{
-		assert(gameManager && "LoadingState: NULL pointer");
 	}
 
 	void LoadingState::Init()
 	{
 		LoadResources();
-
-		mDelayForNextState = 2.5f;
 	}
 
 	void LoadingState::Execute()
 	{
-		assert(mGameManager && "Execute: NULL pointer");
-		sf::RenderWindow * const renderWindow = mGameManager->GetRenderWindow();
-		assert(renderWindow && "Execute: NULL pointer");
-		StateMachine * const stateMachine = mGameManager->GetStateMachine();
-		assert(stateMachine && "Execute: NULL pointer");
+		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
+		StateMachine& stateMachine = mGameManager.GetStateMachine();
 
 		// Check if we must show the thanks message or change the state.
 		if(mDelayForNextState > 0.0f)
 		{
-			mDelayForNextState -= renderWindow->GetFrameTime() / 1000.0f;
-			renderWindow->Draw(*mBackgroundSprite);
+			mDelayForNextState -= renderWindow.GetFrameTime() / 1000.0f;
+			renderWindow.Draw(*mBackgroundSprite);
 		}
 
 		else
-			stateMachine->ChangeState(mGameManager->GetLevel01State());
+			stateMachine.ChangeState(mGameManager.GetLevel01State());
 	}
 
 	void LoadingState::ManageEvents(const sf::Event& ev) 
@@ -70,20 +64,14 @@ namespace Game
 
 	void LoadingState::LoadResources()
 	{
-		assert(mGameManager && "LoadResources: NULL pointer");
-		sf::RenderWindow * const renderWindow = mGameManager->GetRenderWindow();
-		assert(renderWindow && "LoadResources: NULL pointer");
+		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
+		ImageManager& imageManager = mGameManager.GetImageManager();
 
-		ImageManager * const imageManager = mGameManager->GetImageManager();
-		assert(imageManager && "LoadResources: NULL pointer");
-
-		sf::Texture * const backgroundImage = imageManager->getResource("resources/background/loading.png");
+		sf::Texture * const backgroundImage = imageManager.getResource("resources/background/loading.png");
 		assert(backgroundImage && "LoadResources: NULL pointer");
 
-		SpriteManager * const spriteManager = mGameManager->GetSpriteManager();
-		assert(spriteManager && "LoadResources: NULL pointer");
-
-		mBackgroundSprite = spriteManager->getResource("MainMenuBackground");
+		SpriteManager& spriteManager = mGameManager.GetSpriteManager();
+		mBackgroundSprite = spriteManager.getResource("MainMenuBackground");
 		assert(mBackgroundSprite && "LoadResources: NULL pointer");
 		
 		mBackgroundSprite->SetTexture(*backgroundImage);
@@ -91,15 +79,11 @@ namespace Game
 	}
 	
 	void LoadingState::DestroyResources()
-	{
-		assert(mGameManager && "DestroyResources: NULL pointer");
-		
-		ImageManager * const imageManager = mGameManager->GetImageManager();
-		assert(imageManager && "DestroyResources: NULL pointer");
-		imageManager->releaseResource("resources/background/loading.png");
+	{		
+		ImageManager& imageManager = mGameManager.GetImageManager();
+		imageManager.releaseResource("resources/background/loading.png");
 	
-		SpriteManager * const spriteManager = mGameManager->GetSpriteManager();
-		assert(spriteManager && "DestroyResources: NULL pointer");
-		spriteManager->releaseResource("MainMenuBackground");
+		SpriteManager& spriteManager = mGameManager.GetSpriteManager();
+		spriteManager.releaseResource("MainMenuBackground");
 	}
 }

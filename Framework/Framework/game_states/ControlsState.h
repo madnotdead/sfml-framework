@@ -21,7 +21,7 @@ namespace Game
 	class ControlsState : public InformationState
 	{
 	public:
-		ControlsState(GameManager * const gameManager);
+		ControlsState(GameManager& gameManager);
 		
 	protected:
 		void DrawContent();

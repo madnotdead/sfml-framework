@@ -25,16 +25,14 @@ namespace Game
 	}
 
 	// Change the current state.
-	void StateMachine::ChangeState(State * const newState)
+	void StateMachine::ChangeState(State& newState)
 	{
-		assert(newState && "ChangeState: NULL pointer");
-
 		// Call the exit method of the existing state
 		if(mCurrentState)
 			mCurrentState->Clear();
 
 		// Change state to the new state
-		mCurrentState = newState;
+		mCurrentState = &newState;
 
 		//call the entry method of the new state
 		mCurrentState->Init();
