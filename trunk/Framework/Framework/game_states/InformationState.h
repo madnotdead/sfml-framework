@@ -34,7 +34,7 @@ namespace Game
 	class InformationState : public State
 	{
 	public:
-		InformationState(GameManager * const gameManager);
+		InformationState(GameManager& gameManager);
 
 	public:
 		void Init();

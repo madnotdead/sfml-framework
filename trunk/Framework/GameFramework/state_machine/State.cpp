@@ -14,10 +14,9 @@
 
 namespace Game 
 {
-	State::State(GameManager * const gameManager)
+	State::State(GameManager& gameManager)
 		: mGameManager(gameManager)
 	{
-		assert(gameManager && "State: NULL pointer");
 	}
 	
 	State::~State() { }

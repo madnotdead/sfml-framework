@@ -26,6 +26,7 @@
 
 #include <GameFramework/managers/ImageManager.h>
 #include <GameFramework/managers/SpriteManager.h>
+#include <GameFramework/managers/SoundManager.h>
 
 #include "../game_states/ControlsState.h"
 #include "../game_states/CreditsState.h"
@@ -52,18 +53,19 @@ namespace Game
 
 	public:
 		void Run();
-		inline sf::RenderWindow* GetRenderWindow();
-		inline ImageManager* GetImageManager();
-		inline SpriteManager* GetSpriteManager();
-		inline StateMachine* GetStateMachine();
-		inline Utils::MemoryPool* GetMemoryPool();
+		inline sf::RenderWindow& GetRenderWindow();
+		inline ImageManager& GetImageManager();
+		inline SoundManager& GetSoundManager();
+		inline SpriteManager& GetSpriteManager();
+		inline StateMachine& GetStateMachine();
+		inline Utils::MemoryPool& GetMemoryPool();
 
-		inline State* GetMainMenuState();
-		inline State* GetControlsState();
-		inline State* GetCreditsState();
-		inline State* GetGameExplanationState();
-		inline State* GetLoadingState();
-		inline State* GetLevel01State();
+		inline State& GetMainMenuState();
+		inline State& GetControlsState();
+		inline State& GetCreditsState();
+		inline State& GetGameExplanationState();
+		inline State& GetLoadingState();
+		inline State& GetLevel01State();
 
 	private:
 #ifdef _DEBUG
@@ -82,6 +84,8 @@ namespace Game
 
 		SpriteManager mSpriteManager;
 
+		SoundManager mSoundManager;
+
 		StateMachine mStateMachine;
 
 		MainMenuState mMainMenuState;
@@ -98,60 +102,64 @@ namespace Game
 		sf::Font *mFont;
 	};
 
-	sf::RenderWindow* GameManager::GetRenderWindow()
+	sf::RenderWindow& GameManager::GetRenderWindow()
 	{
-		return &mRenderWindow;
+		return mRenderWindow;
 	}
 
-	ImageManager* GameManager::GetImageManager()
+	ImageManager& GameManager::GetImageManager()
 	{
-		return &mImageManager;
+		return mImageManager;
 	}
 
-	SpriteManager* GameManager::GetSpriteManager()
+	SoundManager& GameManager::GetSoundManager()
 	{
-		return &mSpriteManager;
+		return mSoundManager;
 	}
 
-	StateMachine* GameManager::GetStateMachine()
+	SpriteManager& GameManager::GetSpriteManager()
 	{
-		return &mStateMachine;
+		return mSpriteManager;
 	}
 
-	Utils::MemoryPool * GameManager::GetMemoryPool()
+	StateMachine& GameManager::GetStateMachine()
 	{
-		return &mMemoryPool;
+		return mStateMachine;
 	}
 
-	State* GameManager::GetMainMenuState() 
+	Utils::MemoryPool& GameManager::GetMemoryPool()
 	{
-		return &mMainMenuState;
+		return mMemoryPool;
 	}
 
-	State* GameManager::GetControlsState() 
+	State& GameManager::GetMainMenuState() 
 	{
-		return &mControlsState;
+		return mMainMenuState;
 	}
 
-
-	State* GameManager::GetCreditsState() 
+	State& GameManager::GetControlsState() 
 	{
-		return &mCreditsState;
+		return mControlsState;
 	}
 
-	State* GameManager::GetGameExplanationState() 
+	State& GameManager::GetCreditsState() 
 	{
-		return &mGameExplanationState;
+		return mCreditsState;
 	}
 
-	State*GameManager::GetLoadingState()
+	State& GameManager::GetGameExplanationState() 
 	{
-		return &mLoadingState;
+		return mGameExplanationState;
 	}
 
-	State* GameManager::GetLevel01State()
+	State& GameManager::GetLoadingState()
 	{
-		return &mLevel01State;
+		return mLoadingState;
+	}
+
+	State& GameManager::GetLevel01State()
+	{
+		return mLevel01State;
 	}
 }
 

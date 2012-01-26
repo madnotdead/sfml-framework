@@ -29,20 +29,21 @@ namespace Game
 	GameManager::GameManager() 
 		: mRenderWindow(sf::VideoMode::VideoMode(1024, 768), "Game", sf::Style::Close)
 		, mMemoryPool(sMemoryBlocks, sMemoryBlockSize)
-		, mImageManager(&mMemoryPool)
-		, mSpriteManager(&mMemoryPool)
-		, mMainMenuState(this)
-		, mControlsState(this)
-		, mCreditsState(this)
-		, mGameExplanationState(this)
-		, mLoadingState(this)
-		, mLevel01State(this)
+		, mImageManager(mMemoryPool)
+		, mSoundManager(mMemoryPool)
+		, mSpriteManager(mMemoryPool)
+		, mMainMenuState(*this)
+		, mControlsState(*this)
+		, mCreditsState(*this)
+		, mGameExplanationState(*this)
+		, mLoadingState(*this)
+		, mLevel01State(*this)
 #ifdef _DEBUG
 		, mFpsText(0)
 #endif
 		, mFont(new (mMemoryPool.Alloc(sizeof(sf::Font))) sf::Font)
 	{
-		mStateMachine.ChangeState(&mMainMenuState);
+		mStateMachine.ChangeState(mMainMenuState);
 		
 		bool correctLoading = mFont->LoadFromFile("resources/fonts/calibri.ttf");
 		assert(correctLoading && "GameManager: Incorrect font loading");

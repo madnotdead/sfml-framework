@@ -44,7 +44,7 @@ namespace
 
 namespace Game
 {
-	Level01State::Level01State(GameManager * const gameManager)
+	Level01State::Level01State(GameManager& gameManager)
 		: State(gameManager)
 		, mEnemy(sf::Vector2f(FLT_MAX, FLT_MAX), 2000.0f, 10000)
 		, mPlayerPosition(sf::Vector2f(FLT_MAX, FLT_MAX))
@@ -61,8 +61,6 @@ namespace Game
 		, mPlayerMaxHealth(2000)
 		, mPlayerCurrentHealth(mPlayerMaxHealth)
 	{
-		assert(gameManager && "Level01State: NULL pointer");
-
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 	}
 
@@ -71,64 +69,59 @@ namespace Game
 		// The player can shot from the beginning.
 		mElapsedTimeFromLastShot = mTimeToWaitToShot;
 		
-		ImageManager * const imageManager = mGameManager->GetImageManager();
-		assert(imageManager && "Init: NULL pointer");
+		ImageManager& imageManager = mGameManager.GetImageManager();
 
 		// Init player sprite.
-		const sf::Texture *image = imageManager->getResource("resources/ships/PlayerShip.png");
+		const sf::Texture *image = imageManager.getResource("resources/ships/PlayerShip.png");
 		assert(image && "Init: NULL pointer");
-		SpriteManager * const spriteManager = mGameManager->GetSpriteManager();
-		assert(spriteManager && "Init: NULL pointer");
-		mPlayerSprite = spriteManager->getResource("PlayerShipSprite");
+		SpriteManager& spriteManager = mGameManager.GetSpriteManager();
+		mPlayerSprite = spriteManager.getResource("PlayerShipSprite");
 		assert(mPlayerSprite && "Init: NULL pointer");
 		mPlayerSprite->SetTexture(*image);
 		mPlayerPosition.x = 0.0f;
 		mPlayerPosition.y = 0.0f;
 				
 		// Init player bullets.
-		image = imageManager->getResource("resources/bullets/bullet.png");
+		image = imageManager.getResource("resources/bullets/bullet.png");
 		assert(image && "Init: NULL pointer");
-		mPlayerBulletSprite = spriteManager->getResource("PlayerBulletSprite");
+		mPlayerBulletSprite = spriteManager.getResource("PlayerBulletSprite");
 		assert(mPlayerBulletSprite && "Init: NULL pointer");
 		mPlayerBulletSprite->SetTexture(*image);
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 
 		// Init enemy sprite.
-		image = imageManager->getResource("resources/ships/boss.PNG");
+		image = imageManager.getResource("resources/ships/boss.PNG");
 		assert(image && "Init: NULL pointer");
-		mEnemySprite = spriteManager->getResource("EnemyShipSprite");
+		mEnemySprite = spriteManager.getResource("EnemyShipSprite");
 		assert(mEnemySprite && "Init: NULL pointer");
 		mEnemySprite->SetTexture(*image);
 		mEnemy.mPosition.x = 0.0f;
 		mEnemy.mPosition.y = 0.0f;
 
 		// Init background
-		image = imageManager->getResource("resources/background/level1.png");
+		image = imageManager.getResource("resources/background/level1.png");
 		assert(image && "Init: NULL pointer");
-		mBackground = spriteManager->getResource("LevelBackground");
+		mBackground = spriteManager.getResource("LevelBackground");
 		assert(mBackground && "Init: NULL pointer");
 		mBackground->SetTexture(*image);
 
-		sf::RenderWindow * const renderWindow = mGameManager->GetRenderWindow();
-		assert(renderWindow && "Init: NULL pointer");
-		//mBackground->Resize(static_cast<float>(renderWindow->GetWidth()), static_cast<float>(renderWindow->GetHeight()));
+		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
 		mBackground->SetPosition(0.0f, 0.0f);
 	}
 
 	void Level01State::Execute()
 	{
-		sf::RenderWindow * const renderWindow = mGameManager->GetRenderWindow();
-		assert(renderWindow && "Execute: NULL pointer");
+		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
 
 		// Update player position
-		const float frameTime = static_cast<float>(renderWindow->GetFrameTime()) / 1000.0f;
+		const float frameTime = static_cast<float>(renderWindow.GetFrameTime()) / 1000.0f;
 		UpdatePlayerPositionFromInput(&mPlayerPosition, frameTime, mPlayerSpeed);
 				
 		// Fit player sprite onto the screen
 		const sf::Texture * const playerImage = mPlayerSprite->GetTexture();
 		assert(playerImage && "Execute: NULL pointer");
-		FitInsideScreen(&mPlayerPosition, playerImage->GetWidth(), playerImage->GetHeight(), renderWindow->GetWidth(), 
-			renderWindow->GetHeight());
+		FitInsideScreen(&mPlayerPosition, playerImage->GetWidth(), playerImage->GetHeight(), renderWindow.GetWidth(), 
+			renderWindow.GetHeight());
 		mPlayerSprite->SetPosition(mPlayerPosition);
 
 		// Update player bullet positions
@@ -148,7 +141,7 @@ namespace Game
 
 		// Update enemy
 		const sf::Texture * const enemyImage = mEnemySprite->GetTexture();
-		mEnemy.Update(frameTime, enemyImage->GetWidth(), enemyImage->GetHeight(), renderWindow->GetWidth(), renderWindow->GetHeight());
+		mEnemy.Update(frameTime, enemyImage->GetWidth(), enemyImage->GetHeight(), renderWindow.GetWidth(), renderWindow.GetHeight());
 		mEnemySprite->SetPosition(mEnemy.mPosition);
 
 		// Calculate collisions between player bullets and enemy.
@@ -162,7 +155,7 @@ namespace Game
 			mPlayerPosition.y = 0.0f;
 		}
 
-		renderWindow->Draw(*mBackground);
+		renderWindow.Draw(*mBackground);
 
 		// Draw player ship and bullets
 		for(uint8_t i = 0; i < sPlayerBullets; ++i)
@@ -170,12 +163,12 @@ namespace Game
 			if(mPlayerBulletsPositions[i].y != FLT_MAX)
 			{
 				mPlayerBulletSprite->SetPosition(mPlayerBulletsPositions[i]);
-				renderWindow->Draw(*mPlayerBulletSprite);
+				renderWindow.Draw(*mPlayerBulletSprite);
 			}
 		}
 
-		renderWindow->Draw(*mEnemySprite);
-		renderWindow->Draw(*mPlayerSprite);
+		renderWindow.Draw(*mEnemySprite);
+		renderWindow.Draw(*mPlayerSprite);	
 	}
 
 	void Level01State::ManageEvents(const sf::Event& ev)
@@ -184,39 +177,31 @@ namespace Game
 		if(ev.Type == sf::Event::KeyPressed)
 		{
 			if(ev.Key.Code == sf::Keyboard::Escape)
-			{
-				assert(mGameManager && "ManageEvents: NULL pointer");
-				
-				ImageManager * const imageManager = mGameManager->GetImageManager();
-				assert(imageManager && "ManageEvents: NULL pointer");
-				imageManager->releaseResource("resources/images/PlayerShip.png");
+			{				
+				ImageManager& imageManager = mGameManager.GetImageManager();
+				imageManager.releaseResource("resources/images/PlayerShip.png");
 
-				SpriteManager * const spriteManager = mGameManager->GetSpriteManager();
-				assert(spriteManager && "ManageEvents: NULL pointer");
-				spriteManager->releaseResource("PlayerShip");
+				SpriteManager& spriteManager = mGameManager.GetSpriteManager();
+				spriteManager.releaseResource("PlayerShip");
 				
-				StateMachine * const stateMachine = mGameManager->GetStateMachine();
-				assert(stateMachine && "ManageEvents: NULL pointer");
-				stateMachine->ChangeState(mGameManager->GetMainMenuState());
+				StateMachine& stateMachine = mGameManager.GetStateMachine();
+				stateMachine.ChangeState(mGameManager.GetMainMenuState());
 			}	
 		}
 	}
 	
 	void Level01State::Clear()
 	{
-		ImageManager * const imageManager = mGameManager->GetImageManager();
-		assert(imageManager && "Clear: NULL pointer");	
-		imageManager->releaseResource("resources/ships/boss.png");
-		imageManager->releaseResource("resources/background/level1.jpg");
+		ImageManager& imageManager = mGameManager.GetImageManager();
+		imageManager.releaseResource("resources/ships/boss.png");
+		imageManager.releaseResource("resources/background/level1.jpg");
+		imageManager.releaseResource("resources/images/PlayerShip.png");
 
-		imageManager->releaseResource("resources/images/PlayerShip.png");
-
-		SpriteManager * const spriteManager = mGameManager->GetSpriteManager();
-		assert(spriteManager && "Clear: NULL pointer");
-		spriteManager->releaseResource("PlayerShipSprite");
-		spriteManager->releaseResource("PlayerBulletSprite");
-		spriteManager->releaseResource("EnemyShipSprite");
-		spriteManager->releaseResource("LevelBackground");
+		SpriteManager& spriteManager = mGameManager.GetSpriteManager();
+		spriteManager.releaseResource("PlayerShipSprite");
+		spriteManager.releaseResource("PlayerBulletSprite");
+		spriteManager.releaseResource("EnemyShipSprite");
+		spriteManager.releaseResource("LevelBackground");
 	}
 
 	void Level01State::CheckEnemyToBulletsCollisions()

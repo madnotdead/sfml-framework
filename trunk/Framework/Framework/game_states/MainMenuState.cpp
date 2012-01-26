@@ -26,13 +26,12 @@
 
 namespace Game
 {
-	MainMenuState::MainMenuState(GameManager * const gameManager) 
+	MainMenuState::MainMenuState(GameManager& gameManager) 
 		: InformationState(gameManager)
 		, mLastKeyOptionChange(sf::Keyboard::Key(sf::Keyboard::Up)) 
 		, mCurrentOption(MenuOption_NewGame)
 		, mEnableChangeOption(true)
 	{
-		assert(gameManager && "MainMenuState: NULL pointer");
 	}
 	
 	void MainMenuState::Init()
@@ -49,12 +48,8 @@ namespace Game
 	
 	void MainMenuState::ManageEvents(const sf::Event& ev) 
 	{
-		assert(mGameManager && "ManageEvents: NULL pointer");
-		StateMachine * const stateMachine = mGameManager->GetStateMachine();
-		assert(stateMachine && "ManageEvents: NULL pointer");
-
-		sf::RenderWindow * const renderWindow = mGameManager->GetRenderWindow();
-		assert(renderWindow && "ManageEvents: NULL pointer");
+		StateMachine& stateMachine = mGameManager.GetStateMachine();
+		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
 
 		// Check if we must do an option change
 		if(ev.Type == sf::Event::KeyPressed && mEnableChangeOption)
@@ -128,23 +123,23 @@ namespace Game
 				switch(mCurrentOption)
 				{
 				case(MenuOption_NewGame):
-					stateMachine->ChangeState(mGameManager->GetLoadingState());
+					stateMachine.ChangeState(mGameManager.GetLoadingState());
 					break;
 
 				case(MenuOption_Controls):
-					stateMachine->ChangeState(mGameManager->GetControlsState());
+					stateMachine.ChangeState(mGameManager.GetControlsState());
 					break;
 
 				case(MenuOption_GameExplanation):
-					stateMachine->ChangeState(mGameManager->GetGameExplanationState());
+					stateMachine.ChangeState(mGameManager.GetGameExplanationState());
 					break;
 
 				case(MenuOption_Credits):
-					stateMachine->ChangeState(mGameManager->GetCreditsState());
+					stateMachine.ChangeState(mGameManager.GetCreditsState());
 					break;
 
 				case(MenuOption_Exit):
-					renderWindow->Close();
+					renderWindow.Close();
 					break;
 
 				default:
@@ -164,13 +159,11 @@ namespace Game
 	void MainMenuState::DrawContent()
 	{
 		assert(mText && "DrawContent: NULL pointer");
+		
+		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
 
-		assert(mGameManager && "DrawContent: NULL pointer");
-		sf::RenderWindow * const renderWindow = mGameManager->GetRenderWindow();
-		assert(renderWindow && "DrawContent: NULL pointer");
-
-		const float xPos = static_cast<float>(renderWindow->GetWidth()) * 0.6f;
-		const float yPos = static_cast<float>(renderWindow->GetHeight()) * 0.4f;
+		const float xPos = static_cast<float>(renderWindow.GetWidth()) * 0.6f;
+		const float yPos = static_cast<float>(renderWindow.GetHeight()) * 0.4f;
 		const float initialPos = 50.0f;
 		const float displacement = 50.0f;
 		

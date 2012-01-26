@@ -27,7 +27,7 @@ namespace Game
 	class MainMenuState : public InformationState
 	{
 	public:
-		MainMenuState(GameManager * const gameManager);
+		MainMenuState(GameManager& gameManager);
 		
 	public:
 		void Init();

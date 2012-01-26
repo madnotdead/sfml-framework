@@ -30,13 +30,12 @@
 
 namespace Game
 {
-	InformationState::InformationState(GameManager * const gameManager) 
+	InformationState::InformationState(GameManager& gameManager) 
 		: State(gameManager)
 		, mBackgroundSprite(0)
 		, mFont(0)
 		, mText(0) 
 	{
-		assert(gameManager && "InformationState: NULL pointer");
 	} 
 
 	void InformationState::Init()
@@ -55,12 +54,10 @@ namespace Game
 
 	void InformationState::ManageEvents(const sf::Event& ev) 
 	{
-		assert(mGameManager && "ManageEvents: NULL pointer");
-		StateMachine * const stateMachine = mGameManager->GetStateMachine();
-		assert(stateMachine && "ManageEvents: NULL pointer");
+		StateMachine& stateMachine = mGameManager.GetStateMachine();
 		
 		if(ev.Type == sf::Event::KeyPressed && ev.Key.Code == sf::Keyboard::Escape)
-			stateMachine->ChangeState(mGameManager->GetMainMenuState());
+			stateMachine.ChangeState(mGameManager.GetMainMenuState());
 	}
 
 	void InformationState::Clear()
@@ -69,22 +66,14 @@ namespace Game
 	}
 
 	void InformationState::LoadResources()
-	{
-		assert(mGameManager && "LoadResources: NULL pointer");
-		
-		ImageManager * const imageManager = mGameManager->GetImageManager();
-		assert(imageManager && "LoadResources: NULL pointer");
-		
-		sf::Texture * const backgroundImage = imageManager->getResource("resources/background/main_screen.png");
+	{		
+		ImageManager& imageManager = mGameManager.GetImageManager();		
+		sf::Texture * const backgroundImage = imageManager.getResource("resources/background/main_screen.png");
 		assert(backgroundImage && "LoadResources: NULL pointer");
 
-		sf::RenderWindow * const renderWindow = mGameManager->GetRenderWindow();
-		assert(renderWindow && "LoadResources: NULL pointer");
+		SpriteManager& spriteManager = mGameManager.GetSpriteManager();
 
-		SpriteManager * const spriteManager = mGameManager->GetSpriteManager();
-		assert(spriteManager && "LoadResources: NULL pointer");
-
-		mBackgroundSprite = spriteManager->getResource("MainMenuBackground");
+		mBackgroundSprite = spriteManager.getResource("MainMenuBackground");
 
 		mBackgroundSprite->SetTexture(*backgroundImage);
 		mBackgroundSprite->SetPosition(0.0f, 0.0f);
@@ -92,14 +81,14 @@ namespace Game
 
 	void InformationState::DestroyResources()
 	{
-		Utils::MemoryPool * const memoryPool = mGameManager->GetMemoryPool();
-		memoryPool->Free(mFont);
-		memoryPool->Free(mText);
+		Utils::MemoryPool& memoryPool = mGameManager.GetMemoryPool();
+		memoryPool.Free(mFont);
+		memoryPool.Free(mText);
 	}
 
 	void InformationState::InitFont()
 	{
-		void *memory = mGameManager->GetMemoryPool()->Alloc(sizeof(sf::Font));
+		void *memory = mGameManager.GetMemoryPool().Alloc(sizeof(sf::Font));
 		mFont = new (memory) sf::Font();
 		bool correctLoading = mFont->LoadFromFile("resources/fonts/calibri.ttf");
 		assert(correctLoading && "InitFont: Font was not correctly loeaded");
@@ -107,7 +96,7 @@ namespace Game
 
 	void InformationState::InitText()
 	{
-		void *memory = mGameManager->GetMemoryPool()->Alloc(sizeof(sf::Text));
+		void *memory = mGameManager.GetMemoryPool().Alloc(sizeof(sf::Text));
 		mText = new (memory) sf::Text("", *mFont);
 		mText->SetCharacterSize(50);
 		mText->SetStyle(sf::Text::Bold);
@@ -118,24 +107,19 @@ namespace Game
 	{
 		assert(mBackgroundSprite && "Draw(): NULL pointer");
 
-		assert(mGameManager && "Draw: NULL pointer");
-		sf::RenderWindow * const renderWindow = mGameManager->GetRenderWindow();
-		assert(renderWindow && "Draw: NULL pointer");
-
-		renderWindow->Draw(*mBackgroundSprite);
+		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
+		renderWindow.Draw(*mBackgroundSprite);
 	}
 
 	void InformationState::DisplayText(const std::string& body, const float xPos, const float yPos, const sf::Color& color)
 	{
 		assert(mText && "DisplayText: NULL pointer");
-
-		assert(mGameManager && "DisplayText: NULL pointer");
-		sf::RenderWindow * const renderWindow = mGameManager->GetRenderWindow();
-		assert(renderWindow && "DisplayText: NULL pointer");
-
+				
 		mText->SetString(body.c_str());
 		mText->SetPosition(xPos, yPos);
 		mText->SetColor(color);
-		renderWindow->Draw(*mText);
+
+		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
+		renderWindow.Draw(*mText);
 	}
 }

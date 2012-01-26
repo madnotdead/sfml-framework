@@ -29,11 +29,9 @@ namespace Game
 		StateMachine();
 
 	public:
-		void ChangeState(State * const newState);
+		void ChangeState(State& newState);
 		inline void Update();
 		inline void ManageEvents(const sf::Event& ev);
-
-
 
 	private:
 		StateMachine(const StateMachine& stateMachine);

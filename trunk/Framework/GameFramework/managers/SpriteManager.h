@@ -17,7 +17,7 @@ namespace Game
 	class SpriteManager : public ResourceManager<sf::Sprite> 
 	{
 	public:
-		SpriteManager(::Utils::MemoryPool * const memoryPool);
+		SpriteManager(Utils::MemoryPool& memoryPool);
 
 	protected:
 		sf::Sprite* load(const std::string& strId);

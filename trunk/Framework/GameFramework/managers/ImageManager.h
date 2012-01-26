@@ -17,7 +17,7 @@ namespace Game
 	class ImageManager : public ResourceManager<sf::Texture> 
 	{
 	public:
-		ImageManager(Utils::MemoryPool * const memoryPool);
+		ImageManager(Utils::MemoryPool& memoryPool);
 
 	protected:
 		sf::Texture* load(const std::string& strId);

@@ -34,15 +34,14 @@ namespace Game
 		}
 
 	protected:
-		Utils::MemoryPool * const mMemoryPool;
+		Utils::MemoryPool& mMemoryPool;
 
 		virtual T* load(const std::string& strId) = 0;
 
 	public:
-		ResourceManager(Utils::MemoryPool * const memoryPool) 
+		ResourceManager(Utils::MemoryPool& memoryPool) 
 			: mMemoryPool(memoryPool)
 		{
-			assert(memoryPool && "ResourcesManager: NULL pointer");
 		}
 
 		virtual ~ResourceManager() 
@@ -70,8 +69,7 @@ namespace Game
 			T *resource = find( strId );
 			if(resource) 
 			{
-				assert(mMemoryPool && "releaseResource: NULL pointer");
-				mMemoryPool->Free(resource);
+				mMemoryPool.Free(resource);
 				mResource.erase(mResource.find(strId));
 			}
 		}
@@ -80,8 +78,7 @@ namespace Game
 		{
 			while(mResource.begin() != mResource.end())
 			{
-				assert(mMemoryPool && "releaseAllResources: NULL pointer");
-				mMemoryPool->Free(mResource.begin()->second);
+				mMemoryPool.Free(mResource.begin()->second);
 				mResource.erase(mResource.begin());
 			}
 		}
