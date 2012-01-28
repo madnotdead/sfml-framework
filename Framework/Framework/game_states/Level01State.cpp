@@ -148,7 +148,7 @@ namespace Game
 		mBackgroundItemsGenerator->startGeneration(10000);		
 
 		// Init jewels generator.
-		mJewelsGenerator = new JewelsGenerator(mGameManager);
+		mJewelsGenerator = new JewelsGenerator(mGameManager, mHud);
 		mHudPopulator = new HudPopulator(mHud, *mJewelsGenerator);
 		image = imageManager.getResource("resources/jewels/small/darkGreen.png");
 		sf::Texture* imageb = imageManager.getResource("resources/jewels/small/darkGreenb.png");
@@ -224,7 +224,6 @@ namespace Game
 		}
 
 		mHud.setLife(5);
-		mHud.setMapPosition(7);
 
 		// Init enemy generator.
 		mEnemyGenerator = new EnemysGenerator(mGameManager);

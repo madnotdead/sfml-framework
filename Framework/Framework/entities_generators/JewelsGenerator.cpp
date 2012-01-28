@@ -9,10 +9,11 @@
 
 namespace Game
 {
-	JewelsGenerator::JewelsGenerator(GameManager& gameManager)
+	JewelsGenerator::JewelsGenerator(GameManager& gameManager, Hud& hud)
 		: mGamemanager(gameManager)
 		, mTimer(timerGenerateItem, this)
 		, mCurrentItem(0)
+		, mHud(hud)
 	{
 		srand(static_cast<uint32_t> (time(0)));
 	}
@@ -107,5 +108,10 @@ namespace Game
 			mItemsPools[mCurrentItem].isActive = true;
 			mCurrentItem = 0;
 		}
+		static size_t pos = 0;
+		if(pos == 12) {
+			pos = 0;
+		}
+		mHud.setMapPosition(pos++);
 	}
 }

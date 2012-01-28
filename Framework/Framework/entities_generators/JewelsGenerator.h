@@ -16,6 +16,7 @@ namespace sf
 namespace Game
 {
 	class GameManager;
+	class Hud;
 
 	class JewelsGenerator
 	{
@@ -35,7 +36,7 @@ namespace Game
 			JewelColor_Invalid,
 		};
 
-		JewelsGenerator(GameManager& gameManager);
+		JewelsGenerator(GameManager& gameManager, Hud& hud);
 		~JewelsGenerator();
 
 		void addJewel(sf::Texture& image, const JewelColor color);
@@ -77,6 +78,7 @@ namespace Game
 		GameManager& mGamemanager;
 		Utils::Timer mTimer;
 		size_t mCurrentItem;
+		Hud& mHud;
 	};
 }
 
