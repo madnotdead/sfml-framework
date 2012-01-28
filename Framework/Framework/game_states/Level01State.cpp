@@ -84,7 +84,7 @@ namespace Game
 		assert(image && "Init: NULL pointer");
 		mPlayerBulletSprite = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
 		mPlayerBulletSprite->SetTexture(*image);
-		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
+		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions); 
 
 		// Init enemy sprite.
 		image = imageManager.getResource("resources/ships/boss.PNG");
@@ -93,11 +93,12 @@ namespace Game
 		mEnemySprite->SetTexture(*image);
 		mEnemy.mPosition.x = 0.0f;
 		mEnemy.mPosition.y = 0.0f;
-
+		 
 		// Init background
-		image = imageManager.getResource("resources/background/level1.png");
+		image = imageManager.getResource("resources/background/background1.jpg");
 		assert(image && "Init: NULL pointer");
 		mMap.initMap(*image);
+		mMap.setScrollingSpeed(2.0f);
 	}
 
 	void Level01State::Execute()
@@ -146,6 +147,7 @@ namespace Game
 			mPlayerPosition.y = 0.0f;
 		}
 
+		mMap.update();
 		mMap.draw();
 
 		// Draw player ship and bullets
@@ -179,7 +181,7 @@ namespace Game
 	{
 		ImageManager& imageManager = mGameManager.GetImageManager();
 		imageManager.releaseResource("resources/ships/boss.png");
-		imageManager.releaseResource("resources/background/level1.jpg");
+		imageManager.releaseResource("resources/background/background1.jpg");
 		imageManager.releaseResource("resources/images/PlayerShip.png");
 
 		mGameManager.GetMemoryPool().Free(mPlayerBulletSprite);
