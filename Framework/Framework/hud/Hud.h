@@ -7,13 +7,13 @@ namespace Game {
 
 class GameManager;
 
-struct HudInfo {
+struct BallInfo {
 	enum STATE {OFF, ON};
 	STATE state;
 	const sf::Texture* offTexture;
 	const sf::Texture* onTexture;
 	sf::Vector2f position;
-	HudInfo() : state(OFF), offTexture(NULL), onTexture(NULL) {}
+	BallInfo() : state(OFF), offTexture(NULL), onTexture(NULL) {}
 };
 
 class Hud {
@@ -26,21 +26,24 @@ public:
 	void clear();
 
 	// circle
-	void addCircle(const sf::Texture* circle);
-	void addMovingPart(const sf::Texture* part);
-	void setPartRotation(float mapPosition); // 0 to 100
+	void addLifeTexture(const sf::Texture* texture);
+	void addMapPositionTexture(const sf::Texture* texture);
+	void setLife(size_t life);
+	void setMapPosition(size_t mapPos);
+
 
 private:
 
 void updateNextPosition();
-std::vector<HudInfo> mHudInfo;
+std::vector<BallInfo> mHudInfo;
 GameManager& mGameManager;
 sf::Vector2f mNextPosition;
 size_t mCurrentIndex;
 
-const sf::Texture* mCircle;
-const sf::Texture* mPart;
-float mPartRotation;
+std::vector<const sf::Texture*> mLifeInfo;
+std::vector<const sf::Texture*> mMapInfo;
+size_t mMapPosition;
+size_t mLife;
 
 
 

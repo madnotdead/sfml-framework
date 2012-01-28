@@ -5,9 +5,9 @@ namespace Game {
 
 const float HUD_SIZE = 30.f;
 const float HUD_OFFSET = 20.f;
-const sf::Vector2f CIRCLE_POSITION(30.f, 600.f);
+const sf::Vector2f CIRCLE_POSITION(30.f, 500.f);
 
-Hud::Hud (GameManager& gameManager, size_t textureCount) : mGameManager(gameManager), mCurrentIndex(0)
+Hud::Hud (GameManager& gameManager, size_t textureCount) : mGameManager(gameManager), mCurrentIndex(0), mMapPosition(0), mLife(0)
 { 
 	mHudInfo.reserve(textureCount);
 	mNextPosition.x = HUD_SIZE * 2;
@@ -16,7 +16,7 @@ Hud::Hud (GameManager& gameManager, size_t textureCount) : mGameManager(gameMana
 
 void Hud::addItem(const sf::Texture* offTexture, const sf::Texture* onTexture)
 {
-	HudInfo info;
+	BallInfo info;
 	info.offTexture = offTexture;
 	info.onTexture = onTexture;
 	info.position = mNextPosition;
@@ -29,21 +29,19 @@ void Hud::draw()
 	sf::Sprite sprite;
 	for(size_t i = 0; i < mHudInfo.size(); ++i) {
 		sprite.SetPosition(mHudInfo[i].position);
-		const sf::Texture* texture = mHudInfo[i].state == HudInfo::OFF ?  mHudInfo[i].offTexture : mHudInfo[i].onTexture;
+		const sf::Texture* texture = mHudInfo[i].state == BallInfo::OFF ?  mHudInfo[i].offTexture : mHudInfo[i].onTexture;
 		sprite.SetTexture(*texture);
 		mGameManager.GetRenderWindow().Draw(sprite);
 	}
-	
-	// Draw circle
+
+	// Draw map position
 	sprite.SetPosition(CIRCLE_POSITION);
-	sprite.SetTexture(*mCircle);
+	sprite.SetTexture(*(mMapInfo[mMapPosition]), true);
 	mGameManager.GetRenderWindow().Draw(sprite);
 
-	// Draw part
+	// Draw life
 	sprite.SetPosition(CIRCLE_POSITION);
-	sprite.SetTexture(*mPart);
-	sprite.SetOrigin(105.f, 105.f);
-	sprite.Rotate(mPartRotation);
+	sprite.SetTexture(*(mLifeInfo[mLife]), true);
 	mGameManager.GetRenderWindow().Draw(sprite);
 }
 
@@ -54,37 +52,44 @@ void Hud::updateNextPosition()
 
 void Hud::turnOn()
 {
-	mHudInfo[mCurrentIndex].state = HudInfo::ON;
+	mHudInfo[mCurrentIndex].state = BallInfo::ON;
 	mCurrentIndex++;
 }
 
 void Hud::turnOff()
 {
 	mCurrentIndex--;
-	mHudInfo[mCurrentIndex].state = HudInfo::OFF;
+	mHudInfo[mCurrentIndex].state = BallInfo::OFF;
 }	
 
 void Hud::clear() 
 {
 	for(size_t i = 0; i < mHudInfo.size(); ++i) {
-		mHudInfo[i].state = HudInfo::OFF;
+		mHudInfo[i].state = BallInfo::OFF;
 		mCurrentIndex = 0;
 	}
 }
 
-void Hud::addCircle( const sf::Texture* circle )
+void Hud::addLifeTexture( const sf::Texture* texture )
 {
-	mCircle = circle;
+	mLifeInfo.push_back(texture);
 }
 
-void Hud::addMovingPart( const sf::Texture* part )
+void Hud::addMapPositionTexture( const sf::Texture* texture )
 {
-	mPart = part;
+	mMapInfo.push_back(texture);
 }
 
-void Hud::setPartRotation( float mapPosition )
+void Hud::setLife( size_t life )
 {
-	mPartRotation = (365.f / 100) * mapPosition; 
+	mLife = life;
 }
+
+void Hud::setMapPosition( size_t mapPos )
+{
+	mMapPosition = mapPos;
+}
+
+
 
 }
