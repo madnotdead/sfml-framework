@@ -7,18 +7,10 @@
 
 #include "ResourceManager.h"
 
-namespace Utils
-{
-	class MemoryPool;
-}
-
 namespace Game
 {
 	class ImageManager : public ResourceManager<sf::Texture> 
 	{
-	public:
-		ImageManager(Utils::MemoryPool& memoryPool);
-
 	protected:
 		sf::Texture* load(const std::string& strId);
 	};

@@ -25,7 +25,6 @@
     <ClCompile Include="state_machine\StateMachine.cpp" />
     <ClCompile Include="utilities\CollisionDetection.cpp" />
     <ClCompile Include="utilities\FPSCalculator.cpp" />
-    <ClCompile Include="utilities\MemoryPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="managers\ImageManager.h" />
@@ -35,7 +34,6 @@
     <ClInclude Include="state_machine\StateMachine.h" />
     <ClInclude Include="utilities\CollisionDetection.h" />
     <ClInclude Include="utilities\FPSCalculator.h" />
-    <ClInclude Include="utilities\MemoryPool.h" />
     <ClInclude Include="utilities\Timer.h" />
     <ClInclude Include="utilities\TimerManager.h" />
     <ClInclude Include="utilities\Types.h" />

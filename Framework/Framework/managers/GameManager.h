@@ -20,8 +20,6 @@
 #include <GameFramework/utilities/FPSCalculator.h>
 #endif
 
-#include <GameFramework/utilities/MemoryPool.h>
-
 #include <GameFramework/utilities/Types.h>
 #include <GameFramework/utilities/TimerManager.h>
 
@@ -57,7 +55,6 @@ namespace Game
 		inline ImageManager& GetImageManager();
 		inline SoundManager& GetSoundManager();
 		inline StateMachine& GetStateMachine();
-		inline Utils::MemoryPool& GetMemoryPool();
 		inline Utils::TimerManager& GetTimerManager();
 
 
@@ -78,9 +75,7 @@ namespace Game
 		static const uint32_t sMemoryBlockSize = 512;
 
 		sf::RenderWindow mRenderWindow;
-
-		Utils::MemoryPool mMemoryPool;
-		
+				
 		ImageManager mImageManager;
 
 		SoundManager mSoundManager;
@@ -121,11 +116,6 @@ namespace Game
 	StateMachine& GameManager::GetStateMachine()
 	{
 		return mStateMachine;
-	}
-
-	Utils::MemoryPool& GameManager::GetMemoryPool()
-	{
-		return mMemoryPool;
 	}
 
     Utils::TimerManager& GameManager::GetTimerManager() 

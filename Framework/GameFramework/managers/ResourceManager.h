@@ -5,8 +5,6 @@
 #include <map>
 #include <string>
 
-#include "../utilities/MemoryPool.h"
-
 namespace Game
 {
 	template< class T >
@@ -34,15 +32,10 @@ namespace Game
 		}
 
 	protected:
-		Utils::MemoryPool& mMemoryPool;
-
 		virtual T* load(const std::string& strId) = 0;
 
 	public:
-		ResourceManager(Utils::MemoryPool& memoryPool) 
-			: mMemoryPool(memoryPool)
-		{
-		}
+		ResourceManager() {}
 
 		virtual ~ResourceManager() 
 		{
@@ -69,7 +62,7 @@ namespace Game
 			T *resource = find( strId );
 			if(resource) 
 			{
-				mMemoryPool.Free(resource);
+				delete resource;
 				mResource.erase(mResource.find(strId));
 			}
 		}
@@ -78,7 +71,7 @@ namespace Game
 		{
 			while(mResource.begin() != mResource.end())
 			{
-				mMemoryPool.Free(mResource.begin()->second);
+				delete mResource.begin()->second;
 				mResource.erase(mResource.begin());
 			}
 		}

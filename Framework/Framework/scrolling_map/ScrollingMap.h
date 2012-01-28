@@ -3,10 +3,9 @@
 
 #include <string>
 
-#include <SFML/Graphics/Sprite.hpp>
-
 namespace sf
 {
+	class Sprite;
 	class Texture;
 }
 
@@ -23,12 +22,12 @@ namespace Game
 		void initMap(const sf::Texture& image);
 
 		inline void setScrollingSpeed(const float scrollingSpeed);
-		inline float getMapYPosition() const;
 		void update();
 		void draw();
 
+		float getMapYPosition() const;
+
 	private:
-		//std::vector<sf::Sprite*> mMapElements;
 		GameManager& mGameManager;
 		sf::Sprite *mMapTile1;
 		sf::Sprite *mMapTile2;
@@ -38,11 +37,6 @@ namespace Game
 	void ScrollingMap::setScrollingSpeed(const float scrollingSpeed) 
 	{ 
 		mScrollingSpeed = scrollingSpeed; 
-	}
-
-	float ScrollingMap::getMapYPosition() const
-	{
-		return mMapTile1->GetPosition().y;
 	}
 }
 

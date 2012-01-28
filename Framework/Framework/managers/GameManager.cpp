@@ -28,9 +28,6 @@ namespace Game
 {
 	GameManager::GameManager() 
 		: mRenderWindow(sf::VideoMode::VideoMode(1024, 768), "Game", sf::Style::Close)
-		, mMemoryPool(sMemoryBlocks, sMemoryBlockSize)
-		, mImageManager(mMemoryPool)
-		, mSoundManager(mMemoryPool)
 		, mMainMenuState(*this)
 		, mControlsState(*this)
 		, mCreditsState(*this)
@@ -40,7 +37,7 @@ namespace Game
 #ifdef _DEBUG
 		, mFpsText(0)
 #endif
-		, mFont(new (mMemoryPool.Alloc(sizeof(sf::Font))) sf::Font)
+		, mFont(new sf::Font)
 	{
 		mStateMachine.ChangeState(mMainMenuState);
 		
@@ -58,10 +55,10 @@ namespace Game
 		mImageManager.releaseAllResources();
 
 #ifdef _DEBUG
-		mMemoryPool.Free(mFpsText);
+		delete mFpsText;
 #endif
 
-		mMemoryPool.Free(mFont);
+		delete mFont;
 	}
 	
 	void GameManager::Run()
@@ -105,8 +102,7 @@ namespace Game
 	{
 		assert(mFont && "InitText(): NULL pointer");
 
-		void *memory = mMemoryPool.Alloc(sizeof(sf::Text));
-		mFpsText = new (memory) sf::Text("", *mFont);
+		mFpsText = new sf::Text("", *mFont);
 		mFpsText->SetCharacterSize(30);
 		const float xCoord = 10.0f;
 		const float yCoord = 10.0f;

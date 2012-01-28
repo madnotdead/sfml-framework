@@ -18,12 +18,17 @@
 #include <GameFramework/state_machine/StateMachine.h>
 
 #include "../managers/GameManager.h"
+
+#include "../scrolling_map/BackgroundItemsGenerator.h"
+#include "../scrolling_map/ScrollingMap.h"
+
+#include "../utilities/Updaters.h"
+
 #include <GameFramework/managers/ImageManager.h>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
 #include <GameFramework/utilities/CollisionDetection.h>
-#include "../utilities/Updaters.h"
 
 namespace
 {
@@ -46,7 +51,8 @@ namespace Game
 {
 	Level01State::Level01State(GameManager& gameManager)
 		: State(gameManager)
-		, mMap(gameManager)
+		, mMap(0)
+		, mBackgroundItemsGenerator(0)
 		, mEnemy(sf::Vector2f(FLT_MAX, FLT_MAX), 2000.0f, 10000)
 		, mPlayerPosition(sf::Vector2f(FLT_MAX, FLT_MAX))
 		, mPlayerSprite(0)
@@ -73,9 +79,9 @@ namespace Game
 		ImageManager& imageManager = mGameManager.GetImageManager();
 
 		// Init player sprite.
-		const sf::Texture *image = imageManager.getResource("resources/ships/PlayerShip.png");
+		sf::Texture *image = imageManager.getResource("resources/ships/PlayerShip.png");
 		assert(image && "Init: NULL pointer");
-		mPlayerSprite = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
+		mPlayerSprite = new  sf::Sprite;
 		mPlayerSprite->SetTexture(*image);
 		mPlayerPosition.x = 0.0f;
 		mPlayerPosition.y = 0.0f;
@@ -83,44 +89,55 @@ namespace Game
 		// Init player bullets.
 		image = imageManager.getResource("resources/bullets/bullet.png");
 		assert(image && "Init: NULL pointer");
-		mPlayerBulletSprite = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
+		mPlayerBulletSprite = new sf::Sprite;
 		mPlayerBulletSprite->SetTexture(*image);
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 
 		// Init enemy sprite.
 		image = imageManager.getResource("resources/ships/boss.PNG");
 		assert(image && "Init: NULL pointer");
-		mEnemySprite = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
+		mEnemySprite = new sf::Sprite;
 		mEnemySprite->SetTexture(*image);
 		mEnemy.mPosition.x = 0.0f;
 		mEnemy.mPosition.y = 0.0f;
 
-		// Init background
+		// Init Map
+		mMap = new ScrollingMap(mGameManager);
 		image = imageManager.getResource("resources/background/background1.jpg");
 		assert(image && "Init: NULL pointer");
-		mMap.initMap(*image);
-		mMap.setScrollingSpeed(2.0f);
+		mMap->initMap(*image);
+		mMap->setScrollingSpeed(2.0f);
 
-		// hud
-		const sf::Texture *hudOffImage = imageManager.getResource("resources/hud/hudElementOff.png");
-		const sf::Texture *hudOnImage = imageManager.getResource("resources/hud/hudElementOn.png");
-		mHud.addItem(hudOffImage, hudOnImage);
-		mHud.addItem(hudOffImage, hudOnImage);
-		mHud.addItem(hudOffImage, hudOnImage);
-		mHud.addItem(hudOffImage, hudOnImage);
-		mHud.turnOn();
-		mHud.turnOn();
-		mHud.turnOn();
-		mHud.turnOff();
-
-		const sf::Texture *circle = imageManager.getResource("resources/hud/circle.png");
-		const sf::Texture *rotating = imageManager.getResource("resources/hud/pinza.png");
-		mHud.addCircle(circle);
-		mHud.addMovingPart(rotating);
-		mHud.setPartRotation(30);
-
-
-
+		// Init background items generator.
+		mBackgroundItemsGenerator = new BackgroundItemsGenerator(mGameManager);
+		image = imageManager.getResource("resources/background/items/circle.png");
+		assert(image && "Init: NULL pointer");
+		mBackgroundItemsGenerator->addImage(*image);
+		image = imageManager.getResource("resources/background/items/nebulosa1big.psd.png");
+		assert(image && "Init: NULL pointer");
+		mBackgroundItemsGenerator->addImage(*image);
+		image = imageManager.getResource("resources/background/items/nebulosa2big.psd.png");
+		assert(image && "Init: NULL pointer");
+		mBackgroundItemsGenerator->addImage(*image);
+		image = imageManager.getResource("resources/background/items/nebulosa3big.psd.png");
+		assert(image && "Init: NULL pointer");
+		mBackgroundItemsGenerator->addImage(*image);
+		image = imageManager.getResource("resources/background/items/nebulosa4big.psd.png");
+		assert(image && "Init: NULL pointer");
+		mBackgroundItemsGenerator->addImage(*image);
+		image = imageManager.getResource("resources/background/items/otroplaneta.png");
+		assert(image && "Init: NULL pointer");
+		mBackgroundItemsGenerator->addImage(*image);
+		image = imageManager.getResource("resources/background/items/planeta1.psd.png");
+		assert(image && "Init: NULL pointer");
+		mBackgroundItemsGenerator->addImage(*image);
+		image = imageManager.getResource("resources/background/items/planeta2.png");
+		assert(image && "Init: NULL pointer");
+		mBackgroundItemsGenerator->addImage(*image);
+		image = imageManager.getResource("resources/background/items/planetalool.psd.png");
+		assert(image && "Init: NULL pointer");
+		mBackgroundItemsGenerator->addImage(*image);
+		mBackgroundItemsGenerator->startGeneration(1000);		
 	}
 
 	void Level01State::Execute()
@@ -169,8 +186,11 @@ namespace Game
 			mPlayerPosition.y = 0.0f;
 		}
 
-		mMap.update();
-		mMap.draw();
+		mMap->update();
+		mMap->draw();
+
+		mBackgroundItemsGenerator->update();
+		mBackgroundItemsGenerator->draw();
 
 		// Draw player ship and bullets
 		for(uint8_t i = 0; i < sPlayerBullets; ++i)
@@ -184,7 +204,7 @@ namespace Game
 
 		renderWindow.Draw(*mEnemySprite);
 		renderWindow.Draw(*mPlayerSprite);	
-		mHud.draw();
+		//mHud.draw();
 	}
 
 	void Level01State::ManageEvents(const sf::Event& ev)
@@ -203,13 +223,13 @@ namespace Game
 	void Level01State::Clear()
 	{
 		ImageManager& imageManager = mGameManager.GetImageManager();
-		imageManager.releaseResource("resources/ships/boss.png");
-		imageManager.releaseResource("resources/background/background1.jpg");
-		imageManager.releaseResource("resources/images/PlayerShip.png");
-
-		mGameManager.GetMemoryPool().Free(mPlayerBulletSprite);
-		mGameManager.GetMemoryPool().Free(mPlayerSprite);
-		mGameManager.GetMemoryPool().Free(mEnemySprite);
+		imageManager.releaseAllResources();
+		
+		delete mPlayerBulletSprite;
+		delete mPlayerSprite;
+		delete mEnemySprite;		
+		delete mBackgroundItemsGenerator;
+		delete mMap;
 	}
 
 	void Level01State::CheckEnemyToBulletsCollisions()

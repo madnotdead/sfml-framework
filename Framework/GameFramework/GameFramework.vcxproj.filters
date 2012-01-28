@@ -27,9 +27,6 @@
     <ClCompile Include="utilities\FPSCalculator.cpp">
       <Filter>utilities</Filter>
     </ClCompile>
-    <ClCompile Include="utilities\MemoryPool.cpp">
-      <Filter>utilities</Filter>
-    </ClCompile>
     <ClCompile Include="managers\SoundManager.cpp">
       <Filter>managers</Filter>
     </ClCompile>
@@ -51,9 +48,6 @@
       <Filter>utilities</Filter>
     </ClInclude>
     <ClInclude Include="utilities\FPSCalculator.h">
-      <Filter>utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="utilities\MemoryPool.h">
       <Filter>utilities</Filter>
     </ClInclude>
     <ClInclude Include="utilities\Types.h">

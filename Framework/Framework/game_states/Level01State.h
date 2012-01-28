@@ -12,7 +12,6 @@
 #define GAME_LEVEL01_STATE_H
 
 #include "../entities/KamikazeEnemy.h"
-#include "../scrolling_map/ScrollingMap.h"
 
 #include <GameFramework/utilities/Types.h>
 
@@ -27,7 +26,9 @@ namespace sf
 
 namespace Game
 {
+	class BackgroundItemsGenerator;
 	class GameManager;
+	class ScrollingMap;
 
 	class Level01State : public State
 	{
@@ -46,7 +47,8 @@ namespace Game
 	private: 
 		void CheckEnemyToBulletsCollisions();
 
-		ScrollingMap mMap;
+		ScrollingMap *mMap;
+		BackgroundItemsGenerator *mBackgroundItemsGenerator;
 		KamikazeEnemy mEnemy;
 		sf::Vector2f mPlayerPosition;
 		sf::Vector2f mPlayerBulletsPositions[sPlayerBullets];
