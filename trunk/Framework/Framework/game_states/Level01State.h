@@ -14,8 +14,8 @@
 #include <GameFramework/utilities/Types.h>
 
 #include <GameFramework/state_machine/State.h>
+
 #include "..\hud\Hud.h"
-#include "..\entities_generators\EnemysGenerator.h"
 #include "..\coliders\GemColider.h"
 
 namespace Animator
@@ -32,6 +32,7 @@ namespace sf
 namespace Game
 {
 	class BackgroundItemsGenerator;
+	class EnemysGenerator;
 	class GameManager;
 	class JewelsGenerator;
 	class ScrollingMap;
@@ -59,6 +60,7 @@ namespace Game
 		Animator::PlayerAnimator *mPlayerAnimator;
 		sf::Vector2f mPlayerPosition;
 		sf::Vector2f mPlayerBulletsPositions[sPlayerBullets];
+		//bool mPlayerBulletsState[sPlayerBullets];
 		sf::Sprite *mPlayerSprite;
 		sf::Sprite *mPlayerBulletSprite;		
 		const float mPlayerSpeed;
@@ -70,7 +72,7 @@ namespace Game
 		uint32_t mPlayerMaxHealth;
 		uint32_t mPlayerCurrentHealth;
 		Hud mHud;
-		EnemysGenerator mEnemyGenerator;
+		EnemysGenerator *mEnemyGenerator;
 		GemColider mGemColider;
 	};
 }

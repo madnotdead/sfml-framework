@@ -211,6 +211,7 @@
     <ClInclude Include="algorithms\sin.h" />
     <ClInclude Include="algorithms\z.h" />
     <ClInclude Include="animators\PlayerAnimator.h" />
+    <ClInclude Include="coliders\CollisionHelper.h" />
     <ClInclude Include="coliders\GemColider.h" />
     <ClInclude Include="entities\Enemy.h" />
     <ClInclude Include="entities_generators\EnemysGenerator.h" />

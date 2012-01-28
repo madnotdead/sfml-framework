@@ -180,5 +180,8 @@
     <ClInclude Include="hud\HudPopulator.h">
       <Filter>hud</Filter>
     </ClInclude>
+    <ClInclude Include="coliders\CollisionHelper.h">
+      <Filter>coliders</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

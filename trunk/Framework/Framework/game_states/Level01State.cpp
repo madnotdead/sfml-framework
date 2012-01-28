@@ -19,6 +19,7 @@
 
 #include "../animators/PlayerAnimator.h"
 
+#include "..\entities_generators\EnemysGenerator.h"
 #include "../entities_generators/JewelsGenerator.h"
 
 #include "../managers/GameManager.h"
@@ -74,9 +75,12 @@ namespace Game
 		, mPlayerCurrentHealth(mPlayerMaxHealth)
 		, mHud(gameManager, 10)
 		, mGemColider(gameManager, mHud)
-		, mEnemyGenerator(gameManager)
+		, mEnemyGenerator(0)
 	{
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
+		
+		//for (size_t i = 0; i < mPlayerBulletsState->size(); ++i)
+
 	}
 
 	void Level01State::Init()
@@ -207,6 +211,19 @@ namespace Game
 
 		mHud.setLife(5);
 		mHud.setMapPosition(7);
+
+		// Init enemy generator.
+		mEnemyGenerator = new EnemysGenerator(mGameManager);
+		image = imageManager.getResource("resources/enemies/iceCream.png");
+		assert(image && "Init: NULL pointer");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::LINEAR);
+		image = imageManager.getResource("resources/enemies/egg.png");
+		assert(image && "Init: NULL pointer");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::LINEAR, 2.0f);
+		image = imageManager.getResource("resources/enemies/chupetin.png");
+		assert(image && "Init: NULL pointer");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::LINEAR, 2.0f);
+		mEnemyGenerator->startGeneration(2000);
 	}
 
 	void Level01State::Execute()
@@ -247,6 +264,9 @@ namespace Game
 
 		mJewelsGenerator->update();
 		mJewelsGenerator->draw();
+
+		// Draw enemies.
+		mEnemyGenerator->draw();
 
 		// Draw player ship and bullets
 		for(uint8_t i = 0; i < sPlayerBullets; ++i)

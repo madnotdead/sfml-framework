@@ -79,7 +79,7 @@ namespace Game
 		}
 	}
 
-	void EnemysGenerator::addEnemy( sf::Texture& image, bool enableRotation, MOVE_TYPE type )
+	void EnemysGenerator::addEnemy( sf::Texture& image, bool enableRotation, MOVE_TYPE type, const float scaleFactor)
 	{
 		for(size_t i = 0; i < 3; ++i) {
 			Enemy* enemy = new Enemy(mGamemanager);
@@ -88,6 +88,7 @@ namespace Game
 			if(enableRotation) {
 				enemy->enableRotation();
 			}
+			enemy->getSprite()->SetScale(scaleFactor, scaleFactor);
 			mEnemyPool.push_back(enemy);
 		}
 	}
