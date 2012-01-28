@@ -1,8 +1,10 @@
 #include "GemColider.h"
 #include "..\managers\GameManager.h"
 #include <GameFramework\utilities\CollisionDetection.h>
+#include "..\hud\HudPopulator.h"
 
-Game::GemColider::GemColider( GameManager& gameManager, Hud& hud ) : mGameManager(gameManager), mHud(hud)
+Game::GemColider::GemColider( GameManager& gameManager, Hud& hud, HudPopulator& hudPopulator ) :
+mGameManager(gameManager), mHud(hud), mHudPopulator(hudPopulator), mCurrentIndex(0)
 {
 }
 
@@ -16,7 +18,13 @@ void Game::GemColider::update(const sf::Sprite& ship, std::vector<JewelsGenerato
 			bool colide = CheckRectanglesCollision(shipRect, jewelRect); 
 			if(colide) {
 				jewels[i].isActive = false;
-				
+				if(i == mHudPopulator.getHudIndices()[mCurrentIndex]) {
+					mHud.turnOn();
+					mCurrentIndex++;
+				} else {
+					mHud.clear();
+					mCurrentIndex = 0;
+				}
 			}
 		}
 	}

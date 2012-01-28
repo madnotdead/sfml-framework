@@ -76,7 +76,6 @@ namespace Game
 		, mPlayerMaxHealth(2000)
 		, mPlayerCurrentHealth(mPlayerMaxHealth)
 		, mHud(gameManager, 10)
-		, mGemColider(gameManager, mHud)
 		, mEnemyGenerator(0)
 		, mHudPopulator(0)
 	{
@@ -204,6 +203,8 @@ namespace Game
 		mJewelsGenerator->startGeneration(static_cast<size_t> (static_cast<float> (mMap->getMapHeight() * 17) / (10.0f * mMap->getScrollingSpeed())));	
 		mHudPopulator->pouplateHud();
 
+		mGemColider = new GemColider(mGameManager, mHud, *mHudPopulator);
+
 		// add map textures
 		for(size_t i = 0; i < 12; ++i) 
 		{
@@ -294,7 +295,7 @@ namespace Game
 		renderWindow.Draw(*mPlayerSprite);	
 		mHud.draw();
 
-		mGemColider.update(*mPlayerSprite, mJewelsGenerator->getItemPool());
+		mGemColider->update(*mPlayerSprite, mJewelsGenerator->getItemPool());
 	}
 
 	void Level01State::ManageEvents(const sf::Event& ev)

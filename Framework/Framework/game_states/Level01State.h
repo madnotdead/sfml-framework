@@ -74,7 +74,7 @@ namespace Game
 		uint32_t mPlayerCurrentHealth;
 		Hud mHud;
 		EnemysGenerator *mEnemyGenerator;
-		GemColider mGemColider;
+		GemColider* mGemColider;
 		HudPopulator* mHudPopulator;
 		
 	};
