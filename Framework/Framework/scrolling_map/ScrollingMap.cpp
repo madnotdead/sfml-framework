@@ -2,11 +2,7 @@
 
 #include <cassert>
 
-#include <GameFramework/utilities/Types.h>
-
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
 
 #include "../managers/GameManager.h"
 
@@ -48,21 +44,20 @@ namespace Game
 		if (tile1Position.y >= windowHeight) 
 		{
 			const uint32_t imageHeight = mMapTile1->GetTexture()->GetHeight();
-			mMapTile1->Move(0.0f, - static_cast<float> (imageHeight));
+			int beginOffset = static_cast<int> (mMapTile2->GetPosition().y) - imageHeight;
+			mMapTile1->SetPosition(0.0f, static_cast<float> (beginOffset));
 		}
 
-		else if (tile2Position.y >= windowHeight) 
+		if (tile2Position.y >= windowHeight) 
 		{
-			const uint32_t imageHeight = mMapTile1->GetTexture()->GetHeight();
-			mMapTile2->Move(0.0f, - static_cast<float> (imageHeight));
+			const uint32_t imageHeight = mMapTile2->GetTexture()->GetHeight();
+			int beginOffset = static_cast<int> (mMapTile1->GetPosition().y) - imageHeight;
+			mMapTile2->SetPosition(0.0f, static_cast<float> (beginOffset));
 		}
 
-		else
-		{
-			// Update the current map position.
-			mMapTile1->Move(0.0f, mScrollingSpeed);
-			mMapTile2->Move(0.0f, mScrollingSpeed);
-		}
+		// Update the current map position.
+		mMapTile1->Move(0.0f, mScrollingSpeed);
+		mMapTile2->Move(0.0f, mScrollingSpeed);		
 	}
 
 	void ScrollingMap::draw()

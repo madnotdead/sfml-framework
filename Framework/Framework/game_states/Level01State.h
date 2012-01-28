@@ -28,6 +28,7 @@ namespace Game
 {
 	class BackgroundItemsGenerator;
 	class GameManager;
+	class JewelsGenerator;
 	class ScrollingMap;
 
 	class Level01State : public State
@@ -49,6 +50,7 @@ namespace Game
 
 		ScrollingMap *mMap;
 		BackgroundItemsGenerator *mBackgroundItemsGenerator;
+		JewelsGenerator *mJewelsGenerator;
 		KamikazeEnemy mEnemy;
 		sf::Vector2f mPlayerPosition;
 		sf::Vector2f mPlayerBulletsPositions[sPlayerBullets];

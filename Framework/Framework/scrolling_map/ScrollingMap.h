@@ -3,11 +3,10 @@
 
 #include <string>
 
-namespace sf
-{
-	class Sprite;
-	class Texture;
-}
+#include <GameFramework/utilities/Types.h>
+
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 namespace Game
 {
@@ -22,6 +21,8 @@ namespace Game
 		void initMap(const sf::Texture& image);
 
 		inline void setScrollingSpeed(const float scrollingSpeed);
+		inline float getScrollingSpeed() const;
+		inline uint32_t getMapHeight() const;
 		void update();
 		void draw();
 
@@ -37,6 +38,16 @@ namespace Game
 	void ScrollingMap::setScrollingSpeed(const float scrollingSpeed) 
 	{ 
 		mScrollingSpeed = scrollingSpeed; 
+	}
+
+	inline float ScrollingMap::getScrollingSpeed() const
+	{
+		return mScrollingSpeed;
+	}
+
+	inline uint32_t ScrollingMap::getMapHeight() const
+	{
+		return mMapTile1->GetTexture()->GetHeight() + mMapTile2->GetTexture()->GetHeight();
 	}
 }
 
