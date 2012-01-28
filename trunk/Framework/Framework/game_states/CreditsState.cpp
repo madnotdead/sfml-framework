@@ -40,8 +40,11 @@ namespace Game
 		mText->SetCharacterSize(30);
 
 		const char *credits = "Programmers: \n"
-							  "Ramiro Del Corro - ramiro.del.corro@gmail.com \n"
-							  "Bertoa Nicolas - nicobertoa@gmail.com";
+							  "Nicolas Bertoa - nicobertoa@gmail.com \n"
+							  "Ramiro Del Corro - ramiro.del.corro@gmail.com \n \n"
+							  "Artists: \n"
+							  "Carla Corcoba - kna_003@hotmail.com \n"
+							  "Gaspar Almada - gaspar980@gmail.com";
 		DisplayText(credits, xPos, yPos + initialPos, sf::Color::White);
 	}
 }

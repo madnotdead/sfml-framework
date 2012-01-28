@@ -12,6 +12,8 @@
 #ifndef GAME_GAMEMANAGER_H
 #define GAME_GAMEMANAGER_H
 
+#include <SFML/Audio/Music.hpp>
+
 #include <SFML/Graphics/RenderWindow.hpp>
 
 #include <GameFramework/state_machine/StateMachine.h>
@@ -56,6 +58,7 @@ namespace Game
 		inline SoundManager& GetSoundManager();
 		inline StateMachine& GetStateMachine();
 		inline Utils::TimerManager& GetTimerManager();
+		inline sf::Music& GetMusic();
 
 
 		inline State& GetMainMenuState();
@@ -90,6 +93,8 @@ namespace Game
 		GameExplanationState mGameExplanationState;
 		LoadingState mLoadingState;
 		Level01State mLevel01State;
+
+		sf::Music mMusic;
 		
 #ifdef _DEBUG
 		Utils::FPSCalculator mFpsManager;
@@ -121,6 +126,11 @@ namespace Game
     Utils::TimerManager& GameManager::GetTimerManager() 
 	{
 		return mTimerManager;
+	}
+
+	sf::Music& GameManager::GetMusic()
+	{
+		return mMusic;
 	}
 
 	State& GameManager::GetMainMenuState() 

@@ -11,6 +11,8 @@
 #ifndef GAME_LEVEL01_STATE_H
 #define GAME_LEVEL01_STATE_H
 
+#include <SFML/Audio/Music.hpp>
+
 #include <GameFramework/utilities/Types.h>
 
 #include <GameFramework/state_machine/State.h>
@@ -67,8 +69,7 @@ namespace Game
 		sf::Sprite *mPlayerSprite;
 		sf::Sprite *mPlayerBulletSprite;		
 		const float mPlayerSpeed;
-		const float mPlayerBulletSpeed;
-		const int mPlayerBulletPower;
+		const float mPlayerBulletSpeed;		
 		const float mTimeToWaitToShot;
 		const float mTimeIncrement;
 		float mElapsedTimeFromLastShot;
@@ -77,8 +78,7 @@ namespace Game
 		Hud *mHud;
 		EnemysGenerator *mEnemyGenerator;
 		GemColider* mGemColider;
-		HudPopulator* mHudPopulator;
-		
+		HudPopulator* mHudPopulator;		
 		CollisionHelper mCollisionHelper;
 		EnemyColider mEnemyColider;
 
