@@ -16,10 +16,10 @@
 
     <Filter Include="scrolling_map">
       <UniqueIdentifier>{ac0167bd-f95a-4d7e-b4b7-6cca68ddd47a}</UniqueIdentifier>
-	  
+	</Filter>
+	
     <Filter Include="hud">
-      <UniqueIdentifier>{5c039fbc-25ad-4899-b9e9-8b318276765f}</UniqueIdentifier>
-	  
+      <UniqueIdentifier>{5c039fbc-25ad-4899-b9e9-8b318276765f}</UniqueIdentifier>	  
     </Filter>
 
   </ItemGroup>
