@@ -17,6 +17,7 @@
 
 #include "../coliders/CollisionHelper.h"
 #include "../coliders/GemColider.h"
+#include "../coliders/EnemyColider.h"
 
 namespace Animator
 {
@@ -79,6 +80,8 @@ namespace Game
 		HudPopulator* mHudPopulator;
 		
 		CollisionHelper mCollisionHelper;
+		EnemyColider mEnemyColider;
+
 
 		sf::Texture* mPauseTexture;
 		bool wasPaused;

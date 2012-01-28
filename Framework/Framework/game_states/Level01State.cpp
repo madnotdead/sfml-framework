@@ -42,6 +42,7 @@
 
 #include <sstream>
 #include <Windows.h>
+#include <iostream>
 
 namespace
 {
@@ -83,6 +84,7 @@ namespace Game
 		, mEnemyGenerator(0)
 		, mHudPopulator(0)
 		, wasPaused(false)
+		, mEnemyColider(gameManager)
 	{
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 	}
@@ -329,6 +331,11 @@ namespace Game
 		mHud->draw();
 
 		mGemColider->update(*mPlayerSprite, mJewelsGenerator->getItemPool());
+
+		if(mEnemyColider.Colide(mEnemyGenerator->getEnemies(), mPlayerSprite)) 
+		{
+			std::cout << "Game over" << std::endl;
+		}
 
 
 		// Pause
