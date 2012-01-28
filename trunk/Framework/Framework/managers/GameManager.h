@@ -23,6 +23,7 @@
 #include <GameFramework/utilities/MemoryPool.h>
 
 #include <GameFramework/utilities/Types.h>
+#include <GameFramework/utilities/TimerManager.h>
 
 #include <GameFramework/managers/ImageManager.h>
 #include <GameFramework/managers/SoundManager.h>
@@ -57,6 +58,8 @@ namespace Game
 		inline SoundManager& GetSoundManager();
 		inline StateMachine& GetStateMachine();
 		inline Utils::MemoryPool& GetMemoryPool();
+		inline Utils::TimerManager& GetTimerManager();
+
 
 		inline State& GetMainMenuState();
 		inline State& GetControlsState();
@@ -83,6 +86,8 @@ namespace Game
 		SoundManager mSoundManager;
 
 		StateMachine mStateMachine;
+
+		Utils::TimerManager mTimerManager;
 
 		MainMenuState mMainMenuState;
 		ControlsState mControlsState;
@@ -121,6 +126,11 @@ namespace Game
 	Utils::MemoryPool& GameManager::GetMemoryPool()
 	{
 		return mMemoryPool;
+	}
+
+    Utils::TimerManager& GameManager::GetTimerManager() 
+	{
+		return mTimerManager;
 	}
 
 	State& GameManager::GetMainMenuState() 

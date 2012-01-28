@@ -12,6 +12,7 @@
 #include <cfloat>
 
 #include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/Shader.hpp>
 
 #include "Level01State.h"
 #include <GameFramework/state_machine/StateMachine.h>
@@ -101,6 +102,31 @@ namespace Game
 
 		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
 		mBackground->SetPosition(0.0f, 0.0f);
+
+		s = new sf::Shader;
+		s->LoadFromMemory("uniform vec4 color;  \
+						  varying vec2 vTexCoord;\
+						  varying vec4 vColor;\
+						  void main() { \
+			vTexCoord = gl_MultiTexCoord0 \
+			vColor = color; \
+			gl_Position = ftransform(); }", 
+			
+			
+			"uniform sampler2D myTexture; \
+			varying vec2 vTexCoord; \
+			varying vec4 vColor;\
+			 void main() { \
+			 vec3 temp = mix(vColor.rgb, gl_TextureEnvColor[index].rgb, texture.rgb); \
+			 gl_FragColor = texture2D(myTexture, vTexCoord); \
+			");
+
+		s->SetParameter("color", 1.f, 0.f, 0.f, 1.f);
+
+	
+
+
+
 	}
 
 	void Level01State::Execute()
@@ -149,7 +175,7 @@ namespace Game
 			mPlayerPosition.y = 0.0f;
 		}
 
-		renderWindow.Draw(*mBackground);
+		renderWindow.Draw(*mBackground, s);
 
 		// Draw player ship and bullets
 		for(uint8_t i = 0; i < sPlayerBullets; ++i)

@@ -196,6 +196,7 @@
     <ClInclude Include="game_states\Level01State.h" />
     <ClInclude Include="game_states\LoadingState.h" />
     <ClInclude Include="game_states\MainMenuState.h" />
+    <ClInclude Include="hud\Hud.h" />
     <ClInclude Include="managers\GameManager.h" />
     <ClInclude Include="utilities\Updaters.h" />
   </ItemGroup>

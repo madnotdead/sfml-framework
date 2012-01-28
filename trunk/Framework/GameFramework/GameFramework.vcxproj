@@ -36,6 +36,8 @@
     <ClInclude Include="utilities\CollisionDetection.h" />
     <ClInclude Include="utilities\FPSCalculator.h" />
     <ClInclude Include="utilities\MemoryPool.h" />
+    <ClInclude Include="utilities\Timer.h" />
+    <ClInclude Include="utilities\TimerManager.h" />
     <ClInclude Include="utilities\Types.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

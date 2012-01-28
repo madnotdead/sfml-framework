@@ -62,5 +62,11 @@
     <ClInclude Include="managers\SoundManager.h">
       <Filter>managers</Filter>
     </ClInclude>
+    <ClInclude Include="utilities\Timer.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\TimerManager.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

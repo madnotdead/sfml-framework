@@ -85,6 +85,8 @@ namespace Game
 
 			mStateMachine.Update();
 
+			mTimerManager.tik();
+
 #ifdef _DEBUG
 			DrawFPS();
 #endif
