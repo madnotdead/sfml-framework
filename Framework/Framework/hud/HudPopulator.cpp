@@ -7,7 +7,7 @@
 void Game::HudPopulator::pouplateHud()
 {
 	std::vector<JewelsGenerator::Item>& itemPool = mJewelsGenerator.getItemPool();
-	int maxIndex = itemPool.size();
+	const size_t maxIndex = itemPool.size();
 	while(mIndices.size() != maxIndex) {
 		int rnd = (rand()%maxIndex); 
 		std::vector<size_t>::iterator it;

@@ -3,8 +3,8 @@
 
 void Game::Bounce::move( sf::Vector2f& position,  float speed)
 {
-	float width = mGameManager.GetRenderWindow().GetWidth();
-	float height = mGameManager.GetRenderWindow().GetHeight();
+	const float width = static_cast<float> (mGameManager.GetRenderWindow().GetWidth());
+	const float height = static_cast<float> (mGameManager.GetRenderWindow().GetHeight());
 	if(position.x > width) {
 		xmove = xmove == XPLUS ? XMINUS : XPLUS;
 	} else if(position.x < 0.f) {

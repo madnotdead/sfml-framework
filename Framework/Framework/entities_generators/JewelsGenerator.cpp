@@ -2,10 +2,12 @@
 
 #include <time.h>
 
-#include "../managers/GameManager.h"
-
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+
+#include "../hud/Hud.h"
+
+#include "../managers/GameManager.h"
 
 namespace Game
 {

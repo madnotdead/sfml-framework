@@ -36,7 +36,7 @@ void Hud::draw()
 
 	// Draw map position
 	sprite.SetPosition(CIRCLE_POSITION);
-	sprite.SetTexture(*(mMapInfo[mMapPosition]), true);
+	sprite.SetTexture(*(mMapInfo[mMapPosition]), true); 
 	mGameManager.GetRenderWindow().Draw(sprite);
 
 	// Draw life

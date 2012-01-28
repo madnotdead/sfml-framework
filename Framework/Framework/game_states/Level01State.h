@@ -15,8 +15,8 @@
 
 #include <GameFramework/state_machine/State.h>
 
-#include "..\hud\Hud.h"
-#include "..\coliders\GemColider.h"
+#include "../coliders/CollisionHelper.h"
+#include "../coliders/GemColider.h"
 
 namespace Animator
 {
@@ -36,6 +36,7 @@ namespace Game
 	class GameManager;
 	class JewelsGenerator;
 	class ScrollingMap;
+	class Hud;
 	class HudPopulator;
 
 	class Level01State : public State
@@ -61,7 +62,7 @@ namespace Game
 		Animator::PlayerAnimator *mPlayerAnimator;
 		sf::Vector2f mPlayerPosition;
 		sf::Vector2f mPlayerBulletsPositions[sPlayerBullets];
-		//bool mPlayerBulletsState[sPlayerBullets];
+		bool mPlayerBulletsState[sPlayerBullets];
 		sf::Sprite *mPlayerSprite;
 		sf::Sprite *mPlayerBulletSprite;		
 		const float mPlayerSpeed;
@@ -72,11 +73,12 @@ namespace Game
 		float mElapsedTimeFromLastShot;
 		uint32_t mPlayerMaxHealth;
 		uint32_t mPlayerCurrentHealth;
-		Hud mHud;
+		Hud *mHud;
 		EnemysGenerator *mEnemyGenerator;
 		GemColider* mGemColider;
 		HudPopulator* mHudPopulator;
 		
+		CollisionHelper mCollisionHelper;
 	};
 }
 
