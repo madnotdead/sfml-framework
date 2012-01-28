@@ -19,15 +19,15 @@
     <Filter Include="hud">
       <UniqueIdentifier>{5c039fbc-25ad-4899-b9e9-8b318276765f}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="entities_generators">
       <UniqueIdentifier>{bdabd63a-af16-4614-8080-98afb2d2eb8b}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="algorithms">
       <UniqueIdentifier>{264f7a6b-8673-42cc-b1d0-a290fa9bc37b}</UniqueIdentifier>
     </Filter>
-
+    <Filter Include="coliders">
+      <UniqueIdentifier>{c27aef0e-bfb2-4255-936a-4a596032e69d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entities\KamikazeEnemy.cpp">
@@ -70,11 +70,9 @@
     <ClCompile Include="hud\Hud.cpp">
       <Filter>hud</Filter>
     </ClCompile>
-
     <ClCompile Include="entities_generators\JewelsGenerator.cpp">
       <Filter>entities_generators</Filter>
     </ClCompile>
-
     <ClCompile Include="algorithms\Linear.cpp">
       <Filter>algorithms</Filter>
     </ClCompile>
@@ -96,7 +94,9 @@
     <ClCompile Include="algorithms\Bounce.cpp">
       <Filter>algorithms</Filter>
     </ClCompile>
-
+    <ClCompile Include="entities_generators\EnemysGenerator.cpp">
+      <Filter>entities_generators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entities\KamikazeEnemy.h">
@@ -163,6 +163,9 @@
       <Filter>scrolling_map</Filter>
     </ClInclude>
     <ClInclude Include="entities_generators\JewelsGenerator.h">
+      <Filter>entities_generators</Filter>
+    </ClInclude>
+    <ClInclude Include="entities_generators\EnemysGenerator.h">
       <Filter>entities_generators</Filter>
     </ClInclude>
   </ItemGroup>
