@@ -112,6 +112,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>sfml-main-d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;openal32.lib;sndfile.lib;freetype.lib;glew.lib;jpeg.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -160,6 +161,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>sfml-main.lib;sfml-audio.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;openal32.lib;sndfile.lib;winmm.lib;freetype.lib;glew.lib;jpeg.lib;opengl32.lib</AdditionalDependencies>
@@ -183,6 +185,7 @@
     <ClCompile Include="algorithms\Z.cpp" />
     <ClCompile Include="entities\Enemy.cpp" />
     <ClCompile Include="entities\KamikazeEnemy.cpp" />
+    <ClCompile Include="entities_generators\EnemysGenerator.cpp" />
     <ClCompile Include="entities_generators\JewelsGenerator.cpp" />
     <ClCompile Include="game_states\ControlsState.cpp" />
     <ClCompile Include="game_states\CreditsState.cpp" />
@@ -208,6 +211,7 @@
     <ClInclude Include="algorithms\z.h" />
     <ClInclude Include="entities\Enemy.h" />
     <ClInclude Include="entities\KamikazeEnemy.h" />
+    <ClInclude Include="entities_generators\EnemysGenerator.h" />
     <ClInclude Include="entities_generators\JewelsGenerator.h" />
     <ClInclude Include="game_states\ControlsState.h" />
     <ClInclude Include="game_states\CreditsState.h" />

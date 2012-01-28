@@ -17,6 +17,8 @@ namespace Game {
 		bool isActive () {return mActive;}
 		void restart();
 		void disable() { mActive = false;}
+		void setAlgorithm(Algorithm* val) { mAlgorithm = val; }
+		void enableRotation() { mRotationEnable = true;}
 
 	private:
 		Algorithm* getAlgorithm();
@@ -28,7 +30,6 @@ namespace Game {
 		
 		const sf::Texture* mEnemyImage;
 		bool mActive;
-
-
+		bool mRotationEnable;
 	};
 }
