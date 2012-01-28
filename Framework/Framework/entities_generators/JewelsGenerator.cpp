@@ -11,7 +11,8 @@ namespace Game
 {
 	JewelsGenerator::JewelsGenerator(GameManager& gameManager)
 		: mGamemanager(gameManager)
-		, mTimer(Utils::Timer(timerGenerateItem, this))
+		, mTimer(timerGenerateItem, this)
+		, mCurrentItem(0)
 	{
 		srand(static_cast<uint32_t> (time(0)));
 	}
@@ -28,7 +29,21 @@ namespace Game
 
 	void JewelsGenerator::addJewel(sf::Texture& image, const JewelColor color)
 	{
-		mTextures.push_back(Jewel(&image, color));
+		sf::Vector2f randomPosition;
+		randomPosition.y = - static_cast<float> (image.GetHeight());
+		randomPosition.x = static_cast<float> (rand() % (mGamemanager.GetRenderWindow().GetWidth() - image.GetWidth()));
+
+		const float randomSpeed = static_cast<float> ((rand() % 3) + 1);
+
+		Item item;
+		item.mSprite = new sf::Sprite;
+		item.mSprite->SetTexture(image);
+		item.mSprite->SetPosition(randomPosition);
+		item.mSpeed = randomSpeed;
+		item.mColor = color;
+		item.isActive = false;
+		mItemsPools.push_back(item);
+		mBackupPositions.push_back(randomPosition);
 	}
 
 	void JewelsGenerator::startGeneration(const size_t milliseconds)
@@ -78,43 +93,19 @@ namespace Game
 
 	void JewelsGenerator::generateItem()
 	{
-		// Define random data.
-		const size_t numberOfTextures = mTextures.size();
-		const size_t randomTextureIndex = rand() % numberOfTextures;
-		sf::Texture *randomTexture = mTextures[randomTextureIndex].mTexture;
-
-		sf::Vector2f randomPosition;
-		randomPosition.y = - static_cast<float> (randomTexture->GetHeight());
-		randomPosition.x = static_cast<float> (rand() % (mGamemanager.GetRenderWindow().GetWidth() - randomTexture->GetWidth()));
-
-		const float randomSpeed = static_cast<float> (rand() % 10);
-
-		// Search an unused sprite in the memory pool. 
-		bool inactiveWasFound = false;
-		for (size_t i = 0; i < mItemsPools.size(); ++i)
+		if (mCurrentItem + 1 < mItemsPools.size())
 		{
-			if (!mItemsPools[i].isActive)
-			{
-				mItemsPools[i].mSprite->SetTexture(*randomTexture, true);
-				mItemsPools[i].mSprite->SetPosition(randomPosition);
-				mItemsPools[i].mSpeed = randomSpeed;
-				mItemsPools[i].mColor = mTextures[randomTextureIndex].mColor;
-				mItemsPools[i].isActive = true;		
-				inactiveWasFound = true;
-			}
+			// Load the backup.
+			mItemsPools[mCurrentItem].mSprite->SetPosition(mBackupPositions[mCurrentItem]);
+			mItemsPools[mCurrentItem].isActive = true;
+			++mCurrentItem;
 		}
 
-		// Create a new sprite and add it into the items pool.
-		if (!inactiveWasFound)
+		else
 		{
-			Item item;
-			item.mSprite = new sf::Sprite;
-			item.mSprite->SetTexture(*randomTexture);
-			item.mSprite->SetPosition(randomPosition);
-			item.mSpeed = randomSpeed;
-			item.mColor = mTextures[randomTextureIndex].mColor;
-			item.isActive = true;
-			mItemsPools.push_back(item);
+			mItemsPools[mCurrentItem].mSprite->SetPosition(mBackupPositions[mCurrentItem]);
+			mItemsPools[mCurrentItem].isActive = true;
+			mCurrentItem = 0;
 		}
 	}
 }

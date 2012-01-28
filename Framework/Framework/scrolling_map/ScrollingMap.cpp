@@ -23,15 +23,15 @@ namespace Game
 		delete mMapTile2;
 	}
 
-	void ScrollingMap::initMap(const sf::Texture& image)
+	void ScrollingMap::initMap(const sf::Texture& image1, const sf::Texture& image2)
 	{		
-		mMapTile1->SetTexture(image);
+		mMapTile1->SetTexture(image1);
 		const uint32_t windowHeight = mGameManager.GetRenderWindow().GetHeight();
 		const uint32_t imageHeight = mMapTile1->GetTexture()->GetHeight();
 		int beginOffset = windowHeight - imageHeight;
 		mMapTile1->SetPosition(0.0f, static_cast<float> (beginOffset));
 
-		mMapTile2->SetTexture(image);
+		mMapTile2->SetTexture(image2);
 		beginOffset = static_cast<int> (mMapTile1->GetPosition().y) - imageHeight;
 		mMapTile2->SetPosition(0.0f, static_cast<float> (beginOffset));
 	}

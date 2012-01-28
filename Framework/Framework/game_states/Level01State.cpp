@@ -17,6 +17,8 @@
 #include "Level01State.h"
 #include <GameFramework/state_machine/StateMachine.h>
 
+#include "../animators/PlayerAnimator.h"
+
 #include "../entities_generators/JewelsGenerator.h"
 
 #include "../managers/GameManager.h"
@@ -56,11 +58,10 @@ namespace Game
 		, mMap(0)
 		, mBackgroundItemsGenerator(0)
 		, mJewelsGenerator(0)
-		, mEnemy(sf::Vector2f(FLT_MAX, FLT_MAX), 2000.0f, 10000)
+		, mPlayerAnimator(0)
 		, mPlayerPosition(sf::Vector2f(FLT_MAX, FLT_MAX))
 		, mPlayerSprite(0)
 		, mPlayerBulletSprite(0)
-		, mEnemySprite(0)
 		, mPlayerSpeed(300.0f)
 		, mPlayerBulletSpeed(700.0f)
 		, mPlayerBulletPower(500)
@@ -82,12 +83,18 @@ namespace Game
 		ImageManager& imageManager = mGameManager.GetImageManager();
 
 		// Init player sprite.
-		sf::Texture *image = imageManager.getResource("resources/ships/PlayerShip.png");
-		assert(image && "Init: NULL pointer");
-		mPlayerSprite = new  sf::Sprite;
-		mPlayerSprite->SetTexture(*image);
+		mPlayerSprite = new  sf::Sprite;		
 		mPlayerPosition.x = 0.0f;
 		mPlayerPosition.y = 0.0f;
+		sf::Texture *image = imageManager.getResource("resources/ships/player/idle1.png");
+		assert(image && "Init: NULL pointer");
+		mPlayerSprite->SetTexture(*image);
+		mPlayerAnimator = new Animator::PlayerAnimator(mGameManager, *mPlayerSprite);
+		mPlayerAnimator->addImage(*image);
+		image = imageManager.getResource("resources/ships/player/idle2.png");
+		assert(image && "Init: NULL pointer");
+		mPlayerAnimator->addImage(*image);
+		mPlayerAnimator->startImageChangingTimer(17);
 				
 		// Init player bullets.
 		image = imageManager.getResource("resources/bullets/bullet.png");
@@ -96,19 +103,13 @@ namespace Game
 		mPlayerBulletSprite->SetTexture(*image);
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 
-		// Init enemy sprite.
-		image = imageManager.getResource("resources/ships/boss.PNG");
-		assert(image && "Init: NULL pointer");
-		mEnemySprite = new sf::Sprite;
-		mEnemySprite->SetTexture(*image);
-		mEnemy.mPosition.x = 0.0f;
-		mEnemy.mPosition.y = 0.0f;
-
 		// Init Map
 		mMap = new ScrollingMap(mGameManager);
-		image = imageManager.getResource("resources/background/background1.jpg");
-		assert(image && "Init: NULL pointer");
-		mMap->initMap(*image);
+		image = imageManager.getResource("resources/background/level1a.jpg");
+		assert(image && "Init: NULL pointer");		
+		sf::Texture *image2 = imageManager.getResource("resources/background/level1b.jpg");
+		assert(image2 && "Init: NULL pointer");
+		mMap->initMap(*image, *image2);
 		mMap->setScrollingSpeed(2.0f);
 
 		// Init background items generator.
@@ -159,7 +160,7 @@ namespace Game
 		image = imageManager.getResource("resources/jewels/small/turquesa.png");
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_Turquesa);
-		mJewelsGenerator->startGeneration(4000);	
+		mJewelsGenerator->startGeneration(static_cast<size_t> (static_cast<float> (mMap->getMapHeight() * 17) / (10.0f * mMap->getScrollingSpeed())));	
 	}
 
 	void Level01State::Execute()
@@ -192,22 +193,6 @@ namespace Game
 				mElapsedTimeFromLastShot = 0.0f;
 		}
 
-		// Update enemy
-		const sf::Texture * const enemyImage = mEnemySprite->GetTexture();
-		mEnemy.Update(frameTime, enemyImage->GetWidth(), enemyImage->GetHeight(), renderWindow.GetWidth(), renderWindow.GetHeight());
-		mEnemySprite->SetPosition(mEnemy.mPosition);
-
-		// Calculate collisions between player bullets and enemy.
-		CheckEnemyToBulletsCollisions();
-
-		// Check collisions between player and enemy ships
-		if(CheckRectanglesCollision(Rectangle(mPlayerPosition, playerImage->GetWidth(), playerImage->GetHeight()),
-			Rectangle(mEnemy.mPosition, enemyImage->GetWidth(), enemyImage->GetHeight())))
-		{
-			mPlayerPosition.x = 0.0f;
-			mPlayerPosition.y = 0.0f;
-		}
-
 		mMap->update();
 		mMap->draw();
 
@@ -226,8 +211,7 @@ namespace Game
 				renderWindow.Draw(*mPlayerBulletSprite);
 			}
 		}
-
-		renderWindow.Draw(*mEnemySprite);
+		
 		renderWindow.Draw(*mPlayerSprite);	
 		//mHud.draw();
 	}
@@ -252,30 +236,9 @@ namespace Game
 		
 		delete mPlayerBulletSprite;
 		delete mPlayerSprite;
-		delete mEnemySprite;		
 		delete mBackgroundItemsGenerator;
 		delete mJewelsGenerator;
+		delete mPlayerAnimator;
 		delete mMap;
-	}
-
-	void Level01State::CheckEnemyToBulletsCollisions()
-	{
-		Rectangle enemyRectangle(mEnemy.mPosition, mEnemySprite->GetTexture()->GetWidth(), mEnemySprite->GetTexture()->GetHeight());
-		Rectangle bulletRectangle(sf::Vector2f(0.0f, 0.0f), mPlayerBulletSprite->GetTexture()->GetWidth(), mPlayerBulletSprite->GetTexture()->GetHeight());
-
-		for(uint32_t i = 0; i < sPlayerBullets; ++i)
-		{ 
-			// Update the rectangle position
-			bulletRectangle.mPosition = mPlayerBulletsPositions[i];
-			if(CheckRectanglesCollision(enemyRectangle, bulletRectangle))
-			{
-				// Decrement enemy health
-				mEnemy.mHealth -= mPlayerBulletPower;
-
-				// Reposition the bullet rectangle.
-				mPlayerBulletsPositions[i].x = FLT_MAX;
-				mPlayerBulletsPositions[i].y = FLT_MAX;
-			}
-		}
-	}
+	}	
 }
