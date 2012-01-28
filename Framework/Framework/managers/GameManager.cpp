@@ -27,7 +27,7 @@
 namespace Game
 {
 	GameManager::GameManager() 
-		: mRenderWindow(sf::VideoMode::VideoMode(1024, 768), "Game", sf::Style::Close)
+		: mRenderWindow(sf::VideoMode::VideoMode(1024, 768), "Game", sf::Style::Close | sf::Style::Fullscreen)
 		, mMainMenuState(*this)
 		, mControlsState(*this)
 		, mCreditsState(*this)
