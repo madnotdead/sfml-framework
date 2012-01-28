@@ -25,14 +25,17 @@
     <Filter Include="algorithms">
       <UniqueIdentifier>{264f7a6b-8673-42cc-b1d0-a290fa9bc37b}</UniqueIdentifier>
     </Filter>
+
+    <Filter Include="animators">
+      <UniqueIdentifier>{81c2b019-8da0-44ef-a6bc-85dccd320895}</UniqueIdentifier>
+    </Filter>
+
     <Filter Include="coliders">
       <UniqueIdentifier>{c27aef0e-bfb2-4255-936a-4a596032e69d}</UniqueIdentifier>
     </Filter>
+
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="entities\KamikazeEnemy.cpp">
-      <Filter>entities</Filter>
-    </ClCompile>
     <ClCompile Include="game_states\ControlsState.cpp">
       <Filter>game_states</Filter>
     </ClCompile>
@@ -94,14 +97,17 @@
     <ClCompile Include="algorithms\Bounce.cpp">
       <Filter>algorithms</Filter>
     </ClCompile>
+
+    <ClCompile Include="animators\PlayerAnimator.cpp">
+      <Filter>animators</Filter>
+    </ClCompile>
+
     <ClCompile Include="entities_generators\EnemysGenerator.cpp">
       <Filter>entities_generators</Filter>
     </ClCompile>
+
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="entities\KamikazeEnemy.h">
-      <Filter>entities</Filter>
-    </ClInclude>
     <ClInclude Include="game_states\ControlsState.h">
       <Filter>game_states</Filter>
     </ClInclude>
@@ -165,8 +171,14 @@
     <ClInclude Include="entities_generators\JewelsGenerator.h">
       <Filter>entities_generators</Filter>
     </ClInclude>
+
+    <ClInclude Include="animators\PlayerAnimator.h">
+      <Filter>animators</Filter>
+    </ClInclude>
+
     <ClInclude Include="entities_generators\EnemysGenerator.h">
       <Filter>entities_generators</Filter>
     </ClInclude>
+
   </ItemGroup>
 </Project>

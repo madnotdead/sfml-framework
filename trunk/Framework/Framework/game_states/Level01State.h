@@ -11,12 +11,15 @@
 #ifndef GAME_LEVEL01_STATE_H
 #define GAME_LEVEL01_STATE_H
 
-#include "../entities/KamikazeEnemy.h"
-
 #include <GameFramework/utilities/Types.h>
 
 #include <GameFramework/state_machine/State.h>
 #include "..\hud\Hud.h"
+
+namespace Animator
+{
+	class PlayerAnimator;
+}
 
 namespace sf
 {
@@ -51,12 +54,11 @@ namespace Game
 		ScrollingMap *mMap;
 		BackgroundItemsGenerator *mBackgroundItemsGenerator;
 		JewelsGenerator *mJewelsGenerator;
-		KamikazeEnemy mEnemy;
+		Animator::PlayerAnimator *mPlayerAnimator;
 		sf::Vector2f mPlayerPosition;
 		sf::Vector2f mPlayerBulletsPositions[sPlayerBullets];
 		sf::Sprite *mPlayerSprite;
-		sf::Sprite *mPlayerBulletSprite;
-		sf::Sprite *mEnemySprite;
+		sf::Sprite *mPlayerBulletSprite;		
 		const float mPlayerSpeed;
 		const float mPlayerBulletSpeed;
 		const int mPlayerBulletPower;

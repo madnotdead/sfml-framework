@@ -18,7 +18,7 @@ namespace Game
 		ScrollingMap(GameManager& gameManager);
 		~ScrollingMap();
 		
-		void initMap(const sf::Texture& image);
+		void initMap(const sf::Texture& image1, const sf::Texture& image2);
 
 		inline void setScrollingSpeed(const float scrollingSpeed);
 		inline float getScrollingSpeed() const;

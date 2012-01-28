@@ -183,8 +183,8 @@
     <ClCompile Include="algorithms\Linear.cpp" />
     <ClCompile Include="algorithms\Sin.cc" />
     <ClCompile Include="algorithms\Z.cpp" />
+    <ClCompile Include="animators\PlayerAnimator.cpp" />
     <ClCompile Include="entities\Enemy.cpp" />
-    <ClCompile Include="entities\KamikazeEnemy.cpp" />
     <ClCompile Include="entities_generators\EnemysGenerator.cpp" />
     <ClCompile Include="entities_generators\JewelsGenerator.cpp" />
     <ClCompile Include="game_states\ControlsState.cpp" />
@@ -209,8 +209,8 @@
     <ClInclude Include="algorithms\linear.h" />
     <ClInclude Include="algorithms\sin.h" />
     <ClInclude Include="algorithms\z.h" />
+    <ClInclude Include="animators\PlayerAnimator.h" />
     <ClInclude Include="entities\Enemy.h" />
-    <ClInclude Include="entities\KamikazeEnemy.h" />
     <ClInclude Include="entities_generators\EnemysGenerator.h" />
     <ClInclude Include="entities_generators\JewelsGenerator.h" />
     <ClInclude Include="game_states\ControlsState.h" />

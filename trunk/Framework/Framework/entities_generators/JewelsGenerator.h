@@ -5,6 +5,8 @@
 
 #include <GameFramework/utilities/Timer.h>
 
+#include <SFML/System/Vector2.hpp>
+
 namespace sf
 {
 	class Sprite;
@@ -67,36 +69,11 @@ namespace Game
 			bool isActive;
 		};
 
-		struct Jewel
-		{
-			Jewel()
-				: mTexture(0)
-				, mColor(JewelColor_Invalid)
-			{
-
-			}
-
-			Jewel(sf::Texture *texture, const JewelColor color)
-				: mTexture(texture)
-				, mColor(color)
-			{
-
-			}
-
-			Jewel(const Jewel& jewel)
-			{
-				mTexture = jewel.mTexture;
-				mColor = jewel.mColor;
-			}
-
-			sf::Texture *mTexture;
-			JewelColor mColor;
-		};
-
 		std::vector<Item> mItemsPools;
-		std::vector<Jewel> mTextures;
+		std::vector<sf::Vector2f> mBackupPositions;
 		GameManager& mGamemanager;
 		Utils::Timer mTimer;
+		size_t mCurrentItem;
 	};
 }
 
