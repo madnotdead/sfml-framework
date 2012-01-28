@@ -69,7 +69,7 @@ namespace Game
 		sf::Texture * const backgroundImage = imageManager.getResource("resources/background/loading.png");
 		assert(backgroundImage && "LoadResources: NULL pointer");
 		
-		mBackgroundSprite = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
+		mBackgroundSprite = new sf::Sprite;
 		mBackgroundSprite->SetTexture(*backgroundImage);
 		mBackgroundSprite->SetPosition(0.0f, 0.0f);
 
@@ -81,6 +81,6 @@ namespace Game
 		ImageManager& imageManager = mGameManager.GetImageManager();
 		imageManager.releaseResource("resources/background/loading.png");
 	
-		mGameManager.GetMemoryPool().Free(mBackgroundSprite);
+		delete mBackgroundSprite;
 	}
 }

@@ -7,18 +7,10 @@
 
 #include "ResourceManager.h"
 
-namespace Utils
-{
-	class MemoryPool;
-}
-
 namespace Game
 {
 	class SoundManager : public ResourceManager<sf::SoundBuffer> 
 	{
-	public:
-		SoundManager(Utils::MemoryPool& memoryPool);
-
 	protected:
 		sf::SoundBuffer* load(const std::string& strId);
 	};

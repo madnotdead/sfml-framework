@@ -185,6 +185,7 @@
     <ClCompile Include="game_states\MainMenuState.cpp" />
     <ClCompile Include="hud\Hud.cpp" />
     <ClCompile Include="managers\GameManager.cpp" />
+    <ClCompile Include="scrolling_map\BackgroundItemsGenerator.cpp" />
     <ClCompile Include="scrolling_map\ScrollingMap.cpp" />
     <ClCompile Include="utilities\Updaters.cpp" />
     <ClCompile Include="main.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="game_states\MainMenuState.h" />
     <ClInclude Include="hud\Hud.h" />
     <ClInclude Include="managers\GameManager.h" />
+    <ClInclude Include="scrolling_map\BackgroundItemsGenerator.h" />
     <ClInclude Include="scrolling_map\ScrollingMap.h" />
     <ClInclude Include="utilities\Updaters.h" />
   </ItemGroup>
@@ -207,9 +209,6 @@
     <ProjectReference Include="..\GameFramework\GameFramework.vcxproj">
       <Project>{8528d0c4-81dd-40bc-984c-efe872b30bcb}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -55,6 +55,9 @@
     <ClCompile Include="scrolling_map\ScrollingMap.cpp">
       <Filter>scrolling_map</Filter>
     </ClCompile>
+    <ClCompile Include="scrolling_map\BackgroundItemsGenerator.cpp">
+      <Filter>scrolling_map</Filter>
+    </ClCompile>
     <ClCompile Include="hud\Hud.cpp">
       <Filter>hud</Filter>
     </ClCompile>
@@ -96,8 +99,8 @@
     <ClInclude Include="hud\Hud.h">
       <Filter>hud</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <ClInclude Include="scrolling_map\BackgroundItemsGenerator.h">
+      <Filter>scrolling_map</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

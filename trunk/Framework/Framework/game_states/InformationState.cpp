@@ -69,32 +69,29 @@ namespace Game
 		ImageManager& imageManager = mGameManager.GetImageManager();		
 		sf::Texture * const backgroundImage = imageManager.getResource("resources/background/main_screen.png");
 		assert(backgroundImage && "LoadResources: NULL pointer");
-		
-		mBackgroundSprite = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
+
+		mBackgroundSprite = new sf::Sprite;
 		mBackgroundSprite->SetTexture(*backgroundImage);
 		mBackgroundSprite->SetPosition(0.0f, 0.0f);
 	}
 
 	void InformationState::DestroyResources()
 	{
-		Utils::MemoryPool& memoryPool = mGameManager.GetMemoryPool();
-		memoryPool.Free(mFont);
-		memoryPool.Free(mText);
-		memoryPool.Free(mBackgroundSprite);
+		delete mFont;
+		delete mText;
+		delete mBackgroundSprite;
 	}
 
 	void InformationState::InitFont()
 	{
-		void *memory = mGameManager.GetMemoryPool().Alloc(sizeof(sf::Font));
-		mFont = new (memory) sf::Font();
+		mFont = new sf::Font();
 		bool correctLoading = mFont->LoadFromFile("resources/fonts/calibri.ttf");
 		assert(correctLoading && "InitFont: Font was not correctly loeaded");
 	}
 
 	void InformationState::InitText()
-	{
-		void *memory = mGameManager.GetMemoryPool().Alloc(sizeof(sf::Text));
-		mText = new (memory) sf::Text("", *mFont);
+	{		
+		mText = new sf::Text("", *mFont);
 		mText->SetCharacterSize(50);
 		mText->SetStyle(sf::Text::Bold);
 		mText->SetColor(sf::Color::White);

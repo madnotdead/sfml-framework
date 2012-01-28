@@ -4,6 +4,8 @@
 
 #include <GameFramework/utilities/Types.h>
 
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
 #include "../managers/GameManager.h"
@@ -12,8 +14,8 @@ namespace Game
 {
 	ScrollingMap::ScrollingMap(GameManager& gameManager)
 		: mGameManager(gameManager)
-		, mMapTile1(new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite)
-		, mMapTile2(new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite)
+		, mMapTile1(new sf::Sprite)
+		, mMapTile2(new sf::Sprite)
 		, mScrollingSpeed(0.0f)
 	{
 
@@ -21,8 +23,8 @@ namespace Game
 
 	ScrollingMap::~ScrollingMap()
 	{
-		mGameManager.GetMemoryPool().Free(mMapTile1);
-		mGameManager.GetMemoryPool().Free(mMapTile2);
+		delete mMapTile1;
+		delete mMapTile2;
 	}
 
 	void ScrollingMap::initMap(const sf::Texture& image)
@@ -31,11 +33,11 @@ namespace Game
 		const uint32_t windowHeight = mGameManager.GetRenderWindow().GetHeight();
 		const uint32_t imageHeight = mMapTile1->GetTexture()->GetHeight();
 		int beginOffset = windowHeight - imageHeight;
-		mMapTile1->SetPosition(0.0f, beginOffset);
+		mMapTile1->SetPosition(0.0f, static_cast<float> (beginOffset));
 
 		mMapTile2->SetTexture(image);
-		beginOffset = mMapTile1->GetPosition().y - imageHeight;
-		mMapTile2->SetPosition(0.0f, beginOffset);
+		beginOffset = static_cast<int> (mMapTile1->GetPosition().y) - imageHeight;
+		mMapTile2->SetPosition(0.0f, static_cast<float> (beginOffset));
 	}
 
 	void ScrollingMap::update() 
@@ -46,13 +48,13 @@ namespace Game
 		if (tile1Position.y >= windowHeight) 
 		{
 			const uint32_t imageHeight = mMapTile1->GetTexture()->GetHeight();
-			mMapTile1->Move(0.0f, -imageHeight);
+			mMapTile1->Move(0.0f, - static_cast<float> (imageHeight));
 		}
 
 		else if (tile2Position.y >= windowHeight) 
 		{
 			const uint32_t imageHeight = mMapTile1->GetTexture()->GetHeight();
-			mMapTile2->Move(0.0f, -imageHeight);
+			mMapTile2->Move(0.0f, - static_cast<float> (imageHeight));
 		}
 
 		else
@@ -70,5 +72,11 @@ namespace Game
 
 		mGameManager.GetRenderWindow().Draw(*mMapTile1);
 		mGameManager.GetRenderWindow().Draw(*mMapTile2);
+	}
+
+	float ScrollingMap::getMapYPosition() const
+	{	
+		const float toPositiveRange = mMapTile1->GetPosition().y + mMapTile1->GetTexture()->GetHeight() * 2 - mGameManager.GetRenderWindow().GetHeight();
+		return toPositiveRange * (100.0f / mMapTile1->GetTexture()->GetHeight());
 	}
 }
