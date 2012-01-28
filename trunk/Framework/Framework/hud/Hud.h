@@ -28,13 +28,13 @@ public:
 	// circle
 	void addCircle(const sf::Texture* circle);
 	void addMovingPart(const sf::Texture* part);
+	void setPartRotation(float mapPosition); // 0 to 100
 
 private:
 
 void updateNextPosition();
 std::vector<HudInfo> mHudInfo;
 GameManager& mGameManager;
-sf::Sprite mSprite;
 sf::Vector2f mNextPosition;
 size_t mCurrentIndex;
 

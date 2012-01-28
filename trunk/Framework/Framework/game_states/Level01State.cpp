@@ -117,6 +117,7 @@ namespace Game
 		const sf::Texture *rotating = imageManager.getResource("resources/hud/pinza.png");
 		mHud.addCircle(circle);
 		mHud.addMovingPart(rotating);
+		mHud.setPartRotation(30);
 
 
 
