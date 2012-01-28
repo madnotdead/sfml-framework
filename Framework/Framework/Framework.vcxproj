@@ -184,6 +184,7 @@
     <ClCompile Include="algorithms\Sin.cc" />
     <ClCompile Include="algorithms\Z.cpp" />
     <ClCompile Include="animators\PlayerAnimator.cpp" />
+    <ClCompile Include="coliders\GemColider.cpp" />
     <ClCompile Include="entities\Enemy.cpp" />
     <ClCompile Include="entities_generators\EnemysGenerator.cpp" />
     <ClCompile Include="entities_generators\JewelsGenerator.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="algorithms\sin.h" />
     <ClInclude Include="algorithms\z.h" />
     <ClInclude Include="animators\PlayerAnimator.h" />
+    <ClInclude Include="coliders\GemColider.h" />
     <ClInclude Include="entities\Enemy.h" />
     <ClInclude Include="entities_generators\EnemysGenerator.h" />
     <ClInclude Include="entities_generators\JewelsGenerator.h" />
@@ -221,6 +223,7 @@
     <ClInclude Include="game_states\LoadingState.h" />
     <ClInclude Include="game_states\MainMenuState.h" />
     <ClInclude Include="hud\Hud.h" />
+    <ClInclude Include="hud\HudPopulator.h" />
     <ClInclude Include="managers\GameManager.h" />
     <ClInclude Include="scrolling_map\BackgroundItemsGenerator.h" />
     <ClInclude Include="scrolling_map\ScrollingMap.h" />

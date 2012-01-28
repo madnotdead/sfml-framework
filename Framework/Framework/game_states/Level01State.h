@@ -15,6 +15,8 @@
 
 #include <GameFramework/state_machine/State.h>
 #include "..\hud\Hud.h"
+#include "..\entities_generators\EnemysGenerator.h"
+#include "..\coliders\GemColider.h"
 
 namespace Animator
 {
@@ -68,6 +70,8 @@ namespace Game
 		uint32_t mPlayerMaxHealth;
 		uint32_t mPlayerCurrentHealth;
 		Hud mHud;
+		EnemysGenerator mEnemyGenerator;
+		GemColider mGemColider;
 	};
 }
 
