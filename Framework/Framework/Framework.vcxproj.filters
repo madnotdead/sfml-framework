@@ -13,15 +13,12 @@
     <Filter Include="utilities">
       <UniqueIdentifier>{ba2879ae-6205-49f9-b5ea-c89b6d624ee9}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="scrolling_map">
       <UniqueIdentifier>{ac0167bd-f95a-4d7e-b4b7-6cca68ddd47a}</UniqueIdentifier>
-	</Filter>
-	
-    <Filter Include="hud">
-      <UniqueIdentifier>{5c039fbc-25ad-4899-b9e9-8b318276765f}</UniqueIdentifier>	  
     </Filter>
-
+    <Filter Include="hud">
+      <UniqueIdentifier>{5c039fbc-25ad-4899-b9e9-8b318276765f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entities\KamikazeEnemy.cpp">
@@ -58,6 +55,9 @@
     <ClCompile Include="scrolling_map\ScrollingMap.cpp">
       <Filter>scrolling_map</Filter>
     </ClCompile>
+    <ClCompile Include="hud\Hud.cpp">
+      <Filter>hud</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entities\KamikazeEnemy.h">
@@ -90,14 +90,11 @@
     <ClInclude Include="utilities\Updaters.h">
       <Filter>utilities</Filter>
     </ClInclude>
-
     <ClInclude Include="scrolling_map\ScrollingMap.h">
       <Filter>scrolling_map</Filter>
     </ClInclude>
-
     <ClInclude Include="hud\Hud.h">
       <Filter>hud</Filter>
     </ClInclude>
-
   </ItemGroup>
 </Project>

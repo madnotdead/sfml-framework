@@ -60,6 +60,7 @@ namespace Game
 		, mElapsedTimeFromLastShot(0.0f)
 		, mPlayerMaxHealth(2000)
 		, mPlayerCurrentHealth(mPlayerMaxHealth)
+		, mHud(gameManager, 10)
 	{
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 	}
@@ -84,7 +85,7 @@ namespace Game
 		assert(image && "Init: NULL pointer");
 		mPlayerBulletSprite = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
 		mPlayerBulletSprite->SetTexture(*image);
-		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions); 
+		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 
 		// Init enemy sprite.
 		image = imageManager.getResource("resources/ships/boss.PNG");
@@ -93,12 +94,32 @@ namespace Game
 		mEnemySprite->SetTexture(*image);
 		mEnemy.mPosition.x = 0.0f;
 		mEnemy.mPosition.y = 0.0f;
-		 
+
 		// Init background
 		image = imageManager.getResource("resources/background/background1.jpg");
 		assert(image && "Init: NULL pointer");
 		mMap.initMap(*image);
 		mMap.setScrollingSpeed(2.0f);
+
+		// hud
+		const sf::Texture *hudOffImage = imageManager.getResource("resources/hud/hudElementOff.png");
+		const sf::Texture *hudOnImage = imageManager.getResource("resources/hud/hudElementOn.png");
+		mHud.addItem(hudOffImage, hudOnImage);
+		mHud.addItem(hudOffImage, hudOnImage);
+		mHud.addItem(hudOffImage, hudOnImage);
+		mHud.addItem(hudOffImage, hudOnImage);
+		mHud.turnOn();
+		mHud.turnOn();
+		mHud.turnOn();
+		mHud.turnOff();
+
+		const sf::Texture *circle = imageManager.getResource("resources/hud/circle.png");
+		const sf::Texture *rotating = imageManager.getResource("resources/hud/pinza.png");
+		mHud.addCircle(circle);
+		mHud.addMovingPart(rotating);
+
+
+
 	}
 
 	void Level01State::Execute()
@@ -162,6 +183,7 @@ namespace Game
 
 		renderWindow.Draw(*mEnemySprite);
 		renderWindow.Draw(*mPlayerSprite);	
+		mHud.draw();
 	}
 
 	void Level01State::ManageEvents(const sf::Event& ev)
