@@ -175,6 +175,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="algorithms\Bounce.cpp" />
+    <ClCompile Include="algorithms\Diagonal.cc" />
+    <ClCompile Include="algorithms\L.cpp" />
+    <ClCompile Include="algorithms\Linear.cpp" />
+    <ClCompile Include="algorithms\Sin.cc" />
+    <ClCompile Include="algorithms\Z.cpp" />
+    <ClCompile Include="entities\Enemy.cpp" />
     <ClCompile Include="entities\KamikazeEnemy.cpp" />
     <ClCompile Include="game_states\ControlsState.cpp" />
     <ClCompile Include="game_states\CreditsState.cpp" />
@@ -191,6 +198,14 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="algorithms\Algorithm.h" />
+    <ClInclude Include="algorithms\Bounce.h" />
+    <ClInclude Include="algorithms\Diagonal.h" />
+    <ClInclude Include="algorithms\L.h" />
+    <ClInclude Include="algorithms\linear.h" />
+    <ClInclude Include="algorithms\sin.h" />
+    <ClInclude Include="algorithms\z.h" />
+    <ClInclude Include="entities\Enemy.h" />
     <ClInclude Include="entities\KamikazeEnemy.h" />
     <ClInclude Include="game_states\ControlsState.h" />
     <ClInclude Include="game_states\CreditsState.h" />

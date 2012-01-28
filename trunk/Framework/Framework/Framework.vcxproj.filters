@@ -19,6 +19,9 @@
     <Filter Include="hud">
       <UniqueIdentifier>{5c039fbc-25ad-4899-b9e9-8b318276765f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="algorithms">
+      <UniqueIdentifier>{264f7a6b-8673-42cc-b1d0-a290fa9bc37b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entities\KamikazeEnemy.cpp">
@@ -61,6 +64,27 @@
     <ClCompile Include="hud\Hud.cpp">
       <Filter>hud</Filter>
     </ClCompile>
+    <ClCompile Include="algorithms\Linear.cpp">
+      <Filter>algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Enemy.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="algorithms\Z.cpp">
+      <Filter>algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="algorithms\L.cpp">
+      <Filter>algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="algorithms\Sin.cc">
+      <Filter>algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="algorithms\Bounce.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="algorithms\Diagonal.cc">
+      <Filter>algorithms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entities\KamikazeEnemy.h">
@@ -99,8 +123,29 @@
     <ClInclude Include="hud\Hud.h">
       <Filter>hud</Filter>
     </ClInclude>
-    <ClInclude Include="scrolling_map\BackgroundItemsGenerator.h">
-      <Filter>scrolling_map</Filter>
+    <ClInclude Include="entities\Enemy.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithms\linear.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithms\Algorithm.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithms\z.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithms\L.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithms\sin.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithms\Bounce.h">
+      <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithms\Diagonal.h">
+      <Filter>algorithms</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
