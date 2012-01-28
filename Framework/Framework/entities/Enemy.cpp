@@ -42,8 +42,8 @@ sf::Sprite* Enemy::getSprite()
 
 void Enemy::restart()
 {
-	mSpeed = (rand()%30)+1; 
-	mSprite.SetPosition((rand()%1024), 0);
+	mSpeed = static_cast<float> ((rand() % 10) + 1); 
+	mSprite.SetPosition((static_cast<float> (rand() % (1024 - 80))) , 0.0f);
 	mActive = true;
 }
 

@@ -19,12 +19,14 @@ namespace Game
 		EnemysGenerator(GameManager& gameManager);
 		~EnemysGenerator();
 
-		void addEnemy(sf::Texture& image, bool enableRotation, MOVE_TYPE type);
+		void addEnemy(sf::Texture& image, bool enableRotation, MOVE_TYPE type, const float scaleFactor=1);
 		void startGeneration(const size_t milliseconds);
 		void draw();
 
 		static void timerGenerateItem(void *thisClass);
 		void generateItem();
+
+		inline std::vector<Enemy*> &getEnemies(); 
 
 	private:
 		std::vector<Enemy*> mEnemyPool;
@@ -32,4 +34,9 @@ namespace Game
 		Utils::Timer mTimer;
 		Algorithm* getAlgorithm(MOVE_TYPE type);
 	};
+
+	std::vector<Enemy*> &EnemysGenerator::getEnemies()
+	{
+		return mEnemyPool;
+	}
 }
