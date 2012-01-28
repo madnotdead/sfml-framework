@@ -26,7 +26,7 @@ namespace Game
 	LoadingState::LoadingState(GameManager& gameManager) 
 		: State(gameManager)
 		, mBackgroundSprite(0) 
-		, mDelayForNextState(2.5f)
+		, mDelayForNextState(0.0f)
 	{
 	}
 
@@ -72,6 +72,8 @@ namespace Game
 		mBackgroundSprite = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
 		mBackgroundSprite->SetTexture(*backgroundImage);
 		mBackgroundSprite->SetPosition(0.0f, 0.0f);
+
+		mDelayForNextState = 2.5f;
 	}
 	
 	void LoadingState::DestroyResources()
