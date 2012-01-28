@@ -31,7 +31,6 @@ namespace Game
 		, mMemoryPool(sMemoryBlocks, sMemoryBlockSize)
 		, mImageManager(mMemoryPool)
 		, mSoundManager(mMemoryPool)
-		, mSpriteManager(mMemoryPool)
 		, mMainMenuState(*this)
 		, mControlsState(*this)
 		, mCreditsState(*this)
@@ -57,7 +56,6 @@ namespace Game
 	GameManager::~GameManager()
 	{
 		mImageManager.releaseAllResources();
-		mSpriteManager.releaseAllResources();
 
 #ifdef _DEBUG
 		mMemoryPool.Free(mFpsText);

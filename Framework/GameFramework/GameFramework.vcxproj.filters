@@ -15,9 +15,6 @@
     <ClCompile Include="managers\ImageManager.cpp">
       <Filter>managers</Filter>
     </ClCompile>
-    <ClCompile Include="managers\SpriteManager.cpp">
-      <Filter>managers</Filter>
-    </ClCompile>
     <ClCompile Include="state_machine\State.cpp">
       <Filter>state_machine</Filter>
     </ClCompile>
@@ -42,9 +39,6 @@
       <Filter>managers</Filter>
     </ClInclude>
     <ClInclude Include="managers\ResourceManager.h">
-      <Filter>managers</Filter>
-    </ClInclude>
-    <ClInclude Include="managers\SpriteManager.h">
       <Filter>managers</Filter>
     </ClInclude>
     <ClInclude Include="state_machine\State.h">
