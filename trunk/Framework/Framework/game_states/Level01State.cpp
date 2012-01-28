@@ -86,21 +86,30 @@ namespace Game
 		mPlayerSprite = new  sf::Sprite;		
 		mPlayerPosition.x = 0.0f;
 		mPlayerPosition.y = 0.0f;
-		sf::Texture *image = imageManager.getResource("resources/ships/player/idle1.png");
+		sf::Texture *image = imageManager.getResource("resources/ships/player/player1.png");
 		assert(image && "Init: NULL pointer");
 		mPlayerSprite->SetTexture(*image);
 		mPlayerAnimator = new Animator::PlayerAnimator(mGameManager, *mPlayerSprite);
-		mPlayerAnimator->addImage(*image);
-		image = imageManager.getResource("resources/ships/player/idle2.png");
+		mPlayerAnimator->addImage(*image); 
+		image = imageManager.getResource("resources/ships/player/player2.png"); 
 		assert(image && "Init: NULL pointer");
 		mPlayerAnimator->addImage(*image);
-		mPlayerAnimator->startImageChangingTimer(17);
-				
+		image = imageManager.getResource("resources/ships/player/player3.png"); 
+		assert(image && "Init: NULL pointer");
+		mPlayerAnimator->addImage(*image);
+		image = imageManager.getResource("resources/ships/player/player4.png"); 
+		assert(image && "Init: NULL pointer");
+		mPlayerAnimator->addImage(*image);
+		image = imageManager.getResource("resources/ships/player/player5.png"); 
+		assert(image && "Init: NULL pointer");
+		mPlayerAnimator->addImage(*image);
+		mPlayerAnimator->startImageChangingTimer(17 * 10); 
+					
 		// Init player bullets.
 		image = imageManager.getResource("resources/bullets/bullet.png");
 		assert(image && "Init: NULL pointer");
 		mPlayerBulletSprite = new sf::Sprite;
-		mPlayerBulletSprite->SetTexture(*image);
+		mPlayerBulletSprite->SetTexture(*image); 
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 
 		// Init Map
