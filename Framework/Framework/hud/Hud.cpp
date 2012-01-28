@@ -4,13 +4,13 @@
 namespace Game {
 
 const float HUD_SIZE = 30.f;
-const float HUD_OFFSET = 20.f;
+const float HUD_OFFSET = 40.f;
 const sf::Vector2f CIRCLE_POSITION(30.f, 500.f);
 
 Hud::Hud (GameManager& gameManager, size_t textureCount) : mGameManager(gameManager), mCurrentIndex(0), mMapPosition(0), mLife(0)
 { 
 	mHudInfo.reserve(textureCount);
-	mNextPosition.x = HUD_SIZE * 2;
+	mNextPosition.x = HUD_SIZE;
 	mNextPosition.y = HUD_SIZE;
 }
 

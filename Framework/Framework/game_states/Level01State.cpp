@@ -35,6 +35,8 @@
 
 #include <GameFramework/utilities/CollisionDetection.h>
 
+#include "..\hud\HudPopulator.h"
+
 #include <sstream>
 
 namespace
@@ -76,6 +78,7 @@ namespace Game
 		, mHud(gameManager, 10)
 		, mGemColider(gameManager, mHud)
 		, mEnemyGenerator(0)
+		, mHudPopulator(0)
 	{
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 		
@@ -147,49 +150,59 @@ namespace Game
 
 		// Init jewels generator.
 		mJewelsGenerator = new JewelsGenerator(mGameManager);
+		mHudPopulator = new HudPopulator(mHud, *mJewelsGenerator);
 		image = imageManager.getResource("resources/jewels/small/darkGreen.png");
+		sf::Texture* imageb = imageManager.getResource("resources/jewels/small/darkGreenb.png");
+		mHudPopulator->addTextures(imageb, image);
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_DarkGreen);
 		image = imageManager.getResource("resources/jewels/small/blue.png");
+		imageb = imageManager.getResource("resources/jewels/small/blueb.png");
+		mHudPopulator->addTextures(imageb, image);
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_Blue);
 		image = imageManager.getResource("resources/jewels/small/darkYellow.png");
+		imageb = imageManager.getResource("resources/jewels/small/darkYellowb.png");
+		mHudPopulator->addTextures(imageb, image);
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_DarkYellow);
 		image = imageManager.getResource("resources/jewels/small/lightGreen.png");
+		imageb = imageManager.getResource("resources/jewels/small/lightGreenb.png");
+		mHudPopulator->addTextures(imageb, image);
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_LightGreen);
 		image = imageManager.getResource("resources/jewels/small/lightYellow.png");
+		imageb = imageManager.getResource("resources/jewels/small/lightYellowb.png");
+		mHudPopulator->addTextures(imageb, image);
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_LightYellow);
 		image = imageManager.getResource("resources/jewels/small/violet.png");
+		imageb = imageManager.getResource("resources/jewels/small/violetb.png");
+		mHudPopulator->addTextures(imageb, image);
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_Violet);
 		image = imageManager.getResource("resources/jewels/small/orange.png");
+		imageb = imageManager.getResource("resources/jewels/small/orangeb.png");
+		mHudPopulator->addTextures(imageb, image);
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_Orange);
 		image = imageManager.getResource("resources/jewels/small/pink.png");
+		imageb = imageManager.getResource("resources/jewels/small/pinkb.png");
+		mHudPopulator->addTextures(imageb, image);
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_Pink);
 		image = imageManager.getResource("resources/jewels/small/red.png");
+		imageb = imageManager.getResource("resources/jewels/small/redb.png");
+		mHudPopulator->addTextures(imageb, image);
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_Red);
 		image = imageManager.getResource("resources/jewels/small/turquesa.png");
+		imageb = imageManager.getResource("resources/jewels/small/turquesab.png");
+		mHudPopulator->addTextures(imageb, image);
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_Turquesa);
 		mJewelsGenerator->startGeneration(static_cast<size_t> (static_cast<float> (mMap->getMapHeight() * 17) / (10.0f * mMap->getScrollingSpeed())));	
-
-		// hud
-		const sf::Texture *hudOffImage = imageManager.getResource("resources/hud/hudElementOff.png");
-		const sf::Texture *hudOnImage = imageManager.getResource("resources/hud/hudElementOn.png");
-		mHud.addItem(hudOffImage, hudOnImage);
-		mHud.addItem(hudOffImage, hudOnImage);
-		mHud.addItem(hudOffImage, hudOnImage);
-		mHud.addItem(hudOffImage, hudOnImage);
-		mHud.turnOn();
-		mHud.turnOn();
-		mHud.turnOn();
-		mHud.turnOff();
+		mHudPopulator->pouplateHud();
 
 		// add map textures
 		for(size_t i = 0; i < 12; ++i) 

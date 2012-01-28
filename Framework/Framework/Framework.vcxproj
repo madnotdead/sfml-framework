@@ -196,6 +196,7 @@
     <ClCompile Include="game_states\LoadingState.cpp" />
     <ClCompile Include="game_states\MainMenuState.cpp" />
     <ClCompile Include="hud\Hud.cpp" />
+    <ClCompile Include="hud\HudPopulator.cpp" />
     <ClCompile Include="managers\GameManager.cpp" />
     <ClCompile Include="scrolling_map\BackgroundItemsGenerator.cpp" />
     <ClCompile Include="scrolling_map\ScrollingMap.cpp" />

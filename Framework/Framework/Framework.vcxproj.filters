@@ -103,6 +103,9 @@
     <ClCompile Include="coliders\GemColider.cpp">
       <Filter>coliders</Filter>
     </ClCompile>
+    <ClCompile Include="hud\HudPopulator.cpp">
+      <Filter>hud</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_states\ControlsState.h">

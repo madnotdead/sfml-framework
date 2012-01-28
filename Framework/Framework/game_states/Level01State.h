@@ -36,6 +36,7 @@ namespace Game
 	class GameManager;
 	class JewelsGenerator;
 	class ScrollingMap;
+	class HudPopulator;
 
 	class Level01State : public State
 	{
@@ -74,6 +75,8 @@ namespace Game
 		Hud mHud;
 		EnemysGenerator *mEnemyGenerator;
 		GemColider mGemColider;
+		HudPopulator* mHudPopulator;
+		
 	};
 }
 
