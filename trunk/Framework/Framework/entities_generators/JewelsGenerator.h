@@ -50,8 +50,8 @@ namespace Game
 		static void timerGenerateItem(void *thisClass);
 
 		void generateItem();
+		
 
-	private:
 		struct Item
 		{
 			Item() 
@@ -68,6 +68,9 @@ namespace Game
 			JewelColor mColor;
 			bool isActive;
 		};
+	
+	std::vector<Item>& getItemPool() { return mItemsPools; }	
+	private:
 
 		std::vector<Item> mItemsPools;
 		std::vector<sf::Vector2f> mBackupPositions;

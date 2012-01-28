@@ -34,6 +34,8 @@
 
 #include <GameFramework/utilities/CollisionDetection.h>
 
+#include <sstream>
+
 namespace
 {
 	void InitBulletsPosition(const uint8_t numberOfBullets, sf::Vector2f * const bulletsPosition)
@@ -71,6 +73,8 @@ namespace Game
 		, mPlayerMaxHealth(2000)
 		, mPlayerCurrentHealth(mPlayerMaxHealth)
 		, mHud(gameManager, 10)
+		, mGemColider(gameManager, mHud)
+		, mEnemyGenerator(gameManager)
 	{
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 	}
@@ -170,6 +174,39 @@ namespace Game
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_Turquesa);
 		mJewelsGenerator->startGeneration(static_cast<size_t> (static_cast<float> (mMap->getMapHeight() * 17) / (10.0f * mMap->getScrollingSpeed())));	
+
+		// hud
+		const sf::Texture *hudOffImage = imageManager.getResource("resources/hud/hudElementOff.png");
+		const sf::Texture *hudOnImage = imageManager.getResource("resources/hud/hudElementOn.png");
+		mHud.addItem(hudOffImage, hudOnImage);
+		mHud.addItem(hudOffImage, hudOnImage);
+		mHud.addItem(hudOffImage, hudOnImage);
+		mHud.addItem(hudOffImage, hudOnImage);
+		mHud.turnOn();
+		mHud.turnOn();
+		mHud.turnOn();
+		mHud.turnOff();
+
+		// add map textures
+		for(size_t i = 0; i < 12; ++i) 
+		{
+			std::stringstream ss;
+			ss << i+1;
+			image = imageManager.getResource("resources/hud/map/" + ss.str() + ".png");
+			mHud.addMapPositionTexture(image);
+		}
+
+		// add life textures
+		for(size_t i = 0; i < 11; ++i) 
+		{
+			std::stringstream ss;
+			ss << i+1;
+			image = imageManager.getResource("resources/hud/health/" + ss.str() + ".png");
+			mHud.addLifeTexture(image);
+		}
+
+		mHud.setLife(5);
+		mHud.setMapPosition(7);
 	}
 
 	void Level01State::Execute()
@@ -222,7 +259,9 @@ namespace Game
 		}
 		
 		renderWindow.Draw(*mPlayerSprite);	
-		//mHud.draw();
+		mHud.draw();
+
+		mGemColider.update(*mPlayerSprite, mJewelsGenerator->getItemPool());
 	}
 
 	void Level01State::ManageEvents(const sf::Event& ev)
