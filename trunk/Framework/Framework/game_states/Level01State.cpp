@@ -41,6 +41,7 @@
 #include "..\hud\HudPopulator.h"
 
 #include <sstream>
+#include <Windows.h>
 
 namespace
 {
@@ -81,6 +82,7 @@ namespace Game
 		, mHud(0)
 		, mEnemyGenerator(0)
 		, mHudPopulator(0)
+		, wasPaused(false)
 	{
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 	}
@@ -235,15 +237,39 @@ namespace Game
 		// Init enemy generator.
 		mEnemyGenerator = new EnemysGenerator(mGameManager);
 		image = imageManager.getResource("resources/enemies/iceCream.png");
-		assert(image && "Init: NULL pointer");
-		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::LINEAR);
+		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::LINEAR);
 		image = imageManager.getResource("resources/enemies/egg.png");
-		assert(image && "Init: NULL pointer");
-		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::LINEAR, 2.0f);
+		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::LINEAR, 2.0f);
 		image = imageManager.getResource("resources/enemies/chupetin.png");
-		assert(image && "Init: NULL pointer");
 		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::LINEAR, 2.0f);
-		mEnemyGenerator->startGeneration(2000);
+		image = imageManager.getResource("resources/enemies/chuptin2.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::Z, 2.0f);
+		image = imageManager.getResource("resources/enemies/asteroid1.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::DIAGONAL, 4.0f);
+		image = imageManager.getResource("resources/enemies/asteroid2.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::DIAGONAL, 4.0f);
+		image = imageManager.getResource("resources/enemies/asteroid3.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::DIAGONAL, 2.0f);
+		image = imageManager.getResource("resources/enemies/asteroid4.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::DIAGONAL, 2.0f);
+		image = imageManager.getResource("resources/enemies/ball.png");
+		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::BOUNCE, 2.0f);
+		image = imageManager.getResource("resources/enemies/bee.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::SIN, 2.0f);
+		image = imageManager.getResource("resources/enemies/dona1.png");
+		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::Z, 2.0f);
+		image = imageManager.getResource("resources/enemies/empanada.png");
+		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::DIAGONAL, 2.0f);
+		image = imageManager.getResource("resources/enemies/fongus.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::LINEAR, 2.0f);
+		image = imageManager.getResource("resources/enemies/kye.png");
+		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::BOUNCE, 2.0f);
+		image = imageManager.getResource("resources/enemies/star.png");
+		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::SIN, 2.0f);		
+		mEnemyGenerator->startGeneration(200);
+
+		//Pause screen
+		mPauseTexture = imageManager.getResource("resources/pause/pause.png");
 	}
 
 	void Level01State::Execute()
@@ -303,6 +329,30 @@ namespace Game
 		mHud->draw();
 
 		mGemColider->update(*mPlayerSprite, mJewelsGenerator->getItemPool());
+
+
+		// Pause
+		if(wasPaused) {
+			Sleep(500);
+			wasPaused = false;
+		}
+		if (sf::Keyboard::IsKeyPressed(sf::Keyboard::P)) {
+			wasPaused = true;
+			sf::Sprite pauseSprite;
+			pauseSprite.SetTexture(*mPauseTexture);
+			sf::Vector2f position;
+			position.x = static_cast<float> ((mGameManager.GetRenderWindow().GetWidth() / 2)) - static_cast<float> ((mPauseTexture->GetWidth() / 2));
+			position.y = static_cast<float> ((mGameManager.GetRenderWindow().GetHeight() / 2)) - static_cast<float> ((mPauseTexture->GetHeight() / 2));
+			pauseSprite.SetPosition(position);
+			renderWindow.Draw(pauseSprite);
+			renderWindow.Display();
+			Sleep(500);
+			while(true) {
+				if (sf::Keyboard::IsKeyPressed(sf::Keyboard::P)) {
+					break;
+				}
+			}
+		}
 	}
 
 	void Level01State::ManageEvents(const sf::Event& ev)

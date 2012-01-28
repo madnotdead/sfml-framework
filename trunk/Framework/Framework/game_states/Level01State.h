@@ -79,6 +79,9 @@ namespace Game
 		HudPopulator* mHudPopulator;
 		
 		CollisionHelper mCollisionHelper;
+
+		sf::Texture* mPauseTexture;
+		bool wasPaused;
 	};
 }
 
