@@ -39,9 +39,11 @@ namespace Game
 
 		mText->SetCharacterSize(30);
 
-		const char *explanation = "1) Extinguish all the fire in the road as you can \n"
-								  "2) Each time you extinguish a fire, you increase your timer \n"
-								  "3) If your timer reaches zero, you lose \n \n"
+		const char *explanation = "1) Collect the sequence of gems from left  \n"
+								  "    to right. \n"  
+								  "2) If you collect an invalid gem, the sequence \n"
+								  "    will be reseted. \n" 
+								  "3) Kill the friendly enemies wandering the space \n \n"
 								  "Press ESC to go to main menu";
 		DisplayText(explanation, xPos, yPos + initialPos, sf::Color::Black);
 	}

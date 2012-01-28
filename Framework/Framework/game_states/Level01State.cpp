@@ -11,6 +11,8 @@
 #include <cassert>
 #include <cfloat>
 
+#include <SFML/Audio/Music.hpp>
+
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Shader.hpp>
 
@@ -74,11 +76,10 @@ namespace Game
 		, mPlayerBulletSprite(0)
 		, mPlayerSpeed(5.0f)
 		, mPlayerBulletSpeed(10.0f)
-		, mPlayerBulletPower(500)
 		, mTimeToWaitToShot(0.5f)
 		, mTimeIncrement(0.05f)
 		, mElapsedTimeFromLastShot(0.0f)
-		, mPlayerMaxHealth(2000)
+		, mPlayerMaxHealth(10)
 		, mPlayerCurrentHealth(mPlayerMaxHealth)
 		, mHud(0)
 		, mEnemyGenerator(0)
@@ -272,6 +273,11 @@ namespace Game
 
 		//Pause screen
 		mPauseTexture = imageManager.getResource("resources/pause/pause.png");
+
+		// Init level music
+		mGameManager.GetMusic().OpenFromFile("resources/sounds/level.wav");
+		mGameManager.GetMusic().SetLoop(true);
+		mGameManager.GetMusic().Play();
 	}
 
 	void Level01State::Execute()
@@ -327,6 +333,8 @@ namespace Game
 			}
 		}
 		
+		mHud->setLife(mPlayerCurrentHealth);
+
 		renderWindow.Draw(*mPlayerSprite);	
 		mHud->draw();
 
@@ -388,5 +396,7 @@ namespace Game
 		delete mEnemyGenerator;
 		delete mMap;
 		delete mHud;
+
+		mGameManager.GetMusic().Stop();
 	}	
 }

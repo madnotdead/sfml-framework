@@ -67,7 +67,7 @@ namespace Game
 	void InformationState::LoadResources()
 	{		
 		ImageManager& imageManager = mGameManager.GetImageManager();		
-		sf::Texture * const backgroundImage = imageManager.getResource("resources/background/main_screen.png");
+		sf::Texture * const backgroundImage = imageManager.getResource("resources/background/intro.png");
 		assert(backgroundImage && "LoadResources: NULL pointer");
 
 		mBackgroundSprite = new sf::Sprite;

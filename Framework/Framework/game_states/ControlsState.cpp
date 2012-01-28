@@ -37,10 +37,8 @@ namespace Game
 		const float displacement = 40.0f;
 
 		mText->SetCharacterSize(30);
-		const char* controls = "Left/Right Arrows: Acceleration \n"
-							   "Mouse: Move the fire hose \n"
-							   "Left Click: Shoot a water balloon \n"
-							   "Up/Down Arrow: Move the fire truck \n"
+		const char* controls = "Use the arrows to move the ship \n"
+							   "Press A to shot \n"
 							   "Esc: Main Menu \n \n"
 							   "Press ESC to go to main menu \n";
 		DisplayText(controls, xPos, yPos + initialPos, sf::Color::Black);

@@ -44,6 +44,14 @@ namespace Game
 
 		assert(mText && "Init: NULL pointer");
 		mText->SetStyle(sf::Text::Bold);
+		
+		sf::Music& music = mGameManager.GetMusic();
+		if (music.GetStatus() != sf::Music::Playing)
+		{
+			music.OpenFromFile("resources/sounds/intro.wav");
+			music.SetLoop(true);
+			music.Play();
+		}
 	}
 	
 	void MainMenuState::ManageEvents(const sf::Event& ev) 
@@ -139,6 +147,7 @@ namespace Game
 					break;
 
 				case(MenuOption_Exit):
+					exit(0);
 					renderWindow.Close();
 					break;
 
@@ -162,8 +171,8 @@ namespace Game
 		
 		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
 
-		const float xPos = static_cast<float>(renderWindow.GetWidth()) * 0.6f;
-		const float yPos = static_cast<float>(renderWindow.GetHeight()) * 0.4f;
+		const float xPos = 620.0f;
+		const float yPos = 400.0f;
 		const float initialPos = 50.0f;
 		const float displacement = 50.0f;
 		

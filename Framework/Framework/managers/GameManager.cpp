@@ -27,7 +27,7 @@
 namespace Game
 {
 	GameManager::GameManager() 
-		: mRenderWindow(sf::VideoMode::VideoMode(1024, 768), "Game", sf::Style::Close | sf::Style::Fullscreen)
+		: mRenderWindow(sf::VideoMode::VideoMode(1024, 768), "Game", sf::Style::Close)
 		, mMainMenuState(*this)
 		, mControlsState(*this)
 		, mCreditsState(*this)
@@ -48,6 +48,7 @@ namespace Game
 		InitText();
 #endif 
 		mRenderWindow.SetFramerateLimit(60);
+		mRenderWindow.ShowMouseCursor(false);
 	}
 	
 	GameManager::~GameManager()
