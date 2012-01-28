@@ -59,7 +59,6 @@ namespace Game
 		float mElapsedTimeFromLastShot;
 		uint32_t mPlayerMaxHealth;
 		uint32_t mPlayerCurrentHealth;
-		sf::Shader* s;
 	};
 }
 
