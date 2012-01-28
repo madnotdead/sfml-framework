@@ -25,7 +25,6 @@
 #include <GameFramework/utilities/Types.h>
 
 #include <GameFramework/managers/ImageManager.h>
-#include <GameFramework/managers/SpriteManager.h>
 #include <GameFramework/managers/SoundManager.h>
 
 #include "../game_states/ControlsState.h"
@@ -56,7 +55,6 @@ namespace Game
 		inline sf::RenderWindow& GetRenderWindow();
 		inline ImageManager& GetImageManager();
 		inline SoundManager& GetSoundManager();
-		inline SpriteManager& GetSpriteManager();
 		inline StateMachine& GetStateMachine();
 		inline Utils::MemoryPool& GetMemoryPool();
 
@@ -81,8 +79,6 @@ namespace Game
 		Utils::MemoryPool mMemoryPool;
 		
 		ImageManager mImageManager;
-
-		SpriteManager mSpriteManager;
 
 		SoundManager mSoundManager;
 
@@ -115,11 +111,6 @@ namespace Game
 	SoundManager& GameManager::GetSoundManager()
 	{
 		return mSoundManager;
-	}
-
-	SpriteManager& GameManager::GetSpriteManager()
-	{
-		return mSpriteManager;
 	}
 
 	StateMachine& GameManager::GetStateMachine()

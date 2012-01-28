@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="managers\ImageManager.cpp" />
     <ClCompile Include="managers\SoundManager.cpp" />
-    <ClCompile Include="managers\SpriteManager.cpp" />
     <ClCompile Include="state_machine\State.cpp" />
     <ClCompile Include="state_machine\StateMachine.cpp" />
     <ClCompile Include="utilities\CollisionDetection.cpp" />
@@ -32,7 +31,6 @@
     <ClInclude Include="managers\ImageManager.h" />
     <ClInclude Include="managers\ResourceManager.h" />
     <ClInclude Include="managers\SoundManager.h" />
-    <ClInclude Include="managers\SpriteManager.h" />
     <ClInclude Include="state_machine\State.h" />
     <ClInclude Include="state_machine\StateMachine.h" />
     <ClInclude Include="utilities\CollisionDetection.h" />
@@ -140,7 +138,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(SFML_HEADERS);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SFML)\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

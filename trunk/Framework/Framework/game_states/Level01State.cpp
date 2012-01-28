@@ -18,7 +18,6 @@
 
 #include "../managers/GameManager.h"
 #include <GameFramework/managers/ImageManager.h>
-#include <GameFramework/managers/SpriteManager.h>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
@@ -74,9 +73,7 @@ namespace Game
 		// Init player sprite.
 		const sf::Texture *image = imageManager.getResource("resources/ships/PlayerShip.png");
 		assert(image && "Init: NULL pointer");
-		SpriteManager& spriteManager = mGameManager.GetSpriteManager();
-		mPlayerSprite = spriteManager.getResource("PlayerShipSprite");
-		assert(mPlayerSprite && "Init: NULL pointer");
+		mPlayerSprite = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
 		mPlayerSprite->SetTexture(*image);
 		mPlayerPosition.x = 0.0f;
 		mPlayerPosition.y = 0.0f;
@@ -84,16 +81,14 @@ namespace Game
 		// Init player bullets.
 		image = imageManager.getResource("resources/bullets/bullet.png");
 		assert(image && "Init: NULL pointer");
-		mPlayerBulletSprite = spriteManager.getResource("PlayerBulletSprite");
-		assert(mPlayerBulletSprite && "Init: NULL pointer");
+		mPlayerBulletSprite = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
 		mPlayerBulletSprite->SetTexture(*image);
 		InitBulletsPosition(sPlayerBullets, mPlayerBulletsPositions);
 
 		// Init enemy sprite.
 		image = imageManager.getResource("resources/ships/boss.PNG");
 		assert(image && "Init: NULL pointer");
-		mEnemySprite = spriteManager.getResource("EnemyShipSprite");
-		assert(mEnemySprite && "Init: NULL pointer");
+		mEnemySprite = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
 		mEnemySprite->SetTexture(*image);
 		mEnemy.mPosition.x = 0.0f;
 		mEnemy.mPosition.y = 0.0f;
@@ -101,8 +96,7 @@ namespace Game
 		// Init background
 		image = imageManager.getResource("resources/background/level1.png");
 		assert(image && "Init: NULL pointer");
-		mBackground = spriteManager.getResource("LevelBackground");
-		assert(mBackground && "Init: NULL pointer");
+		mBackground = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
 		mBackground->SetTexture(*image);
 
 		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
@@ -178,12 +172,6 @@ namespace Game
 		{
 			if(ev.Key.Code == sf::Keyboard::Escape)
 			{				
-				ImageManager& imageManager = mGameManager.GetImageManager();
-				imageManager.releaseResource("resources/images/PlayerShip.png");
-
-				SpriteManager& spriteManager = mGameManager.GetSpriteManager();
-				spriteManager.releaseResource("PlayerShip");
-				
 				StateMachine& stateMachine = mGameManager.GetStateMachine();
 				stateMachine.ChangeState(mGameManager.GetMainMenuState());
 			}	
@@ -197,11 +185,9 @@ namespace Game
 		imageManager.releaseResource("resources/background/level1.jpg");
 		imageManager.releaseResource("resources/images/PlayerShip.png");
 
-		SpriteManager& spriteManager = mGameManager.GetSpriteManager();
-		spriteManager.releaseResource("PlayerShipSprite");
-		spriteManager.releaseResource("PlayerBulletSprite");
-		spriteManager.releaseResource("EnemyShipSprite");
-		spriteManager.releaseResource("LevelBackground");
+		mGameManager.GetMemoryPool().Free(mPlayerBulletSprite);
+		mGameManager.GetMemoryPool().Free(mPlayerSprite);
+		mGameManager.GetMemoryPool().Free(mEnemySprite);
 	}
 
 	void Level01State::CheckEnemyToBulletsCollisions()

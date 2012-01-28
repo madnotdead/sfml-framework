@@ -26,7 +26,6 @@
 
 #include "../managers/GameManager.h"
 #include <GameFramework/managers/ImageManager.h>
-#include <GameFramework/managers/SpriteManager.h>
 
 namespace Game
 {
@@ -70,11 +69,8 @@ namespace Game
 		ImageManager& imageManager = mGameManager.GetImageManager();		
 		sf::Texture * const backgroundImage = imageManager.getResource("resources/background/main_screen.png");
 		assert(backgroundImage && "LoadResources: NULL pointer");
-
-		SpriteManager& spriteManager = mGameManager.GetSpriteManager();
-
-		mBackgroundSprite = spriteManager.getResource("MainMenuBackground");
-
+		
+		mBackgroundSprite = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
 		mBackgroundSprite->SetTexture(*backgroundImage);
 		mBackgroundSprite->SetPosition(0.0f, 0.0f);
 	}
@@ -84,6 +80,7 @@ namespace Game
 		Utils::MemoryPool& memoryPool = mGameManager.GetMemoryPool();
 		memoryPool.Free(mFont);
 		memoryPool.Free(mText);
+		memoryPool.Free(mBackgroundSprite);
 	}
 
 	void InformationState::InitFont()
