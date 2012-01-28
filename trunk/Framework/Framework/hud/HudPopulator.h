@@ -13,6 +13,7 @@ public:
 	HudPopulator(Hud& hud, JewelsGenerator& jewelsGenerator);
 	void pouplateHud();
 	void addTextures(const sf::Texture* offTexture, const sf::Texture* onTexture);
+	const std::vector<size_t>& getHudIndices() {return mIndices;}
 
 private:
 	Hud& mHud;
