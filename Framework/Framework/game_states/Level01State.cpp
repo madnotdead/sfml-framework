@@ -46,12 +46,12 @@ namespace Game
 {
 	Level01State::Level01State(GameManager& gameManager)
 		: State(gameManager)
+		, mMap(gameManager)
 		, mEnemy(sf::Vector2f(FLT_MAX, FLT_MAX), 2000.0f, 10000)
 		, mPlayerPosition(sf::Vector2f(FLT_MAX, FLT_MAX))
 		, mPlayerSprite(0)
 		, mPlayerBulletSprite(0)
 		, mEnemySprite(0)
-		, mBackground(0)
 		, mPlayerSpeed(300.0f)
 		, mPlayerBulletSpeed(700.0f)
 		, mPlayerBulletPower(500)
@@ -97,11 +97,7 @@ namespace Game
 		// Init background
 		image = imageManager.getResource("resources/background/level1.png");
 		assert(image && "Init: NULL pointer");
-		mBackground = new (mGameManager.GetMemoryPool().Alloc(sizeof(sf::Sprite))) sf::Sprite;
-		mBackground->SetTexture(*image);
-
-		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
-		mBackground->SetPosition(0.0f, 0.0f);
+		mMap.initMap(*image);
 	}
 
 	void Level01State::Execute()
@@ -150,7 +146,7 @@ namespace Game
 			mPlayerPosition.y = 0.0f;
 		}
 
-		renderWindow.Draw(*mBackground);
+		mMap.draw();
 
 		// Draw player ship and bullets
 		for(uint8_t i = 0; i < sPlayerBullets; ++i)

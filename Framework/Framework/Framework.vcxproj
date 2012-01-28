@@ -184,6 +184,7 @@
     <ClCompile Include="game_states\LoadingState.cpp" />
     <ClCompile Include="game_states\MainMenuState.cpp" />
     <ClCompile Include="managers\GameManager.cpp" />
+    <ClCompile Include="scrolling_map\ScrollingMap.cpp" />
     <ClCompile Include="utilities\Updaters.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -198,6 +199,7 @@
     <ClInclude Include="game_states\MainMenuState.h" />
     <ClInclude Include="hud\Hud.h" />
     <ClInclude Include="managers\GameManager.h" />
+    <ClInclude Include="scrolling_map\ScrollingMap.h" />
     <ClInclude Include="utilities\Updaters.h" />
   </ItemGroup>
   <ItemGroup>

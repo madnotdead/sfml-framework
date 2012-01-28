@@ -12,6 +12,7 @@
 #define GAME_LEVEL01_STATE_H
 
 #include "../entities/KamikazeEnemy.h"
+#include "../scrolling_map/ScrollingMap.h"
 
 #include <GameFramework/utilities/Types.h>
 
@@ -44,13 +45,13 @@ namespace Game
 	private: 
 		void CheckEnemyToBulletsCollisions();
 
+		ScrollingMap mMap;
 		KamikazeEnemy mEnemy;
 		sf::Vector2f mPlayerPosition;
 		sf::Vector2f mPlayerBulletsPositions[sPlayerBullets];
 		sf::Sprite *mPlayerSprite;
 		sf::Sprite *mPlayerBulletSprite;
 		sf::Sprite *mEnemySprite;
-		sf::Sprite *mBackground;
 		const float mPlayerSpeed;
 		const float mPlayerBulletSpeed;
 		const int mPlayerBulletPower;
