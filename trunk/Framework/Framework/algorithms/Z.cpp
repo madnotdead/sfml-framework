@@ -4,7 +4,7 @@
 
 void Game::Z::move( sf::Vector2f& position,  float speed)
 {
-	float width = mGameManager.GetRenderWindow().GetWidth();
+	const float width = static_cast<float> (mGameManager.GetRenderWindow().GetWidth());
 	if(position.x + speed >= width) {
 		movement = LEFT;
 	} else if(position.x - speed <= 0.f) {

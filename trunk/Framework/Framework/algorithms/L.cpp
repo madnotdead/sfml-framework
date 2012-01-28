@@ -16,5 +16,5 @@ void Game::L::move( sf::Vector2f& position,  float speed)
 
 Game::L::L( GameManager& gameManager ) : Algorithm(gameManager), movement(DOWN), mCutOff(0.f)
 {
-	mCutOff = (rand()%768) + 50;
+	mCutOff = static_cast<float> ((rand() % 768) + 50);
 }

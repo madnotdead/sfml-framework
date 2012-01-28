@@ -184,6 +184,7 @@
     <ClCompile Include="algorithms\Sin.cc" />
     <ClCompile Include="algorithms\Z.cpp" />
     <ClCompile Include="animators\PlayerAnimator.cpp" />
+    <ClCompile Include="coliders\CollisionHelper.cpp" />
     <ClCompile Include="coliders\GemColider.cpp" />
     <ClCompile Include="entities\Enemy.cpp" />
     <ClCompile Include="entities_generators\EnemysGenerator.cpp" />

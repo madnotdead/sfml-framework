@@ -4,7 +4,7 @@
 
 void Game::Sin::move( sf::Vector2f& position,  float speed)
 {
-	float width = mGameManager.GetRenderWindow().GetWidth();
+	const float width = static_cast<float> (mGameManager.GetRenderWindow().GetWidth());
 	position.y += speed;	
 	position.x += sin(position.x) * 10; 
 }

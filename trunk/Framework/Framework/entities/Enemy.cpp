@@ -3,7 +3,12 @@
 
 namespace Game {
 
-Enemy::Enemy( GameManager& gameManager ) : mGameManager(gameManager), mActive(false), mRotationEnable(false), mAlgorithm(NULL)
+Enemy::Enemy( GameManager& gameManager ) 
+	: mGameManager(gameManager)
+	, mActive(false)
+	, mRotationEnable(false)
+	, mAlgorithm(NULL)
+	, mEnemyImage(0)
 {
 }
 
@@ -20,7 +25,6 @@ void Enemy::draw()
 		if(mRotationEnable) {
 			mSprite.SetRotation(mSprite.GetRotation() + 1.f);
 		}
-		mSprite.SetTexture(*mEnemyImage);
 		mGameManager.GetRenderWindow().Draw(mSprite);
 	}
 }
@@ -33,6 +37,7 @@ Enemy::~Enemy()
 void Enemy::setTexture( const sf::Texture* texture )
 {
 	mEnemyImage = texture;
+	mSprite.SetTexture(*texture);
 }
 
 sf::Sprite* Enemy::getSprite()
