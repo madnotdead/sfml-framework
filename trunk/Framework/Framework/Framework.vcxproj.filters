@@ -103,15 +103,15 @@
     <ClCompile Include="coliders\GemColider.cpp">
       <Filter>coliders</Filter>
     </ClCompile>
-
     <ClCompile Include="coliders\CollisionHelper.cpp">
       <Filter>coliders</Filter>
     </ClCompile>
-
     <ClCompile Include="hud\HudPopulator.cpp">
       <Filter>hud</Filter>
     </ClCompile>
-
+    <ClCompile Include="coliders\EnemyColider.cpp">
+      <Filter>coliders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_states\ControlsState.h">
@@ -190,6 +190,9 @@
       <Filter>hud</Filter>
     </ClInclude>
     <ClInclude Include="coliders\CollisionHelper.h">
+      <Filter>coliders</Filter>
+    </ClInclude>
+    <ClInclude Include="coliders\EnemyColider.h">
       <Filter>coliders</Filter>
     </ClInclude>
   </ItemGroup>

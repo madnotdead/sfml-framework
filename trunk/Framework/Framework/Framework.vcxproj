@@ -185,6 +185,7 @@
     <ClCompile Include="algorithms\Z.cpp" />
     <ClCompile Include="animators\PlayerAnimator.cpp" />
     <ClCompile Include="coliders\CollisionHelper.cpp" />
+    <ClCompile Include="coliders\EnemyColider.cpp" />
     <ClCompile Include="coliders\GemColider.cpp" />
     <ClCompile Include="entities\Enemy.cpp" />
     <ClCompile Include="entities_generators\EnemysGenerator.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="algorithms\z.h" />
     <ClInclude Include="animators\PlayerAnimator.h" />
     <ClInclude Include="coliders\CollisionHelper.h" />
+    <ClInclude Include="coliders\EnemyColider.h" />
     <ClInclude Include="coliders\GemColider.h" />
     <ClInclude Include="entities\Enemy.h" />
     <ClInclude Include="entities_generators\EnemysGenerator.h" />
