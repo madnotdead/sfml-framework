@@ -79,10 +79,10 @@
     <ClCompile Include="algorithms\Sin.cc">
       <Filter>algorithms</Filter>
     </ClCompile>
-    <ClCompile Include="algorithms\Bounce.cpp">
-      <Filter>managers</Filter>
-    </ClCompile>
     <ClCompile Include="algorithms\Diagonal.cc">
+      <Filter>algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="algorithms\Bounce.cpp">
       <Filter>algorithms</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="algorithms\Diagonal.h">
       <Filter>algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="scrolling_map\BackgroundItemsGenerator.h">
+      <Filter>scrolling_map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
