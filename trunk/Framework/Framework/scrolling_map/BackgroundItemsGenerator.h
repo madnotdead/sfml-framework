@@ -57,4 +57,4 @@ namespace Game
 	};
 }
 
-#endif // GAME_BACKGROUND_DECORATOR_H
+#endif // GAME_BACKGROUND_ITEMS_GENERATOR_H
