@@ -78,7 +78,7 @@ namespace Game
 	void InformationState::DestroyResources()
 	{
 		delete mFont;
-		delete mText;
+		delete mText; 
 		delete mBackgroundSprite;
 	}
 
