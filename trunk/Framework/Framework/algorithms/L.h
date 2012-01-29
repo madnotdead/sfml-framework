@@ -6,6 +6,7 @@ namespace Game {
 	public:
 		L(GameManager& gameManager);
 		void move(sf::Vector2f& position, float speed);
+		MOVE_TYPE getType() { return MOVE_L;}
 
 	private:
 		enum MOVEMENT { DOWN, RIGHT } movement;

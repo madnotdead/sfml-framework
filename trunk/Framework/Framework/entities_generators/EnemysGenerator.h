@@ -2,6 +2,7 @@
 #include <vector>
 #include <GameFramework/utilities/Timer.h>
 #include "..\entities\Enemy.h"
+#include "MoveType.h"
 
 namespace sf
 {
@@ -15,7 +16,6 @@ namespace Game
 	class EnemysGenerator
 	{
 	public:
-		enum MOVE_TYPE {BOUNCE, DIAGONAL, L, LINEAR, SIN, Z};
 		EnemysGenerator(GameManager& gameManager);
 		~EnemysGenerator();
 

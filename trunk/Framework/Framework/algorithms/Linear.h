@@ -6,5 +6,6 @@ namespace Game {
 	public:
 		Linear(GameManager& gameManager) : Algorithm(gameManager) {}
 		void move(sf::Vector2f& position, float speed);
+		MOVE_TYPE getType() { return LINEAR;}
 	};
 }

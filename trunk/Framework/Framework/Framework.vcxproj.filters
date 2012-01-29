@@ -207,5 +207,8 @@
     <ClInclude Include="game_states\CongratulationsState.h">
       <Filter>game_states</Filter>
     </ClInclude>
+    <ClInclude Include="entities_generators\MoveType.h">
+      <Filter>entities_generators</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
