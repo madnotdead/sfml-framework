@@ -31,16 +31,16 @@ namespace Game
 	Algorithm* EnemysGenerator::getAlgorithm(MOVE_TYPE type)
 	{
 		switch(type) {
-		case EnemysGenerator::BOUNCE:
+		case BOUNCE:
 			return new Bounce(mGamemanager);
-		case EnemysGenerator::LINEAR:
+		case LINEAR:
 			return new Linear(mGamemanager);
-		case EnemysGenerator::Z:
+		case MOVE_Z:
 			return new Game::Z(mGamemanager);
-		case EnemysGenerator::L:
+		case MOVE_L:
 			return new Game::L(mGamemanager);
 		default:
-		case EnemysGenerator::SIN:
+		case SIN:
 			return new Sin(mGamemanager);
 		}	
 	}

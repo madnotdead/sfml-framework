@@ -234,6 +234,7 @@
     <ClInclude Include="entities\Enemy.h" />
     <ClInclude Include="entities_generators\EnemysGenerator.h" />
     <ClInclude Include="entities_generators\JewelsGenerator.h" />
+    <ClInclude Include="entities_generators\MoveType.h" />
     <ClInclude Include="game_states\CongratulationsState.h" />
     <ClInclude Include="game_states\ControlsState.h" />
     <ClInclude Include="game_states\CreditsState.h" />
