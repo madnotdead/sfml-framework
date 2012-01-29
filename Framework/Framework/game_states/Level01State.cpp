@@ -11,8 +11,7 @@
 #include <cassert>
 #include <cfloat>
 
-#include <SFML/Audio/Music.hpp>
-
+#include <SFML/Audio/Sound.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Shader.hpp>
 
@@ -82,6 +81,9 @@ namespace Game
 		, mHud(0)
 		, mEnemyGenerator(0)
 		, mHudPopulator(0)
+		, mPlayerShoot(0)
+		, mRightKey(0)
+		, mWrongKey(0)
 		, wasPaused(false)
 		, mEnemyColider(gameManager)
 	{
@@ -139,7 +141,7 @@ namespace Game
 		sf::Texture *image2 = imageManager.getResource("resources/background/level1b.jpg");
 		assert(image2 && "Init: NULL pointer");
 		mMap->initMap(*image, *image2);
-		mMap->setScrollingSpeed(2.0f);
+		mMap->setScrollingSpeed(5.0f);
 
 		// Init background items generator.
 		mBackgroundItemsGenerator = new BackgroundItemsGenerator(mGameManager);
@@ -210,10 +212,8 @@ namespace Game
 		mHudPopulator->addTextures(imageb, image);
 		assert(image && "Init: NULL pointer");
 		mJewelsGenerator->addJewel(*image, JewelsGenerator::JewelColor_Turquesa);
-		mJewelsGenerator->startGeneration(static_cast<size_t> (static_cast<float> (mMap->getMapHeight() * 17) / (10.0f * mMap->getScrollingSpeed())));	
+		mJewelsGenerator->startGeneration(static_cast<size_t> (static_cast<float> (mMap->getMapHeight() * 15) / (10.0f * mMap->getScrollingSpeed())));	
 		mHudPopulator->pouplateHud();
-
-		mGemColider = new GemColider(mGameManager, *mHud, *mHudPopulator);
 
 		// add map textures
 		for(size_t i = 0; i < 12; ++i) 
@@ -238,36 +238,36 @@ namespace Game
 		// Init enemy generator.
 		mEnemyGenerator = new EnemysGenerator(mGameManager);
 		image = imageManager.getResource("resources/enemies/iceCream.png");
-		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::LINEAR);
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::Z, 2.0f);
 		image = imageManager.getResource("resources/enemies/egg.png");
-		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::LINEAR, 2.0f);
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::L, 2.0f);
 		image = imageManager.getResource("resources/enemies/chupetin.png");
 		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::LINEAR, 2.0f);
-		image = imageManager.getResource("resources/enemies/chuptin2.png");
-		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::Z, 2.0f);
-		image = imageManager.getResource("resources/enemies/asteroid1.png");
-		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::DIAGONAL, 4.0f);
-		image = imageManager.getResource("resources/enemies/asteroid2.png");
-		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::DIAGONAL, 4.0f);
-		image = imageManager.getResource("resources/enemies/asteroid3.png");
-		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::DIAGONAL, 2.0f);
-		image = imageManager.getResource("resources/enemies/asteroid4.png");
-		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::DIAGONAL, 2.0f);
 		image = imageManager.getResource("resources/enemies/ball.png");
-		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::BOUNCE, 2.0f);
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::Z, 2.0f);
 		image = imageManager.getResource("resources/enemies/bee.png");
 		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::SIN, 2.0f);
 		image = imageManager.getResource("resources/enemies/dona1.png");
-		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::Z, 2.0f);
-		image = imageManager.getResource("resources/enemies/empanada.png");
-		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::DIAGONAL, 2.0f);
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::Z, 2.0f);
 		image = imageManager.getResource("resources/enemies/fongus.png");
-		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::LINEAR, 2.0f);
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::L, 2.0f);
 		image = imageManager.getResource("resources/enemies/kye.png");
-		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::BOUNCE, 2.0f);
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::Z, 2.0f);
 		image = imageManager.getResource("resources/enemies/star.png");
-		mEnemyGenerator->addEnemy(*image, true, EnemysGenerator::SIN, 2.0f);		
-		mEnemyGenerator->startGeneration(200);
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::L, 2.0f);		
+		image = imageManager.getResource("resources/enemies/paraguas.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::Z, 2.0f);
+		image = imageManager.getResource("resources/enemies/lavarropas.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::Z, 2.0f);
+		image = imageManager.getResource("resources/enemies/asteroid2.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::DIAGONAL, 2.0f);
+		image = imageManager.getResource("resources/enemies/block.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::Z, 2.0f);	
+		image = imageManager.getResource("resources/enemies/empanada.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::LINEAR, 2.0f);
+		image = imageManager.getResource("resources/enemies/tornillo1.png");
+		mEnemyGenerator->addEnemy(*image, false, EnemysGenerator::L, 2.0f);
+		mEnemyGenerator->startGeneration(500);		
 
 		//Pause screen
 		mPauseTexture = imageManager.getResource("resources/pause/pause.png");
@@ -275,101 +275,132 @@ namespace Game
 		mPlayerCurrentHealth = 10;
 
 		// Init level music
-		mGameManager.GetMusic().OpenFromFile("resources/sounds/level.wav");
-		mGameManager.GetMusic().SetLoop(true);
+		mGameManager.GetMusic().OpenFromFile("resources/sounds/intro.wav");
+		mGameManager.GetMusic().SetLoop(true); 
 		mGameManager.GetMusic().Play();
+
+		// Init player shoot sound.
+		sf::SoundBuffer *soundBuffer = mGameManager.GetSoundManager().getResource("resources/sounds/piupiu.wav");
+		assert(soundBuffer && "Level01State::Init: NULL pointer");
+		mPlayerShoot = new sf::Sound(*soundBuffer);
+		mPlayerShoot->SetLoop(false);
+		mPlayerShoot->SetVolume(50.0f);
+
+		// Init right and wrong key sounds.
+		soundBuffer = mGameManager.GetSoundManager().getResource("resources/sounds/rightGem.wav");
+		assert(soundBuffer && "Level01State::Init: NULL pointer");
+		mRightKey = new sf::Sound(*soundBuffer);
+		mRightKey->SetLoop(false);
+
+		soundBuffer = mGameManager.GetSoundManager().getResource("resources/sounds/wrongGem.wav");
+		assert(soundBuffer && "Level01State::Init: NULL pointer");
+		mWrongKey = new sf::Sound(*soundBuffer);
+		mWrongKey->SetLoop(false);
+		mWrongKey->SetVolume(50.0f);
+		mGemColider = new GemColider(mGameManager, *mHud, *mHudPopulator, *mRightKey, *mWrongKey);
 	}
 
 	void Level01State::Execute()
 	{
-		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
-
-		// Update player position
-		UpdatePlayerPositionFromInput(mPlayerPosition, mPlayerSpeed);
-				
-		// Fit player sprite onto the screen
-		const sf::Texture * const playerImage = mPlayerSprite->GetTexture();
-		assert(playerImage && "Execute: NULL pointer");
-		FitInsideScreen(mPlayerPosition, playerImage->GetWidth(), playerImage->GetHeight(), renderWindow.GetWidth(), renderWindow.GetHeight());
-		mPlayerSprite->SetPosition(mPlayerPosition);
-
-		mCollisionHelper.PlayerBulletsAndEnemiesCollisions(mEnemyGenerator->getEnemies(), mPlayerBulletsPositions, sPlayerBullets, mPlayerBulletsState, 
-			mPlayerBulletSprite->GetTexture()->GetWidth(), mPlayerBulletSprite->GetTexture()->GetHeight());
-
-		// Update player bullet positions
-		UpdatePlayerBulletsPositions(sPlayerBullets, mPlayerBulletsPositions, mPlayerBulletsState, mPlayerBulletSpeed);
-		UpdatePlayerBulletsState(sPlayerBullets, mPlayerBulletsPositions, mPlayerBulletsState, mPlayerBulletSprite->GetTexture()->GetHeight());
-
-		// Check if the player shoot.
-		mElapsedTimeFromLastShot += mTimeIncrement;
-		if(mTimeToWaitToShot <= mElapsedTimeFromLastShot)
+		if (mHud->getNumberOfTurnedOn() == 10)
 		{
-			const sf::Texture * const bulletImage = mPlayerBulletSprite->GetTexture();
-			assert(bulletImage && "Execute: NULL pointer");
-
-			if(UpdateBulletsFromInput(sPlayerBullets, mPlayerBulletsPositions, mPlayerBulletsState, mPlayerPosition, playerImage->GetWidth(), bulletImage->GetWidth()))
-				mElapsedTimeFromLastShot = 0.0f;
+			mGameManager.GetStateMachine().ChangeState(mGameManager.GetCongratulationsState());
 		}
 
-		mMap->update();
-		mMap->draw();
-
-		mBackgroundItemsGenerator->update();
-		mBackgroundItemsGenerator->draw();
-
-		mJewelsGenerator->update();
-		mJewelsGenerator->draw();
-
-		// Draw enemies.
-		mEnemyGenerator->draw();
-
-		// Draw player ship and bullets
-		for(uint8_t i = 0; i < sPlayerBullets; ++i)
+		else 
 		{
-			if(mPlayerBulletsState[i])
+			sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
+
+			// Update player position
+			UpdatePlayerPositionFromInput(mPlayerPosition, mPlayerSpeed);
+
+			// Fit player sprite onto the screen
+			const sf::Texture * const playerImage = mPlayerSprite->GetTexture();
+			assert(playerImage && "Execute: NULL pointer");
+			FitInsideScreen(mPlayerPosition, playerImage->GetWidth(), playerImage->GetHeight(), renderWindow.GetWidth(), renderWindow.GetHeight());
+			mPlayerSprite->SetPosition(mPlayerPosition);
+
+			mCollisionHelper.PlayerBulletsAndEnemiesCollisions(mEnemyGenerator->getEnemies(), mPlayerBulletsPositions, sPlayerBullets, mPlayerBulletsState, 
+				mPlayerBulletSprite->GetTexture()->GetWidth(), mPlayerBulletSprite->GetTexture()->GetHeight());
+
+			// Update player bullet positions
+			UpdatePlayerBulletsPositions(sPlayerBullets, mPlayerBulletsPositions, mPlayerBulletsState, mPlayerBulletSpeed);
+			UpdatePlayerBulletsState(sPlayerBullets, mPlayerBulletsPositions, mPlayerBulletsState, mPlayerBulletSprite->GetTexture()->GetHeight());
+
+			// Check if the player shoot.
+			mElapsedTimeFromLastShot += mTimeIncrement;
+			if(mTimeToWaitToShot <= mElapsedTimeFromLastShot)
 			{
-				mPlayerBulletSprite->SetPosition(mPlayerBulletsPositions[i]);
-				renderWindow.Draw(*mPlayerBulletSprite);
-			}
-		}
-		
-		renderWindow.Draw(*mPlayerSprite);	
-		mHud->draw();
+				const sf::Texture * const bulletImage = mPlayerBulletSprite->GetTexture();
+				assert(bulletImage && "Execute: NULL pointer");
 
-		mGemColider->update(*mPlayerSprite, mJewelsGenerator->getItemPool());
-
-		if(mEnemyColider.Colide(mEnemyGenerator->getEnemies(), mPlayerSprite)) 
-		{
-			mHud->setLife(mPlayerCurrentHealth--);
-			if(mPlayerCurrentHealth == 0) {
-				StateMachine& stateMachine = mGameManager.GetStateMachine();
-				stateMachine.ChangeState(mGameManager.GetMainMenuState());
-				return;
-			}
-		}
-
-		// Pause
-		if(wasPaused) {
-			Sleep(500);
-			wasPaused = false;
-		}
-		if (sf::Keyboard::IsKeyPressed(sf::Keyboard::P)) {
-			wasPaused = true;
-			sf::Sprite pauseSprite;
-			pauseSprite.SetTexture(*mPauseTexture);
-			sf::Vector2f position;
-			position.x = static_cast<float> ((mGameManager.GetRenderWindow().GetWidth() / 2)) - static_cast<float> ((mPauseTexture->GetWidth() / 2));
-			position.y = static_cast<float> ((mGameManager.GetRenderWindow().GetHeight() / 2)) - static_cast<float> ((mPauseTexture->GetHeight() / 2));
-			pauseSprite.SetPosition(position);
-			renderWindow.Draw(pauseSprite);
-			renderWindow.Display();
-			Sleep(500);
-			while(true) {
-				if (sf::Keyboard::IsKeyPressed(sf::Keyboard::P)) {
-					break;
+				if(UpdateBulletsFromInput(sPlayerBullets, mPlayerBulletsPositions, mPlayerBulletsState, mPlayerPosition, playerImage->GetWidth(), bulletImage->GetWidth()))
+				{
+					mElapsedTimeFromLastShot = 0.0f;
+					mPlayerShoot->Play();
 				}
 			}
-		}
+
+			mMap->update();
+			mMap->draw();
+
+			mBackgroundItemsGenerator->update();
+			mBackgroundItemsGenerator->draw();
+
+			mJewelsGenerator->update();
+			mJewelsGenerator->draw();
+
+			// Draw enemies.
+			mEnemyGenerator->draw();
+
+			// Draw player ship and bullets
+			for(uint8_t i = 0; i < sPlayerBullets; ++i)
+			{
+				if(mPlayerBulletsState[i])
+				{
+					mPlayerBulletSprite->SetPosition(mPlayerBulletsPositions[i]);
+					renderWindow.Draw(*mPlayerBulletSprite);
+				}
+			}
+
+			renderWindow.Draw(*mPlayerSprite);	
+			mHud->draw();
+
+			mGemColider->update(*mPlayerSprite, mJewelsGenerator->getItemPool());
+
+			if(mEnemyColider.Colide(mEnemyGenerator->getEnemies(), mPlayerSprite)) 
+			{
+				mHud->setLife(mPlayerCurrentHealth--);
+				if(mPlayerCurrentHealth == 0) {
+					StateMachine& stateMachine = mGameManager.GetStateMachine();
+					stateMachine.ChangeState(mGameManager.GetGameOverState());
+					return;
+				}
+			}
+
+			// Pause
+			if(wasPaused) {
+				Sleep(500);
+				wasPaused = false;
+			}
+			if (sf::Keyboard::IsKeyPressed(sf::Keyboard::P)) {
+				wasPaused = true;
+				sf::Sprite pauseSprite;
+				pauseSprite.SetTexture(*mPauseTexture);
+				sf::Vector2f position;
+				position.x = static_cast<float> ((mGameManager.GetRenderWindow().GetWidth() / 2)) - static_cast<float> ((mPauseTexture->GetWidth() / 2));
+				position.y = static_cast<float> ((mGameManager.GetRenderWindow().GetHeight() / 2)) - static_cast<float> ((mPauseTexture->GetHeight() / 2));
+				pauseSprite.SetPosition(position);
+				renderWindow.Draw(pauseSprite);
+				renderWindow.Display();
+				Sleep(500);
+				while(true) {
+					if (sf::Keyboard::IsKeyPressed(sf::Keyboard::P)) {
+						break;
+					}
+				}
+			}
+		}		
 	}
 
 	void Level01State::ManageEvents(const sf::Event& ev)
@@ -398,6 +429,11 @@ namespace Game
 		delete mEnemyGenerator;
 		delete mMap;
 		delete mHud;
+		delete mPlayerShoot;
+		delete mRightKey;
+		delete mWrongKey;
+
+		mGameManager.GetSoundManager().releaseAllResources();
 
 		mGameManager.GetMusic().Stop();
 	}	

@@ -58,7 +58,7 @@ namespace Game
 
 	sf::Color MainMenuState::GetOptionColor(const MenuOption option) const
 	{
-		return (mCurrentOption == option) ? sf::Color::Blue : sf::Color::White;
+		return (mCurrentOption == option) ? sf::Color::Black : sf::Color::White;
 	}
 }
 

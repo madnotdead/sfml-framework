@@ -68,18 +68,10 @@ namespace Game
 				{
 				case(MenuOption_NewGame):
 					mCurrentOption = MenuOption_Exit;
-					break;
-
-				case(MenuOption_Controls):
-					mCurrentOption = MenuOption_NewGame;
-					break;
-
-				case(MenuOption_GameExplanation):
-					mCurrentOption = MenuOption_Controls;
-					break;
+					break;				
 
 				case(MenuOption_Credits):
-					mCurrentOption = MenuOption_GameExplanation;
+					mCurrentOption = MenuOption_NewGame;
 					break;
 
 				case(MenuOption_Exit):
@@ -99,16 +91,8 @@ namespace Game
 				switch(mCurrentOption)
 				{
 				case(MenuOption_NewGame):
-					mCurrentOption = MenuOption_Controls;
-					break;
-
-				case(MenuOption_Controls):
-					mCurrentOption = MenuOption_GameExplanation;
-					break;
-
-				case(MenuOption_GameExplanation):
 					mCurrentOption = MenuOption_Credits;
-					break;
+					break;				
 
 				case(MenuOption_Credits):
 					mCurrentOption = MenuOption_Exit;
@@ -132,15 +116,7 @@ namespace Game
 				{
 				case(MenuOption_NewGame):
 					stateMachine.ChangeState(mGameManager.GetLoadingState());
-					break;
-
-				case(MenuOption_Controls):
-					stateMachine.ChangeState(mGameManager.GetControlsState());
-					break;
-
-				case(MenuOption_GameExplanation):
-					stateMachine.ChangeState(mGameManager.GetGameExplanationState());
-					break;
+					break;				
 
 				case(MenuOption_Credits):
 					stateMachine.ChangeState(mGameManager.GetCreditsState());
@@ -171,15 +147,13 @@ namespace Game
 		
 		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
 
-		const float xPos = 620.0f;
-		const float yPos = 400.0f;
+		const float xPos = 350.0f;
+		const float yPos = 470.0f;
 		const float initialPos = 50.0f;
-		const float displacement = 50.0f;
+		const float displacement = 75.0f;
 		
 		DisplayText("New Game", xPos, yPos + initialPos, GetOptionColor(MenuOption_NewGame));
-		DisplayText("Controls", xPos, yPos + initialPos + displacement, GetOptionColor(MenuOption_Controls));
-		DisplayText("Game Explanation", xPos, yPos + initialPos + 2.0f * displacement, GetOptionColor(MenuOption_GameExplanation));
-		DisplayText("Credits", xPos, yPos + initialPos + 3.0f * displacement, GetOptionColor(MenuOption_Credits));
-		DisplayText("Exit", xPos, yPos + initialPos + 4.0f * displacement, GetOptionColor(MenuOption_Exit));
+		DisplayText("Credits", xPos, yPos + initialPos + displacement, GetOptionColor(MenuOption_Credits));
+		DisplayText("Exit", xPos, yPos + initialPos + 2.0f * displacement, GetOptionColor(MenuOption_Exit));
 	}
 }

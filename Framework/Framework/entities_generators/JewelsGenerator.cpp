@@ -36,7 +36,7 @@ namespace Game
 		randomPosition.y = - static_cast<float> (image.GetHeight());
 		randomPosition.x = static_cast<float> (rand() % (mGamemanager.GetRenderWindow().GetWidth() - image.GetWidth()));
 
-		const float randomSpeed = static_cast<float> ((rand() % 3) + 1);
+		const float randomSpeed = 2.0f;//static_cast<float> ((rand() % 3) + 1);
 
 		Item item;
 		item.mSprite = new sf::Sprite;

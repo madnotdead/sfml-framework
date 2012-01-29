@@ -13,9 +13,8 @@
 
 #include <SFML/Audio/Music.hpp>
 
-#include <GameFramework/utilities/Types.h>
-
 #include <GameFramework/state_machine/State.h>
+#include <GameFramework/utilities/Types.h>
 
 #include "../coliders/CollisionHelper.h"
 #include "../coliders/GemColider.h"
@@ -29,6 +28,7 @@ namespace Animator
 namespace sf
 {
 	class Event;
+	class Sound;
 	class Sprite; 
 }
 
@@ -45,7 +45,7 @@ namespace Game
 	class Level01State : public State
 	{
 	public:
-		static const uint8_t sPlayerBullets = 5;
+		static const uint8_t sPlayerBullets = 3;
 
 	public:
 		Level01State(GameManager& gameManager);
@@ -80,8 +80,9 @@ namespace Game
 		HudPopulator* mHudPopulator;		
 		CollisionHelper mCollisionHelper;
 		EnemyColider mEnemyColider;
-
-
+		sf::Sound *mPlayerShoot;
+		sf::Sound *mRightKey;
+		sf::Sound *mWrongKey;
 		sf::Texture* mPauseTexture;
 		bool wasPaused;
 	};

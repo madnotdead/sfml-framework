@@ -28,9 +28,11 @@
 #include <GameFramework/managers/ImageManager.h>
 #include <GameFramework/managers/SoundManager.h>
 
+#include "../game_states/CongratulationsState.h"
 #include "../game_states/ControlsState.h"
 #include "../game_states/CreditsState.h"
 #include "../game_states/GameExplanationState.h"
+#include "../game_states/GameOverState.h"
 #include "../game_states/Level01State.h"
 #include "../game_states/LoadingState.h"
 #include "../game_states/MainMenuState.h"
@@ -62,9 +64,11 @@ namespace Game
 
 
 		inline State& GetMainMenuState();
+		inline State& GetCongratulationsState();
 		inline State& GetControlsState();
 		inline State& GetCreditsState();
 		inline State& GetGameExplanationState();
+		inline State& GetGameOverState();
 		inline State& GetLoadingState();
 		inline State& GetLevel01State();
 
@@ -88,8 +92,10 @@ namespace Game
 		Utils::TimerManager mTimerManager;
 
 		MainMenuState mMainMenuState;
+		CongratulationsState mCongratulationsState;
 		ControlsState mControlsState;
 		CreditsState mCreditsState;
+		GameOverState mGameOverState;
 		GameExplanationState mGameExplanationState;
 		LoadingState mLoadingState;
 		Level01State mLevel01State;
@@ -137,6 +143,11 @@ namespace Game
 	{
 		return mMainMenuState;
 	}
+	
+	State& GameManager::GetCongratulationsState()
+	{
+		return mCongratulationsState;
+	}
 
 	State& GameManager::GetControlsState() 
 	{
@@ -146,6 +157,11 @@ namespace Game
 	State& GameManager::GetCreditsState() 
 	{
 		return mCreditsState;
+	}
+
+	State& GameManager::GetGameOverState() 
+	{
+		return mGameOverState;
 	}
 
 	State& GameManager::GetGameExplanationState() 

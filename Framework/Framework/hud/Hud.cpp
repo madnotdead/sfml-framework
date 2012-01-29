@@ -5,7 +5,7 @@ namespace Game {
 
 const float HUD_SIZE = 30.f;
 const float HUD_OFFSET = 40.f;
-const sf::Vector2f CIRCLE_POSITION(30.f, 500.f);
+const sf::Vector2f CIRCLE_POSITION(20.f, 550.f);
 
 Hud::Hud (GameManager& gameManager, size_t textureCount) : mGameManager(gameManager), mCurrentIndex(0), mMapPosition(0), mLife(0)
 { 
@@ -51,15 +51,21 @@ void Hud::updateNextPosition()
 }
 
 void Hud::turnOn()
-{
-	mHudInfo[mCurrentIndex].state = BallInfo::ON;
-	mCurrentIndex++;
+{		
+	if (mCurrentIndex + 1 <= mHudInfo.size())
+	{
+		mHudInfo[mCurrentIndex].state = BallInfo::ON;	
+		mCurrentIndex++;
+	}
 }
 
 void Hud::turnOff()
-{
-	mCurrentIndex--;
-	mHudInfo[mCurrentIndex].state = BallInfo::OFF;
+{	
+	if (mCurrentIndex > 0)
+	{
+		mHudInfo[mCurrentIndex].state = BallInfo::OFF;
+		mCurrentIndex--;
+	}	
 }	
 
 void Hud::clear() 

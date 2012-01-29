@@ -1,21 +1,14 @@
-//////////////////////////////////////////////////////////////////////////
-//
-//  File:   LoadingState.cpp
-//
-//  Desc:   Game state that shows a loading message before the level.
-//
-//  Author: Nicolas Bertoa - nicobertoa@gmail.com
-//
-//////////////////////////////////////////////////////////////////////////
+#include "CongratulationsState.h"
 
 #include <cassert>
 
+#include <SFML/Audio/Sound.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Window/Event.hpp>
 
-#include "Level01State.h"
-#include "LoadingState.h"
+#include "MainMenuState.h"
+
 #include <GameFramework/state_machine/StateMachine.h>
 
 #include "../managers/GameManager.h"
@@ -23,19 +16,20 @@
 
 namespace Game
 {
-	LoadingState::LoadingState(GameManager& gameManager) 
+	CongratulationsState::CongratulationsState(GameManager& gameManager) 
 		: State(gameManager)
 		, mBackgroundSprite(0) 
 		, mDelayForNextState(0.0f)
+		, mMusic(0)
 	{
 	}
 
-	void LoadingState::Init()
+	void CongratulationsState::Init()
 	{
 		LoadResources();
 	}
 
-	void LoadingState::Execute()
+	void CongratulationsState::Execute()
 	{
 		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
 		StateMachine& stateMachine = mGameManager.GetStateMachine();
@@ -48,39 +42,48 @@ namespace Game
 		} 
 
 		else
-			stateMachine.ChangeState(mGameManager.GetLevel01State());
+			stateMachine.ChangeState(mGameManager.GetMainMenuState());
 	}
 
-	void LoadingState::ManageEvents(const sf::Event& ev) 
+	void CongratulationsState::ManageEvents(const sf::Event& ev) 
 	{
 		ev;
 	} 
 
-	void LoadingState::Clear()
+	void CongratulationsState::Clear()
 	{
 		DestroyResources();
 	}
 
-	void LoadingState::LoadResources()
+	void CongratulationsState::LoadResources()
 	{
 		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
 		ImageManager& imageManager = mGameManager.GetImageManager();
 
-		sf::Texture * const backgroundImage = imageManager.getResource("resources/background/loading.jpg");
+		sf::Texture * const backgroundImage = imageManager.getResource("resources/background/final.jpg");
 		assert(backgroundImage && "LoadResources: NULL pointer");
-		
+
 		mBackgroundSprite = new sf::Sprite;
 		mBackgroundSprite->SetTexture(*backgroundImage);
 		mBackgroundSprite->SetPosition(0.0f, 0.0f);
 
 		mDelayForNextState = 6000.0f;
+
+		sf::SoundBuffer *soundBuffer = mGameManager.GetSoundManager().getResource("resources/sounds/congratulations.wav");
+		assert(soundBuffer && "CongratulationsState::LoadResources: NULL pointer");
+		mMusic = new sf::Sound(*soundBuffer);
+		mMusic->SetLoop(false);
+		mMusic->Play();
 	}
-	
-	void LoadingState::DestroyResources()
+
+	void CongratulationsState::DestroyResources()
 	{		
 		ImageManager& imageManager = mGameManager.GetImageManager();
-		imageManager.releaseResource("resources/background/loading.jpg");
-	
+		imageManager.releaseResource("resources/background/final.jpg");
+
+		mGameManager.GetSoundManager().releaseAllResources();
+
 		delete mBackgroundSprite;
+		delete mMusic;
 	}
 }
