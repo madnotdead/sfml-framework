@@ -112,6 +112,12 @@
     <ClCompile Include="coliders\EnemyColider.cpp">
       <Filter>coliders</Filter>
     </ClCompile>
+    <ClCompile Include="game_states\GameOverState.cpp">
+      <Filter>game_states</Filter>
+    </ClCompile>
+    <ClCompile Include="game_states\CongratulationsState.cpp">
+      <Filter>game_states</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_states\ControlsState.h">
@@ -194,6 +200,12 @@
     </ClInclude>
     <ClInclude Include="coliders\EnemyColider.h">
       <Filter>coliders</Filter>
+    </ClInclude>
+    <ClInclude Include="game_states\GameOverState.h">
+      <Filter>game_states</Filter>
+    </ClInclude>
+    <ClInclude Include="game_states\CongratulationsState.h">
+      <Filter>game_states</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

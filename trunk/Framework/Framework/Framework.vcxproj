@@ -202,9 +202,11 @@
     <ClCompile Include="entities\Enemy.cpp" />
     <ClCompile Include="entities_generators\EnemysGenerator.cpp" />
     <ClCompile Include="entities_generators\JewelsGenerator.cpp" />
+    <ClCompile Include="game_states\CongratulationsState.cpp" />
     <ClCompile Include="game_states\ControlsState.cpp" />
     <ClCompile Include="game_states\CreditsState.cpp" />
     <ClCompile Include="game_states\GameExplanationState.cpp" />
+    <ClCompile Include="game_states\GameOverState.cpp" />
     <ClCompile Include="game_states\InformationState.cpp" />
     <ClCompile Include="game_states\Level01State.cpp" />
     <ClCompile Include="game_states\LoadingState.cpp" />
@@ -232,9 +234,11 @@
     <ClInclude Include="entities\Enemy.h" />
     <ClInclude Include="entities_generators\EnemysGenerator.h" />
     <ClInclude Include="entities_generators\JewelsGenerator.h" />
+    <ClInclude Include="game_states\CongratulationsState.h" />
     <ClInclude Include="game_states\ControlsState.h" />
     <ClInclude Include="game_states\CreditsState.h" />
     <ClInclude Include="game_states\GameExplanationState.h" />
+    <ClInclude Include="game_states\GameOverState.h" />
     <ClInclude Include="game_states\InformationState.h" />
     <ClInclude Include="game_states\Level01State.h" />
     <ClInclude Include="game_states\LoadingState.h" />

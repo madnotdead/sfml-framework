@@ -2,14 +2,22 @@
 
 #include <GameFramework\utilities\CollisionDetection.h>
 
+#include <SFML/Audio/Sound.hpp>
+
 #include "../hud/Hud.h"
 #include "..\hud\HudPopulator.h"
 
 #include "..\managers\GameManager.h"
 
-Game::GemColider::GemColider( GameManager& gameManager, Hud& hud, HudPopulator& hudPopulator ) :
-mGameManager(gameManager), mHud(hud), mHudPopulator(hudPopulator), mCurrentIndex(0)
+Game::GemColider::GemColider( GameManager& gameManager, Hud& hud, HudPopulator& hudPopulator, sf::Sound& rightSelection, sf::Sound& wrongSelection) 
+	: mGameManager(gameManager)
+	, mHud(hud)
+	, mHudPopulator(hudPopulator)
+	, mCurrentIndex(0)
+	, mRightSelection(rightSelection)
+	, mWrongSelection(wrongSelection)
 {
+
 }
 
 void Game::GemColider::update(const sf::Sprite& ship, std::vector<JewelsGenerator::Item>& jewels )
@@ -24,8 +32,14 @@ void Game::GemColider::update(const sf::Sprite& ship, std::vector<JewelsGenerato
 				jewels[i].isActive = false;
 				if(i == mHudPopulator.getHudIndices()[mCurrentIndex]) {
 					mHud.turnOn();
-					mCurrentIndex++;
+					mRightSelection.Play();
+					// Alto hardcodeo
+					if (mCurrentIndex < 9)
+					{
+						++mCurrentIndex;
+					}
 				} else {
+					mWrongSelection.Play();
 					mHud.clear();
 					mCurrentIndex = 0;
 				}

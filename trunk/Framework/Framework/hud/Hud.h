@@ -30,6 +30,7 @@ public:
 	void addMapPositionTexture(const sf::Texture* texture);
 	void setLife(size_t life);
 	void setMapPosition(size_t mapPos);
+	size_t getNumberOfTurnedOn() const { return mCurrentIndex; }
 
 
 private:

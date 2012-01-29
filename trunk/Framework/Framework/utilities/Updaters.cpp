@@ -86,7 +86,7 @@ namespace Game
 		assert(bulletsState && "UpdateBulletsFromInput: NULL pointer");
 
 		// The player pressed fire button
-		if (sf::Keyboard::IsKeyPressed(sf::Keyboard::A))
+		if (sf::Keyboard::IsKeyPressed(sf::Keyboard::Space))
 		{
 			// Shot a bullet if possible.
 			for(uint8_t i = 0; i < numberOfBullets; ++i)

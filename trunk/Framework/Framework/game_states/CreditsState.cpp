@@ -10,9 +10,8 @@
 
 #include <cassert>
 
-#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Text.hpp>
+#include <SFML/Window/Event.hpp>
 
 #include "CreditsState.h"
 #include "MainMenuState.h"
@@ -21,30 +20,39 @@
 
 namespace Game
 {
-	CreditsState::CreditsState(GameManager& gameManager)
-		: InformationState(gameManager)
+	CreditsState::CreditsState(GameManager& gameManager) 
+		: State(gameManager)
+		, mBackgroundSprite(0)
 	{
+	} 
+
+	void CreditsState::Init()
+	{
+		ImageManager& imageManager = mGameManager.GetImageManager();		
+		sf::Texture * const backgroundImage = imageManager.getResource("resources/background/credits.jpg");
+		assert(backgroundImage && "LoadResources: NULL pointer");
+
+		mBackgroundSprite = new sf::Sprite;
+		mBackgroundSprite->SetTexture(*backgroundImage);
+		mBackgroundSprite->SetPosition(0.0f, 0.0f);
 	}
 
-	void CreditsState::DrawContent()
+	void CreditsState::Execute()
 	{
-		assert(mText && "Init: NULL pointer");
-
-		sf::RenderWindow& renderWindow = mGameManager.GetRenderWindow();
-
-		const float xPos = static_cast<float>(renderWindow.GetWidth()) * 0.3f;
-		const float yPos = static_cast<float>(renderWindow.GetHeight()) * 0.4f;
-		const float initialPos = 0.0f;
-		const float displacement = 40.0f;
-
-		mText->SetCharacterSize(30);
-
-		const char *credits = "Programmers: \n"
-							  "Nicolas Bertoa - nicobertoa@gmail.com \n"
-							  "Ramiro Del Corro - ramiro.del.corro@gmail.com \n \n"
-							  "Artists: \n"
-							  "Carla Corcoba - kna_003@hotmail.com \n"
-							  "Gaspar Almada - gaspar980@gmail.com";
-		DisplayText(credits, xPos, yPos + initialPos, sf::Color::White);
+		mGameManager.GetRenderWindow().Draw(*mBackgroundSprite);		
 	}
+
+	void CreditsState::ManageEvents(const sf::Event& ev) 
+	{
+		StateMachine& stateMachine = mGameManager.GetStateMachine();
+
+		if(ev.Type == sf::Event::KeyPressed && ev.Key.Code == sf::Keyboard::Escape)
+			stateMachine.ChangeState(mGameManager.GetMainMenuState());
+	}
+
+	void CreditsState::Clear()
+	{
+		mGameManager.GetImageManager().releaseResource("resources/background/credits.jpg");
+		delete mBackgroundSprite;
+	}	
 }

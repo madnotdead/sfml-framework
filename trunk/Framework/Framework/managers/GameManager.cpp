@@ -27,10 +27,12 @@
 namespace Game
 {
 	GameManager::GameManager() 
-		: mRenderWindow(sf::VideoMode::VideoMode(1024, 768), "Game", sf::Style::Close)
+		: mRenderWindow(sf::VideoMode::VideoMode(1024, 768), "Cosmic Ring", sf::Style::Close)
 		, mMainMenuState(*this)
+		, mCongratulationsState(*this)
 		, mControlsState(*this)
 		, mCreditsState(*this)
+		, mGameOverState(*this)
 		, mGameExplanationState(*this)
 		, mLoadingState(*this)
 		, mLevel01State(*this)
