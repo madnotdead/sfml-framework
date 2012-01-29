@@ -73,7 +73,6 @@ namespace Game
 		const float mTimeToWaitToShot;
 		const float mTimeIncrement;
 		float mElapsedTimeFromLastShot;
-		uint32_t mPlayerMaxHealth;
 		uint32_t mPlayerCurrentHealth;
 		Hud *mHud;
 		EnemysGenerator *mEnemyGenerator;
