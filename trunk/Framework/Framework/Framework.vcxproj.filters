@@ -210,5 +210,12 @@
     <ClInclude Include="entities_generators\MoveType.h">
       <Filter>entities_generators</Filter>
     </ClInclude>
+    <ClInclude Include="resource1.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\resources\player1.ico" />
   </ItemGroup>
 </Project>
