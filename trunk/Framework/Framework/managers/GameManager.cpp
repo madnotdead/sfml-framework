@@ -47,7 +47,7 @@ namespace Game
 #ifdef _DEBUG
 		InitText();
 #endif 
-		mRenderWindow.SetFramerateLimit(60);
+		mRenderWindow.SetFramerateLimit(30);
 		mRenderWindow.ShowMouseCursor(false);
 	}
 	
@@ -65,7 +65,7 @@ namespace Game
 	void GameManager::Run()
 	{
 		// Start game loop
-		while (mRenderWindow.IsOpened())
+		while (mRenderWindow.IsOpen())
 		{
 			// Process events
 			sf::Event event;

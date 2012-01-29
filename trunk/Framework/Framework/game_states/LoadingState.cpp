@@ -43,9 +43,9 @@ namespace Game
 		// Check if we must show the thanks message or change the state.
 		if(mDelayForNextState > 0.0f)
 		{
-			mDelayForNextState -= renderWindow.GetFrameTime() / 1000.0f;
+			mDelayForNextState -= 17;
 			renderWindow.Draw(*mBackgroundSprite);
-		}
+		} 
 
 		else
 			stateMachine.ChangeState(mGameManager.GetLevel01State());
@@ -54,7 +54,7 @@ namespace Game
 	void LoadingState::ManageEvents(const sf::Event& ev) 
 	{
 		ev;
-	}
+	} 
 
 	void LoadingState::Clear()
 	{
@@ -73,7 +73,7 @@ namespace Game
 		mBackgroundSprite->SetTexture(*backgroundImage);
 		mBackgroundSprite->SetPosition(0.0f, 0.0f);
 
-		mDelayForNextState = 2.5f;
+		mDelayForNextState = 2000.0f;
 	}
 	
 	void LoadingState::DestroyResources()
