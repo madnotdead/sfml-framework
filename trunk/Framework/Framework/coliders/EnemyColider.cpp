@@ -17,6 +17,7 @@ bool Game::EnemyColider::Colide( std::vector<Enemy*>& enemies, const sf::Sprite*
 				Rectangle(currentEnemy, texture->GetWidth() * static_cast<uint32_t> (enemy->GetScale().x), 
 				texture->GetHeight() * static_cast<uint32_t> (enemy->GetScale().y))))
 			{
+				enemies[i]->disable();
 				return true;
 			}
 		}

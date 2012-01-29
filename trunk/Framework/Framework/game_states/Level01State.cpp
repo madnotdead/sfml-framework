@@ -44,7 +44,6 @@
 
 #include <sstream>
 #include <Windows.h>
-#include <iostream>
 
 namespace
 {
@@ -79,8 +78,7 @@ namespace Game
 		, mTimeToWaitToShot(0.5f)
 		, mTimeIncrement(0.05f)
 		, mElapsedTimeFromLastShot(0.0f)
-		, mPlayerMaxHealth(10)
-		, mPlayerCurrentHealth(mPlayerMaxHealth)
+		, mPlayerCurrentHealth(10)
 		, mHud(0)
 		, mEnemyGenerator(0)
 		, mHudPopulator(0)
@@ -235,7 +233,7 @@ namespace Game
 			mHud->addLifeTexture(image);
 		}
 
-		mHud->setLife(5);
+		mHud->setLife(10);
 
 		// Init enemy generator.
 		mEnemyGenerator = new EnemysGenerator(mGameManager);
@@ -273,6 +271,8 @@ namespace Game
 
 		//Pause screen
 		mPauseTexture = imageManager.getResource("resources/pause/pause.png");
+
+		mPlayerCurrentHealth = 10;
 
 		// Init level music
 		mGameManager.GetMusic().OpenFromFile("resources/sounds/level.wav");
@@ -333,8 +333,6 @@ namespace Game
 			}
 		}
 		
-		mHud->setLife(mPlayerCurrentHealth);
-
 		renderWindow.Draw(*mPlayerSprite);	
 		mHud->draw();
 
@@ -342,9 +340,13 @@ namespace Game
 
 		if(mEnemyColider.Colide(mEnemyGenerator->getEnemies(), mPlayerSprite)) 
 		{
-			std::cout << "Game over" << std::endl;
+			mHud->setLife(mPlayerCurrentHealth--);
+			if(mPlayerCurrentHealth == 0) {
+				StateMachine& stateMachine = mGameManager.GetStateMachine();
+				stateMachine.ChangeState(mGameManager.GetMainMenuState());
+				return;
+			}
 		}
-
 
 		// Pause
 		if(wasPaused) {
