@@ -136,7 +136,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;SFML_DYNAMIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;SFML_DYNAMIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -148,7 +148,7 @@
     <Link>
       <AdditionalDependencies>sfml-main.lib;sfml-audio.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;openal32.lib;sndfile.lib;winmm.lib;freetype.lib;glew.lib;jpeg.lib;opengl32.lib</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
@@ -247,6 +247,7 @@
     <ClInclude Include="hud\Hud.h" />
     <ClInclude Include="hud\HudPopulator.h" />
     <ClInclude Include="managers\GameManager.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="scrolling_map\BackgroundItemsGenerator.h" />
     <ClInclude Include="scrolling_map\ScrollingMap.h" />
     <ClInclude Include="utilities\Updaters.h" />
@@ -255,6 +256,12 @@
     <ProjectReference Include="..\GameFramework\GameFramework.vcxproj">
       <Project>{8528d0c4-81dd-40bc-984c-efe872b30bcb}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\resources\player1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
